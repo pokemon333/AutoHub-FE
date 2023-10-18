@@ -20,9 +20,40 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-       "@/*": ["./src"]
+       "@/*": ["./src"],
+       "core@" : ["./src/core"],
+       "landing@" : ["./src/modules/landing"],
+       "car@" : ["./src/modules/car"],
+       "search@" : ["./src/modules/car/modules/search"],
+       "advanceSearch@" : ["./src/modules/car/modules/advanceSearch"],
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts", 
+    "src/**/*.tsx", 
+    "src/**/*.vue",
+    "src/**/*",
+
+
+    "src/app/core/**/*.ts",
+    "src/app/modules/car/**/*.ts",
+    "src/app/modules/car/modules/search**/*.ts",
+    "src/app/modules/car/modules/advanceSearch**/*.ts",
+    "src/app/modules/landing/**/*.ts",
+    
+    "src/app/core/**/*",
+    "src/app/modules/car/**/*",
+    "src/app/modules/car/modules/search**/*",
+    "src/app/modules/car/modules/advanceSearch**/*",
+    "src/app/modules/landing/**/*.",
+
+    "src/app/core/**/*.vue",
+    "src/app/modules/car/**/*.vue",
+    "src/app/modules/car/modules/search**/*.vue",
+    "src/app/modules/car/modules/advanceSearch**/*.vue",
+    "src/app/modules/landing/**/*.",
+    "src/app/modules/landing/**/*.vue",
+  ],
   "references": [{ "path": "./tsconfig.node.json" }],
 }
