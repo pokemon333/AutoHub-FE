@@ -21,11 +21,11 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
        "@/*": ["./src"],
-       "core@" : ["./src/core"],
-       "landing@" : ["./src/modules/landing"],
-       "car@" : ["./src/modules/car"],
-       "search@" : ["./src/modules/car/modules/search"],
-       "advanceSearch@" : ["./src/modules/car/modules/advanceSearch"],
+       "core@/*" : ["./src/core"],
+       "landing@/*" : ["./src/modules/landing"],
+       "car@/*" : ["./src/modules/car"],
+       "search@/*" : ["./src/modules/car/modules/search"],
+       "advanceSearch@/*" : ["./src/modules/car/modules/advanceSearch"],
     }
   },
   "include": [
