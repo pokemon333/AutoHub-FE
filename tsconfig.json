@@ -20,12 +20,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-       "@/*": ["./src"],
-       "core@/*" : ["./src/core"],
-       "landing@/*" : ["./src/modules/landing"],
-       "car@/*" : ["./src/modules/car"],
-       "search@/*" : ["./src/modules/car/modules/search"],
-       "advanceSearch@/*" : ["./src/modules/car/modules/advanceSearch"],
+       "@/*": ["./src/*"],
+       "core@/*" : ["./src/app/core/*"],
+       "landing@/*" : ["./src/app/modules/landing/*"],
+       "car@/*" : ["./src/app/modules/car/*"],
+       "search@/*" : ["./src/app/modules/car/modules/search/*"],
+       "advanceSearch@/*" : ["./src/app/modules/car/modules/advanceSearch/*"]
     }
   },
   "include": [
@@ -39,21 +39,27 @@
     "src/app/core/**/*.ts",
     "src/app/modules/car/**/*.ts",
     "src/app/modules/car/modules/search**/*.ts",
-    "src/app/modules/car/modules/advanceSearch**/*.ts",
+    "src/app/modules/car/modules/advanceSearch/**/*.ts",
     "src/app/modules/landing/**/*.ts",
+    
+    "src/app/core/**/*.d.ts",
+    "src/app/modules/car/**/*.d.ts",
+    "src/app/modules/car/modules/search/**/*.d.ts",
+    "src/app/modules/car/modules/advanceSearch/**/*.d.ts",
+    "src/app/modules/landing/**/*.d.ts",
     
     "src/app/core/**/*",
     "src/app/modules/car/**/*",
-    "src/app/modules/car/modules/search**/*",
-    "src/app/modules/car/modules/advanceSearch**/*",
+    "src/app/modules/car/modules/search/**/*",
+    "src/app/modules/car/modules/advanceSearch/**/*",
     "src/app/modules/landing/**/*.",
 
     "src/app/core/**/*.vue",
     "src/app/modules/car/**/*.vue",
-    "src/app/modules/car/modules/search**/*.vue",
-    "src/app/modules/car/modules/advanceSearch**/*.vue",
-    "src/app/modules/landing/**/*.",
+    "src/app/modules/car/modules/search/**/*.vue",
+    "src/app/modules/car/modules/advanceSearch/**/*.vue",
     "src/app/modules/landing/**/*.vue",
+    "src/app/modules/landing/**/*.vue"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

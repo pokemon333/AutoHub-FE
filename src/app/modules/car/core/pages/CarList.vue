@@ -7,5 +7,5 @@
 
 
 <script setup lang="ts">
-import AdvanceSearchForm from 'advanceSearch@/components/AdvanceSearchForm.vue';
+import { AdvanceSearchForm } from 'car@/core/services/getCarListCompoent';
 </script>
