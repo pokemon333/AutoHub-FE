@@ -1,4 +1,4 @@
-import SearchForm from "search@/components/SearchForm.vue";
+import SearchForm from "landing@/components/SearchForm.vue";
 
 export  {
     SearchForm
