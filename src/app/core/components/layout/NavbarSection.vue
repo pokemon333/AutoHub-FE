@@ -1,7 +1,5 @@
 <template>
-
-        {{ isMenuOpen }}
-    <div class="bg-primary-900 flex justify-between px-8 items-center h-20">
+    <nav class="bg-primary-900 flex z-50 sticky top-0 justify-between px-8 items-center h-20">
         <div class="w-40 flex items-center justify-between space-x-4">
             <div @click="changeMenuState" class="rounded-full flex justify-center items-center w-9 h-9 border text-white border-white">
                 <MenuLogo />
@@ -18,7 +16,8 @@
                 </p>
             </div>
         </div>
-    </div>
+    </nav>
+    <!-- {{ isMenuOpen }} -->
 </template>
 <script setup lang="ts">
 import MenuLogo from 'asset@/icon/menu.svg'

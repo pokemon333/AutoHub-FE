@@ -16,7 +16,8 @@ export default {
         fontSize: {
           'card-title' : '12px',
           'card-item' : '11px',
-          'card-price':'14px'
+          'card-price':'14px',
+          'main-header' : '96px'
         },
         fontFamily: {
           poppins: ['Poppins'],

@@ -10,7 +10,6 @@ export const  useCoreStore = defineStore('core',{
             this.isMenuOpen = state
         }
    },
-
    getters : {
    }
 })

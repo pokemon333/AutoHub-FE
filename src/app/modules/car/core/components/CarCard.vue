@@ -7,55 +7,55 @@
             <h1 class=" text-text-400 text-card-title ">
                 The BMW x6 2023 ()
             </h1>
-            <h1 class="text-success-700 mr-4  text-card-price font-bold">
+            <h1 class="text-success-800 font-roboto font-extabold text-card-price ">
                 3000 Lakhs
             </h1>
         </div>
         <div class="py-2 text-card-title flex flex-col space-y-4 px-6 border-b-2  border-b-primary-100/20 bg-primary-50/20 ">
-            <div class="flex space-x-24">
-                <div class="flex items-center space-x-1">
-                    <condition/>
-                    <h1 class="">
-                        140-145 KM
-                    </h1>
+            <div class="flex">
+                <div class="w-1/2  space-y-2">
+                    <div class="flex items-center space-x-2">
+                        <condition/>
+                        <h1 class="">
+                            140-145 KM
+                        </h1>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <transmission/>
+                        <p class="">
+                            140-145 KM
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <fuelType/>
+                        <p class="">
+                            140-145 KM
+                        </p>
+                    </div>
                 </div>
-                <div class="flex items-center">
-                    <font-awesome-icon icon="fa-solid fa-gauge"  class="text-text-100 mr-2"/>
-                    <p class="">
-                        140-145 KM
-                    </p>
-                </div>
-            </div>
-            <div class="flex space-x-24">
-                <div class="flex items-center space-x-1">
-                    <transmission/>
-                    <p class="">
-                        140-145 KM
-                    </p>
-                </div>
-                <div class="flex justify-between">
-                    <font-awesome-icon icon="fa-solid fa-bolt"  class="text-text-100 mr-2"/>
-                    <p class="">
-                        140-145 KM
-                    </p>
-                </div>
-            </div>
-            <div class="flex space-x-24">
-                <div class="flex items-center space-x-1">
-                    <fuelType/>
-                    <p class="">
-                        140-145 KM
-                    </p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <steering/>
-                    <p class="">
-                        Left-steering
-                    </p>
+                <div class="w-1/2 space-y-2">
+                    <div class="flex items-center space-x-2">
+                        <gear/>
+                        <p class="">
+                            140-145 KM
+                        </p>
+                    </div>
+                    <div class="flex item-center space-x-2">
+                        <lighting class="mx-1"/>
+                        <p class="">
+                            140-145 KM
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <steering/>
+                        <p class="">
+                            Left-steering
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="flex justify-between text-card-title rounded-b-md  bg-primary-50/20 py-3 px-3">
+        <div class="flex justify-between text-card-title rounded-b-md  bg-primary-50/20 py-3 px-4">
             <button class="bg-transparent hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
                 Details
             </button>
@@ -71,5 +71,8 @@ import {
     condition,
     fuelType,
     steering,
-    transmission } from 'car@/core/services/getCarCardSvg';
+    transmission,
+    gear,
+    lighting
+} from 'car@/core/services/getCarCardSvg';
 </script>

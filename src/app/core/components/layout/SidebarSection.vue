@@ -1,7 +1,7 @@
 <template>
-    <div class="w-[30%] absolute h-screen bg-red-500" v-if="props.isMenuOpen">
+    <aside class="w-[30%] absolute h-screen bg-red-500" v-if="props.isMenuOpen">
 
-    </div>
+    </aside>
 </template>
 <script setup lang="ts">
 let props = defineProps({
