@@ -1,9 +1,11 @@
 <template>
-  <div id="app" class="h-screen">
+  <div id="app">
+    <div class="h-screen w-screen">
+      <NavbarSection @toggle-side-bar="toggleSideBar"/>
+      <SidebarSection :is-menu-open="isMenuOpen"/>
+      <router-view></router-view>
+    </div>
     <!-- <CarCard/> -->
-    <NavbarSection @toggle-side-bar="toggleSideBar"/>
-    <SidebarSection :is-menu-open="isMenuOpen"/>
-    <router-view></router-view>
   </div>
 </template>
 
