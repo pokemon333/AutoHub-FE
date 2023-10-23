@@ -1,9 +1,9 @@
 <template>
-    <nav class="bg-primary-900 flex z-50 sticky top-0 justify-between px-8 items-center h-20">
+    <nav class="bg-primary-900 flex z-50 sticky top-0 justify-between md:px-8 px-2 items-center h-20">
         <div class="w-40 flex items-center justify-between space-x-4">
-            <div @click="changeMenuState" class="rounded-full flex justify-center items-center w-9 h-9 border text-white border-white">
-                <MenuLogo />
-            </div>
+            <div @click="$emit('toggleSideBar')"  class="rounded-full cursor-pointer flex justify-center items-center w-9 h-9 border text-white border-white">
+                <MenuLogo :class="rotate" @click="rotateMenu" class="transition duration-300 ease-in" />
+            </div>  
             <div class="">
                 <img :src="imageUrl" class="h-14 w-22" alt="">
             </div>
@@ -17,18 +17,14 @@
             </div>
         </div>
     </nav>
-    <!-- {{ isMenuOpen }} -->
 </template>
 <script setup lang="ts">
+import { ref } from 'vue'
 import MenuLogo from 'asset@/icon/menu.svg'
 import imageUrl from 'asset@/img/logo.png' 
 import ChargingStation from 'asset@/icon/charging-station.svg'
-import {useCoreStore } from "core@/store/CoreStore"
-const coreStore  =  useCoreStore()
-let isMenuOpen = coreStore.isMenuOpen
-
-const changeMenuState = () => {
-    coreStore.changeMenuState(!isMenuOpen)
+let rotate = ref('')
+let rotateMenu = () =>{
+    rotate.value = rotate.value == 'rotate-90' ? '' : 'rotate-90'
 }
-
 </script>

@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .landing-page-img {
+        clip-path: polygon(26% 0, 100% 0, 100% 100%, 0% 100%)
+    }
+    .landing-page-explore{
+        clip-path: polygon(0 0, 100% 0%, 97% 100%, 0% 100%)
+    }
+   
+}

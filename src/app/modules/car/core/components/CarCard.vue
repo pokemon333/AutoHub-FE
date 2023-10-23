@@ -7,7 +7,7 @@
             <h1 class=" text-text-400 text-card-title ">
                 The BMW x6 2023 ()
             </h1>
-            <h1 class="text-success-800 font-roboto font-extabold text-card-price ">
+            <h1 class=" font-roboto   text-card-price ">
                 3000 Lakhs
             </h1>
         </div>
@@ -33,7 +33,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="w-1/2 space-y-2">
+                <div class="w-1/2 space-y-2 pl-6">
                     <div class="flex items-center space-x-2">
                         <gear/>
                         <p class="">

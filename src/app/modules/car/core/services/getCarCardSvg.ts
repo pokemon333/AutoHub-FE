@@ -4,11 +4,13 @@ import steering from 'asset@/icon/steering.svg'
 import transmission from 'asset@/icon/transmission.svg'
 import gear from 'asset@/icon/gear.svg'
 import lighting from 'asset@/icon/lighting.svg'
+import advanceFilter from 'asset@/icon/advance-filter.svg'
 export {
     condition,
     fuelType,
     steering,
     transmission,
     gear,
-    lighting
+    lighting,
+    advanceFilter
 }
