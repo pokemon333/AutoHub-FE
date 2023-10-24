@@ -4,8 +4,8 @@
             <div @click="$emit('toggleSideBar')"  class="rounded-full cursor-pointer flex justify-center items-center w-9 h-9 border text-white border-white">
                 <MenuLogo :class="rotate" @click="rotateMenu" class="transition duration-300 ease-in" />
             </div>  
-            <div @click="()=>router.push({name: 'landing'})" class="cursor-pointer">
-                <img :src="imageUrl" class="h-14 w-22 cursor-pointer" alt="">
+            <div @click="()=>router.push({name: 'landing'})" class="cursor-pointer h-full p-1">
+                <img :src="imageUrl" class="h-full w-22 cursor-pointer" alt="">
             </div>
         </div>
         <div>

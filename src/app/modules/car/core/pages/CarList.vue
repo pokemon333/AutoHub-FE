@@ -1,6 +1,5 @@
 <template>
     <div class="w-full h-[88%] bg-primary-50/10 ">
-        
         <div class="md:flex  h-full ">
              <div class=" pt-6  pr-8 h-full relative  " :class="advanceFileter ?  'w-8/12':'w-full'">
                  <div class="w-full flex pl-28 justify-between">
