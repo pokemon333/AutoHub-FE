@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="flex justify-between text-card-title rounded-b-md  bg-primary-50/20 py-3 px-4">
-            <button class="bg-transparent hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
+            <button @click="$emit('carDetail',car?.id)" class="bg-transparent hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
                 Details
             </button>
             <button class="bg-primary-300 hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  px-4 rounded py-1">
@@ -77,7 +77,7 @@ import {
     lighting
 } from 'car@/core/services/getCarCardSvg';
 
-const props = defineProps<string|any>({
+const props : any = defineProps({
   car: {},
 })
 
@@ -94,4 +94,5 @@ let engine_power : string = props?.car?.car_specification?.engine_power
 let car_steering : string =  props?.car?.car_specification?.steering
 let dealer_name: string = props?.car.dealer.user.name
 let brand: string = props?.car.car_model?.car_brand.name
+
 </script>

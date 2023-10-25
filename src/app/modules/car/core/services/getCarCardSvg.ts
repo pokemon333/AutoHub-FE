@@ -5,6 +5,7 @@ import transmission from 'asset@/icon/transmission.svg'
 import gear from 'asset@/icon/gear.svg'
 import lighting from 'asset@/icon/lighting.svg'
 import advanceFilter from 'asset@/icon/advance-filter.svg'
+import back from 'asset@/icon/back.svg'
 export {
     condition,
     fuelType,
@@ -12,5 +13,6 @@ export {
     transmission,
     gear,
     lighting,
-    advanceFilter
+    advanceFilter,
+    back
 }
