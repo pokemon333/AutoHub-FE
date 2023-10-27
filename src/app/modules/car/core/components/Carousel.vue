@@ -1,32 +1,71 @@
 <template>
-  <Carousel id="gallery" :items-to-show="1" :wrap-around="false" v-model="currentSlide">
-    <Slide v-for="slide in 10" :key="slide">
-      <div class="carousel__item">{{ slide }}</div>
-    </Slide>
-  </Carousel>
+  <div class="w-[100%] h-auto flex flex-col  container">
 
-  <Carousel
-    id="thumbnails"
-    :items-to-show="4"
-    :wrap-around="true"
-    v-model="currentSlide"
-    ref="carousel"
-  >
-    <Slide v-for="slide in 10" :key="slide">
-      <div class="carousel__item" @click="slideTo(slide - 1)">{{ slide }}</div>
-    </Slide>
-  </Carousel>
-</template>
+      <div class="w-full md:h-[420px]  h-[200px]">
+        <transition name="slide" mode="out-in">
+            <slot name="main" ></slot>
+        </transition>
+      </div>
 
-<script setup lang="ts">
-import { ref } from 'vue'
+      <div class="w-full  bg-gray-900 pb-2 pt-6   overflow-x-auto  ">
+        <div class="flex space-x-4 p-2  w-full" ref="imageContainer">
+          <slot name="images" ></slot>
+        </div>
+      </div>
 
-import { Carousel, Slide } from 'vue3-carousel'
+    </div>
+  </template>
+<script lang="ts" setup>
 
-import 'vue3-carousel/dist/carousel.css'
-let currentSlide = ref<number | string>(0)
-let slideTo = (val : string | number) => {
-    currentSlide.value =  val
-}
+
 
 </script>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s;
+}
+
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+.container {
+  box-sizing: content-box;
+}
+
+
+.overflow-x-auto::-webkit-scrollbar {
+  width: 0px;
+  height: 5px;
+}
+
+
+/* Track (the area behind the thumb) */
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+/* Thumb (the draggable part) */
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 30px;
+}
+
+.scroll {
+  scrollbar-width: 3px;
+}
+
+/* On hover, style the thumb */
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+</style>

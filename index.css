@@ -8,10 +8,13 @@ body {
     font-family: 'Poppins', 'sans-serif';
 }
 
-.font-roboto{
+.font-roboto-price{
     font-family: 'Roboto';
     font-weight: 600;
     color:#3B7515;
 }
 
 
+.roboto {
+    font-family: 'Roboto';
+}

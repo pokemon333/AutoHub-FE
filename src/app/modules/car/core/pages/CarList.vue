@@ -1,33 +1,42 @@
 <template>
     <div class="w-full h-[88%] bg-primary-50/10 ">
         <div class="md:flex  h-full ">
-             <div class=" pt-6  pr-8 h-full relative  " :class="advanceFileter ?  'w-8/12':'w-full'">
-                 <div class="w-full flex pl-28 justify-between">
-                     <div class=" flex flex-col justify-between "  :class="advanceFileter ?  'w-6/12':'w-[25%]'">    
+            
+             <div class=" pt-6   h-full relative  " :class="advanceFileter ?  'w-8/12':'w-full'">
+
+                 <div class="w-full flex pl-24 ">
+
+                     <div class=" flex flex-col justify-between "  :class="advanceFileter ?  'w-5/12':'w-[25%]'">    
                          <h1 class="text-[24px] font-[500]">Search Cars In Myanmar</h1>
                          <h1 class="text-[16px] font-[500]">{{ count }} {{ count == '1' ? 'car': 'cars' }} listings found in AutoHub</h1>
                      </div>
-                     <div :class="advanceFileter ?  'w-[47%]':'w-[59%] ml-20'" >
+
+                     <div   :class="advanceFileter ?  'w-[42%] ml-10':'w-[56%] ml-[70px]'" >
                          <input v-model="keyword" @keyup="overallSearch" type="text" class="h-16 border border-secondary-400 rounded-md px-3 w-full" placeholder="Overall Search ( Name or Dealer )">
                      </div>
-                     <div class="w-[8%]  flex justify-end items-center px-3" v-if="!advanceFileter">
+
+                     <div class="w-[8%]  ml-4 flex justify-end items-center px-3" v-if="!advanceFileter">
                         <div  @click="toggleSideBar" class="flex cursor-pointer   justify-center   border-red-800  w-10 h-10  border  rounded-full items-center " :class="advanceFileter ?  'bg-secondary-700 ':''">
                             <advanceFilter :class="advanceFileter ?  'fill-gray-100':'fill-secondary-700'"/>
                         </div>
                      </div>
+
                  </div>
-                 <div class="flex h-[86%]" :class="advanceFileter ?  'justify-end ':'justify-center'">
-                    <div class=" flex flex-wrap     justify-between  overflow-y-auto  h-full scroll-auto " :class="advanceFileter? 'w-[87%]':'w-[83%]'"  >
+
+                 <div class="flex h-[86%] " :class="advanceFileter ?  'justify-end ':'justify-center'">
+                    <div class=" flex flex-wrap   overflow-y-auto  h-full scroll-auto " :class="advanceFileter? 'w-[90%]':'w-[85%]'"  >
                         <CarCard 
-                        @car-detail="deatil"
-                        class="mt-8 "
+                        @car-detail="deatil(car.id)"
+                        class="mt-8 mr-10"
                         :car="car" 
                         v-for="car in data"
                         :key="car.id"
                         />
                     </div>
                  </div>
+
              </div>
+
              <div class=" bg-primary-50/20 flex justify-center pt-[33px]"  :class="advanceFileter ?  'w-[35%]':'w-1/12'" v-if="advanceFileter">
                 <div  class=" w-8/12">
                     <h1 class="text-secondary-700 text-[25px]">Explore Specific</h1>
@@ -101,6 +110,8 @@ let toggleSideBar = ()=>{
 }
 
 let deatil = (id : string) => {
+    console.log(id);
+    
     return router.push({name:"car-detail" , params : { id : id}})
 }
 

@@ -7,7 +7,7 @@
             <h1 class=" text-text-400 text-card-title ">
                 {{ brand }} {{ model }} {{ year }} {{ trim_name ? '('+trim_name+')' : '' }}
             </h1>
-            <h1 class=" font-roboto   text-card-price ">
+            <h1 class=" font-roboto-price   text-card-price ">
                 {{ price }} Lakhs
             </h1>
         </div>
