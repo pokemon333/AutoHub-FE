@@ -7,16 +7,23 @@
             <div class="lg:flex lg:w-full w-screen">
 
                 <div class=" lg:w-7/12 lg:pr-2 lg:flex lg:flex-col lg:space-y-5 w-full">
-                    <div class="w-5/12 lg:h-40 ">
-                        <div class="flex flex-col space-y-2">
-                            <h1 class="text-[30px]">{{ car.car_model?.car_brand?.name || '-' }} {{ car?.car_model?.name  || '-'}}</h1>
-                            <div class="flex text-success-800 text-[25px] space-x-1">
-                                <h1 class="font-bold">$</h1>
-                                <h1>{{  car?.price || '-'}}</h1>
+
+                    <div class="lg:w-5/12 lg:h-40 w-full">
+                        <div class="flex">
+                            <div class="lg:hidden flex justify-center items-center">
+                                <back @click="backToList" class="w-10 h-10 cursor-pointer"/>
                             </div>
-                            <h1 class="text-secondary-500 font-bold">{{car?.car_specification?.condition || '-'}}/{{ car?.is_soldout ? '/Sold Out/':'' }}..</h1>
+                            <div class="flex flex-col space-y-2">
+                                <h1 class="text-[30px]">{{ car.car_model?.car_brand?.name || '-' }} {{ car?.car_model?.name  || '-'}}</h1>
+                                <div class="flex text-success-800 text-[25px] space-x-1">
+                                    <h1 class="font-bold">$</h1>
+                                    <h1>{{  car?.price || '-'}}</h1>
+                                </div>
+                                <h1 class="text-secondary-500 font-bold">{{car?.car_specification?.condition || '-'}}/{{ car?.is_soldout ? '/Sold Out/':'' }}..</h1>
+                            </div>
                         </div>
                     </div>
+
                     <div class="lg:w-full w-screen "  v-if="car">
                         <Carousel> 
                             <template v-slot:main>
@@ -71,7 +78,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-primary-100/40  pb-[24%] px-8 rounded-sm border-b border-b-primary-100  pt-2 ">
+                    <div class="bg-primary-100/40  pb-[18%] px-8 rounded-sm border-b border-b-primary-100  pt-2 ">
                         <h1 class="text-[20px] font-[500]">Car Information</h1>
                         <div class="lg:flex mt-8">
                             <div class="lg:w-8/12 pl-5">
@@ -98,11 +105,10 @@
                             </div>
                         </div>
                     </div>
-                   
                 </div>
             </div>
             <!-- descriptions -->
-            <div class="bg-primary-100/40  px-8 mt-4 w-[97%]    rounded-sm border-b border-b-primary-100  py-2">
+            <div class="lg:w-[97%] bg-primary-100/40  px-8 mt-4     rounded-sm border-b border-b-primary-100  py-2">
                 <h1 class="text-[20px] font-[500]">Descriptions</h1>
                 <div class="flex mt-1 px-5">
                    {{ car?.car_info?.descriptions || '-' }}
