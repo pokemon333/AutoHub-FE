@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white w-[339px] rounded-md border-2 border-primary-50/30  font-poppins">
+    <div class="bg-white w-full h-[400px] rounded-md border-2 border-primary-50/30  font-poppins">
         <div class="w-full ">
             <img class="object-cover w-full rounded-lg"  style="height: 200px;" :src="image" alt="car-img">
         </div>

@@ -1,20 +1,20 @@
 <template>
-  <div class="w-[100%] h-auto flex flex-col  container">
+  <div class="lg:w-full w-screen  flex flex-col relative  container">
 
-      <div class="w-full md:h-[420px]  h-[200px]">
+      <div class="lg:w-full w-screen  relative pb-[59%] ">
         <transition name="slide" mode="out-in">
             <slot name="main" ></slot>
         </transition>
       </div>
 
-      <div class="w-full  bg-gray-900 pb-2 pt-6   overflow-x-auto  ">
+      <div class="lg:w-full w-screen bg-gray-900 pb-2 pt-6   overflow-x-auto  ">
         <div class="flex space-x-4 p-2  w-full" ref="imageContainer">
           <slot name="images" ></slot>
         </div>
       </div>
 
-    </div>
-  </template>
+  </div>
+</template>
 <script lang="ts" setup>
 
 

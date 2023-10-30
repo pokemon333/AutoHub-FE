@@ -1,13 +1,13 @@
 <template>
     <div class=" pb-2  flex">
-        <div class=" w-[7%] h-full pt-14 max-md:hidden flex  justify-center">
+        <div class=" lg:w-[7%] h-full pt-14 max-lg:hidden flex  justify-center">
             <back @click="backToList" class="cursor-pointer"/>
         </div>
-        <div class="h-full md:w-[93%] w-screen md:pt-6">
-            <div class="md:flex">
+        <div class="h-full lg:w-[93%] w-screen lg:pt-6">
+            <div class="lg:flex lg:w-full w-screen">
 
-                <div class=" md:w-7/12 md:pr-2 md:flex md:flex-col space-y-5">
-                    <div class=" md:h-40 ">
+                <div class=" lg:w-7/12 lg:pr-2 lg:flex lg:flex-col lg:space-y-5 w-full">
+                    <div class="w-5/12 lg:h-40 ">
                         <div class="flex flex-col space-y-2">
                             <h1 class="text-[30px]">{{ car.car_model?.car_brand?.name || '-' }} {{ car?.car_model?.name  || '-'}}</h1>
                             <div class="flex text-success-800 text-[25px] space-x-1">
@@ -17,10 +17,10 @@
                             <h1 class="text-secondary-500 font-bold">{{car?.car_specification?.condition || '-'}}/{{ car?.is_soldout ? '/Sold Out/':'' }}..</h1>
                         </div>
                     </div>
-                    <div class="w-full h-auto bg-red-500 " v-if="car">
+                    <div class="lg:w-full w-screen "  v-if="car">
                         <Carousel> 
                             <template v-slot:main>
-                                <img alt="Big Image"  :src="currentImage" class="w-full  h-full object-full"/>
+                                <img alt="Big Image"  :src="currentImage" class=" w-full h-full  object-cover  absolute"/>
                             </template>
                             <template v-slot:images>
                                 <div v-for="(image, index) in images" :key="index"
@@ -33,10 +33,10 @@
                     </div>
                 </div>
 
-                <div class="md:w-5/12 md:pr-9 md:flex flex-col space-y-5">
+                <div class="lg:w-5/12 lg:pr-9 lg:flex flex-col lg:mt-0 mt-4 space-y-5">
                     <div class="bg-primary-100/40  px-8 rounded-sm border-b border-b-primary-100  py-2">
                         <h1 class="text-[20px] font-[500]">Dealer Information</h1>
-                        <div class="md:flex mt-1 flex-wrap">
+                        <div class="lg:flex mt-1 flex-wrap">
                            <div class="flex px-3 ">
                                 <div class=" flex  justify-end px-3 ">
                                     <ul class="list-disc flex flex-col space-y-1  font-[300]  roboto  ">
@@ -53,7 +53,7 @@
                                     <h1>{{ car?.dealer?.phone_number || '-' }}</h1>
                                 </div>
                            </div>
-                            <div class="md:w-1/4 flex md:items-end md:justify-end max-md:mt-2 text-white">
+                            <div class="lg:w-1/4 flex lg:items-end lg:justify-end max-lg:mt-2 text-white">
                                 <button class="h-10 w-30 px-4 py-1 rounded-xl bg-secondary-700  text-[14px]">Call Now</button>
                             </div>
                         </div>
@@ -71,10 +71,10 @@
                         </div>
                     </div>
 
-                    <div class="bg-primary-100/40  px-8 rounded-sm border-b border-b-primary-100  pt-2 md:pb-28">
+                    <div class="bg-primary-100/40  pb-[24%] px-8 rounded-sm border-b border-b-primary-100  pt-2 ">
                         <h1 class="text-[20px] font-[500]">Car Information</h1>
-                        <div class="md:flex mt-8">
-                            <div class="md:w-8/12 pl-5">
+                        <div class="lg:flex mt-8">
+                            <div class="lg:w-8/12 pl-5">
                                 <ul class="list-disc flex flex-col space-y-1  font-[500]   ">
                                     <li>{{ car?.car_model?.name  + ' model' || '-'  }} {{ car?.product_year?.name ? `( ${car?.product_year?.name})`: ''   }} </li>
                                     <li>Dynamic Premium ( full grade )</li>
@@ -85,7 +85,7 @@
                                     <li>50-55k Km</li>
                                 </ul>
                             </div>
-                            <div class="md:w-4/12 max-md:pl-5 max-md:mt-1">
+                            <div class="lg:w-4/12 max-lg:pl-5 max-lg:mt-1">
                                     <ul class="list-disc flex flex-col space-y-1  font-[500]   ">
                                         <li>{{ car?.car_specification?.transmission  || '-'}}</li>
                                         <li>{{ car?.car_specification?.steering || '' }} Handed Drive</li>
@@ -101,6 +101,7 @@
                    
                 </div>
             </div>
+            <!-- descriptions -->
             <div class="bg-primary-100/40  px-8 mt-4 w-[97%]    rounded-sm border-b border-b-primary-100  py-2">
                 <h1 class="text-[20px] font-[500]">Descriptions</h1>
                 <div class="flex mt-1 px-5">

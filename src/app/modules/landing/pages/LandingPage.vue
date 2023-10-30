@@ -1,17 +1,21 @@
 <template>
-    <section class="h-[88%] relative w-full  flex  justify-center max-md:items-center ">
-        <div class="md:w-6/12 md:h-full  max-md:mt-4 max-md:py-2 h-10/12 w-10/12   max-md:rounded-md  flex z-20 max-md:absolute flex-col max-md:bg-white ">
-            <h1 class="md:text-[42px] leading-10 pt-2  pb-6 md:ml-20 max-md:flex max-md:justify-center max-md:text-[30px]  font-[400] ">Comprehensive</h1>
-            <h1  class=" md:text-[90px]  leading-10  pb-3 md:ml-20 max-md:flex max-md:justify-center  max-md:text-[50px] m-0 p-0  text-secondary-500 font-[300]" >Marketplace&nbsp;!</h1>
-            <div class="md:landing-page-explore md:w-[70%] md:h-16  max-md:h-16 flex items-center pb-3 max-md:justify-center mt-10  bg-red-600 ">
-                <h1 class="md:text-[48px] md:pl-20 max-md:text-[30px]  text-white font-[600]">Explore Now</h1>
+    <section class=" h-[88%]  relative w-full  flex  justify-center  items-center">
+        <div class="lg:w-1/2 lg:h-full lg:rounded-none max-lg:absolute bg-white  w-3/4   rounded-md">
+            <div class="lg:justify-start lg:mt-2 lg:ml-20 flex justify-center ">
+                <h1 class="lg:leading-none  lg:text-[3vw] text-[5vw]">Comprehensive</h1>
             </div>
-            <div class="md:pl-10 max-md:px-2  mt-4">
+           <div class="lg:text-[7vw] lg:pl-1 lg:ml-28 pb-1 lg:mb-8 leading-none flex justify-center text-[9vw] text-secondary-500 font-[300] mb-2 ">
+                <h1>Marketplace&nbsp;!</h1>
+           </div>
+            <div class="lg:text-[4vw] lg:justify-start lg:pl-20  lg:landing-page-explore lg:w-11/12 flex justify-center bg-red-600 font-[600] text-white p-auto items-center text-[7vw]">
+                <h1 >Explore Now</h1>
+            </div>
+            <div class="lg:pt-3 lg:pb-2 lg:pr-32 lg:justify-start p-[4vw] flex justify-center items-center">
                 <SearchForm class=" md:p-8 h-72 md:w-[70%] max-md:p-8 bg-primary-50/40 border-b-2 border-primary-200 flex flex-col justify-between rounded-lg" @get-filtered-cars="filterCars"/> 
             </div>
         </div>
-        <div class="md:w-6/12 w-[100%]   h-full">
-            <img class="object-cover md:landing-page-img w-full h-full"  src="https://assetsforlife.co.uk/wp-content/uploads/2022/02/buying-property-concept-man-uniform-giving-keys-black-man-1024x683.jpg" alt="" >
+        <div class="lg:w-1/2 w-full h-full">
+            <img class="lg:landing-page-img object-cover  w-full h-full"  src="https://assetsforlife.co.uk/wp-content/uploads/2022/02/buying-property-concept-man-uniform-giving-keys-black-man-1024x683.jpg" alt="" >
         </div>
     </section>
 </template>
