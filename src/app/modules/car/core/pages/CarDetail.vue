@@ -70,6 +70,7 @@
                                     </ul>
                                 </div>
                                 <div class="pl-1 font-[500] flex flex-col space-y-1 roboto ">
+                                   
                                     <h1>{{ car?.dealer?.user?.name || '-' }}</h1>
                                     <h1>{{ car?.dealer?.user?.email|| '-' }}</h1>
                                     <h1>{{ car?.dealer?.address || '-' }}</h1>
@@ -153,7 +154,7 @@ let getData = async () => {
     let res = await  getCarDetial(route.params.id)
     car.value =  res.data.data
     let media = res.data.data.media
-    await media.forEach(img => {        
+    await media.forEach(img  => {        
         images.value.push(img.url);
     });    
     currentImage.value =  images.value[currentIndex.value]
