@@ -1,7 +1,7 @@
 <template>
     <div class="w-full h-[88%] bg-primary-50/10" :class="advanceFileter ? 'flex':''">
         <!-- advance filter form -->
-        <div class=" p-10 bg-primary-50  max-lg:z-40 h-screen max-lg:fixed" v-if="advanceFileter" :class="advanceFileter ? ' lg:w-6/12 w-screen order-2 ':'order-1 w-1/4'">
+        <div class=" p-10 bg-primary-50  max-lg:z-40 max-lg:h-screen max-lg:fixed" v-if="advanceFileter" :class="advanceFileter ? ' lg:w-6/12 w-screen order-2 ':'order-1 w-1/4'">
             <div class="flex justify-between  w-full  h-10">
                 <h1 class="text-secondary-700 text-[25px]">Explore Specific</h1>
                 <div @click="toggleSideBar" class="flex cursor-pointer justify-center  pt-2 border-red-800  w-10 h-10  border  rounded-full items-center " :class="advanceFileter ?  'bg-secondary-700 ':''">
@@ -39,9 +39,9 @@
                         <option value="brand" class="bg-gray-100">Brand</option>
                     </select>
                 </div>
-                <div class="">
-                    <button class="bg-red-500 rounded-md text-white py-2 w-full">
-                        submit
+                <div class="flex justify-center">
+                    <button class="lg:w-5/12 bg-red-500 rounded-md text-white py-2 w-full">
+                        Submit
                     </button>
                 </div>
             </div>
@@ -118,30 +118,29 @@ let deatil = (id : string) => {
 }
 
 let overallSearch = () =>{
-    let inputkeyword = keyword.value.toLowerCase();
-    cars.value = '' 
-    if (inputkeyword.length == 0) {
-        cars.value = carStore.cars  
-        count.value = cars.value.length
-    }else{
-
-        let inputKeywordLower = inputkeyword.toLowerCase();
+    let inputKeyword = keyword.value.toLowerCase();
+    cars.value = '';
+    if (inputKeyword.length === 0) {
+        cars.value = carStore.cars;
+        count.value = cars.value.length;
+    } else {
+        let inputKeywordLower = inputKeyword.toLowerCase();
 
         let filteredCars = carStore.cars.filter((car) => {
-                                    let { car_model, product_year, trim_name, dealer } = car;
-                                    let { car_brand } = car_model;
-                                    let trim = trim_name || '';
-                                    let firstStep = car_brand.name + ' ' + car_model.name + ' ' + product_year.name + ' ' + trim;
+            let { car_model, product_year, trim_name, dealer } = car;
+            let { car_brand } = car_model;
+            let trim = trim_name || '';
+            let firstStep = car_brand.name + ' ' + car_model.name + ' ' + product_year.name + ' ' + trim;
+            const regex = new RegExp(inputKeywordLower, 'i');
+            if (regex.test(firstStep.toLowerCase()) || regex.test(dealer.user.name.toLowerCase())) {
+                return car;
+            }
+        });
 
-                                    return (
-                                        firstStep.toLowerCase().split(' ').includes(inputKeywordLower) ||
-                                        dealer.user.name.toLowerCase().includes(inputKeywordLower)
-                                    );
-                                });
-        
         cars.value = filteredCars;
-        count.value = filteredCars.length
+        count.value = filteredCars.length;
     }
+
     
 }
 </script>

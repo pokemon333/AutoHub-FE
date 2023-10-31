@@ -1,7 +1,7 @@
 <template>
   <div class="lg:w-full w-screen  flex flex-col relative  container">
 
-      <div class="lg:w-full w-screen  relative pb-[59%] ">
+      <div class="lg:w-full w-screen  relative pb-[58%] ">
         <transition name="slide" mode="out-in">
             <slot name="main" ></slot>
         </transition>

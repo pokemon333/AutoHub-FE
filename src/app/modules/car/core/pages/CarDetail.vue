@@ -6,21 +6,36 @@
         <div class="h-full lg:w-[93%] w-screen lg:pt-6">
             <div class="lg:flex lg:w-full w-screen">
 
-                <div class=" lg:w-7/12 lg:pr-2 lg:flex lg:flex-col lg:space-y-5 w-full">
+                <div class=" lg:w-7/12  lg:justify-between lg:pr-2 lg:flex lg:flex-col lg:space-y-5 w-full">
 
-                    <div class="lg:w-5/12 lg:h-40 w-full">
-                        <div class="flex">
+                    <div class="lg:w-5/12 lg:h-40   lg:w-full">
+                        <div class="flex  w-full">
+
                             <div class="lg:hidden flex justify-center items-center">
                                 <back @click="backToList" class="w-10 h-10 cursor-pointer"/>
                             </div>
-                            <div class="flex flex-col space-y-2">
-                                <h1 class="text-[30px]">{{ car.car_model?.car_brand?.name || '-' }} {{ car?.car_model?.name  || '-'}}</h1>
-                                <div class="flex text-success-800 text-[25px] space-x-1">
-                                    <h1 class="font-bold">$</h1>
-                                    <h1>{{  car?.price || '-'}}</h1>
+
+                            <div class="flex  lg:w-full justify-between">
+                                <div class="flex flex-col space-y-1 pb-2">
+                                    <h1 class="text-[30px]">{{ car.car_model?.car_brand?.name || '-' }} {{ car?.car_model?.name  || '-'}}</h1>
+                                    <div class="flex text-success-800 text-[25px] space-x-1">
+                                        <h1 class="font-bold">$</h1>
+                                        <h1>{{ parseInt( car?.price)  || '-'}}</h1>
+                                    </div>
+                                    <h1 class="text-secondary-500 font-bold">{{  car?.car_specification?.condition.charAt(0).toUpperCase() + car?.car_specification?.condition.slice(1) || '-'}}</h1>
+                                    <div class="text-gray-700/80 text-xs mt-2">
+                                        <div class="flex"  v-if="!checkEdited(car?.created_at,car?.updated_at)">
+                                            <h1 class="font-bold">Added at : </h1>
+                                            <h1>&nbsp;{{car?.created_at ? formatDate(car?.created_at) + '&nbsp;( '+dateDifference(car?.created_at)+' )' : ''}}</h1>
+                                        </div>
+                                        <div class="flex" v-if="checkEdited(car?.created_at,car?.updated_at)">
+                                            <h1 class="font-bold">Edited at :</h1>
+                                            <h1>&nbsp;{{car?.updated_at ? formatDate(car?.updated_at) + '&nbsp;( '+dateDifference(car?.updated_at)+' )' : ''}}</h1>
+                                        </div>
+                                    </div>
                                 </div>
-                                <h1 class="text-secondary-500 font-bold">{{car?.car_specification?.condition || '-'}}/{{ car?.is_soldout ? '/Sold Out/':'' }}..</h1>
                             </div>
+
                         </div>
                     </div>
 
@@ -38,15 +53,16 @@
                             </template>
                         </Carousel>
                     </div>
+
                 </div>
 
-                <div class="lg:w-5/12 lg:pr-9 lg:flex flex-col lg:mt-0 mt-4 space-y-5">
-                    <div class="bg-primary-100/40  px-8 rounded-sm border-b border-b-primary-100  py-2">
+                <div class="lg:w-5/12 lg:pr-9  flex-col lg:mt-0 mt-4 space-y-5">
+                    <div class="bg-primary-100/40   pl-8 rounded-sm border-b border-b-primary-100  py-2">
                         <h1 class="text-[20px] font-[500]">Dealer Information</h1>
-                        <div class="lg:flex mt-1 flex-wrap">
+                        <div class="lg:flex mt-1  flex-wrap">
                            <div class="flex px-3 ">
                                 <div class=" flex  justify-end px-3 ">
-                                    <ul class="list-disc flex flex-col space-y-1  font-[300]  roboto  ">
+                                    <ul class="list-disc flex flex-col space-y-1  font-[100]    ">
                                         <li>Name </li>
                                         <li>Social Link</li>
                                         <li>Address</li>
@@ -60,16 +76,16 @@
                                     <h1>{{ car?.dealer?.phone_number || '-' }}</h1>
                                 </div>
                            </div>
-                            <div class="lg:w-1/4 flex lg:items-end lg:justify-end max-lg:mt-2 text-white">
+                            <div class="lg:w-4/12 flex lg:items-end mt-2 lg:justify-end  max-lg:mt-2 text-white">
                                 <button class="h-10 w-30 px-4 py-1 rounded-xl bg-secondary-700  text-[14px]">Call Now</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-primary-100/40  px-8 rounded-sm border-b border-b-primary-100  py-2">
-                        <h1 class="text-[20px] font-[500]">License Information</h1>
-                        <div class="flex mt-1 px-5">
-                                <ul class="list-disc flex flex-col space-y-1  font-[500]   ">
+                        <h1 class="text-[20px] roboto font-[500]">License Information</h1>
+                        <div class="flex mt-1 px-5 ">
+                                <ul class="list-disc roboto flex flex-col space-y-1  font-[500]   ">
                                     <li>{{ car?.car_info?.license_status?.name || '-' }}</li>
                                     <li>{{ car?.car_info?.plate_division?.name  || '-'  }}</li>
                                     <li>{{ car?.car_info?.plate_color || '-'  }}</li>
@@ -78,39 +94,38 @@
                         </div>
                     </div>
 
-                    <div class="bg-primary-100/40  pb-[18%] px-8 rounded-sm border-b border-b-primary-100  pt-2 ">
-                        <h1 class="text-[20px] font-[500]">Car Information</h1>
-                        <div class="lg:flex mt-8">
+                    <div class="bg-primary-100/40 lg:h-[28vw]  pl-8 rounded-sm border-b border-b-primary-100  pt-2 ">
+                        <h1 class="text-[20px] font-[500] roboto">Car Information</h1>
+                        <div class="lg:flex mt-3">
                             <div class="lg:w-8/12 pl-5">
-                                <ul class="list-disc flex flex-col space-y-1  font-[500]   ">
-                                    <li>{{ car?.car_model?.name  + ' model' || '-'  }} {{ car?.product_year?.name ? `( ${car?.product_year?.name})`: ''   }} </li>
-                                    <li>Dynamic Premium ( full grade )</li>
+                                <ul class="list-disc roboto flex flex-col space-y-[0.3vw]  font-[500]   ">
+                                    <li>{{ car?.car_model?.car_brand?.name  || '-' }} {{ car?.car_model?.name  || '-' }} {{ car?.product_year?.name }} {{ car?.trim_name ? '('+car?.trim_name+')' : '' }}</li>
+                                    <li>{{ car?.car_specification?.transmission  || '-'}}</li>
                                     <li>{{ car?.car_specification?.engine_power || '-' }}</li>
-                                    <li>{{car?.car_specification?.milage?.name || ''}}++ Kilo</li>
-                                    <li>{{ car?.car_info?.color?.name || '-' }}</li>
+                                    <li>{{ car?.car_specification?.steering || '' }} Handed Drive</li>
                                     <li>{{car?.car_specification?.fuel_type?.name || ''}}</li>
-                                    <li>50-55k Km</li>
+                                    <li>{{car?.car_specification?.milage?.name+' Km' || ''}}</li>
+                                    <li>{{ car?.car_info?.color?.name || '-' }}</li>
+                                    <li>{{ car?.car_info?.vehicle_id || '-' }}</li>
                                 </ul>
                             </div>
-                            <div class="lg:w-4/12 max-lg:pl-5 max-lg:mt-1">
+                            <!-- <div class="lg:w-4/12 max-lg:pl-5 max-lg:mt-1">
                                     <ul class="list-disc flex flex-col space-y-1  font-[500]   ">
-                                        <li>{{ car?.car_specification?.transmission  || '-'}}</li>
-                                        <li>{{ car?.car_specification?.steering || '' }} Handed Drive</li>
                                         <li>2 owners before</li>
                                         <li>Saloon</li>
                                         <li>No Trim Name</li>
                                         <li>Edited 3 days ago</li>
                                         <li>#76949494</li>
                                     </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
             <!-- descriptions -->
             <div class="lg:w-[97%] bg-primary-100/40  px-8 mt-4     rounded-sm border-b border-b-primary-100  py-2">
-                <h1 class="text-[20px] font-[500]">Descriptions</h1>
-                <div class="flex mt-1 px-5">
+                <h1 class="text-[20px] font-[500] roboto">Descriptions</h1>
+                <div class="flex mt-1 px-5 roboto">
                    {{ car?.car_info?.descriptions || '-' }}
                 </div>
             </div>
@@ -167,6 +182,27 @@ let backToList =  () => {
     router.push({name : 'cars'})
 }
 
+let formatDate = (date) =>{
+    const dateParts = date.split(" ")[0].split("-");
+    const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+    return  formattedDate;
+}
+
+let  dateDifference = (date) =>  {
+    const currentDate = new Date();
+    const inputDate = new Date(date)    
+    const timeDifference = currentDate - inputDate;
+    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    if (daysDifference === 0) {
+        return "Today";
+    } else if (daysDifference > 0) {
+        return `${daysDifference} days ago`;
+    } 
+}
+
+let checkEdited = (create,update) =>{
+   return create == update ? false : true;
+}
 onMounted(()=>{
     getData();
     autoChangeImageSlide();

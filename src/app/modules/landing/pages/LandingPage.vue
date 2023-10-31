@@ -1,6 +1,6 @@
 <template>
-    <section class=" h-[88%]  relative w-full  flex  justify-center  items-center">
-        <div class="lg:w-1/2 lg:h-full lg:rounded-none max-lg:absolute bg-white  w-3/4   rounded-md">
+    <section class=" min-h-[88%]  relative w-full  flex  justify-center  items-center">
+        <div class="lg:w-1/2 lg:h-full lg:rounded-none max-lg:absolute top-20 bg-white  w-3/4   rounded-md">
             <div class="lg:justify-start lg:mt-2 lg:ml-20 flex justify-center ">
                 <h1 class="lg:leading-none  lg:text-[3vw] text-[5vw]">Comprehensive</h1>
             </div>
@@ -11,10 +11,10 @@
                 <h1 >Explore Now</h1>
             </div>
             <div class="lg:pt-3 lg:pb-2 lg:pr-32 lg:justify-start p-[4vw] flex justify-center items-center">
-                <SearchForm class=" md:p-8 h-72 md:w-[70%] max-md:p-8 bg-primary-50/40 border-b-2 border-primary-200 flex flex-col justify-between rounded-lg" @get-filtered-cars="filterCars"/> 
+                <SearchForm class=" md:p-8 h-72 md:w-[70%] max-md:p-8  bg-primary-50/40 border-b-2 border-primary-200 flex flex-col justify-between rounded-lg" @get-filtered-cars="filterCars"/> 
             </div>
         </div>
-        <div class="lg:w-1/2 w-full h-full">
+        <div class="lg:w-1/2 w-full h-screen">
             <img class="lg:landing-page-img object-cover  w-full h-full"  src="https://assetsforlife.co.uk/wp-content/uploads/2022/02/buying-property-concept-man-uniform-giving-keys-black-man-1024x683.jpg" alt="" >
         </div>
     </section>
