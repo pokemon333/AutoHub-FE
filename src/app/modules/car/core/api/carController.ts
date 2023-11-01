@@ -19,7 +19,7 @@ export default function CarController() : CarController{
     }
 
     function getCarDetial(id:string| string[]) : Promise<AxiosResponse>{
-        return ApiService.get('/cars/'+ id)
+        return ApiService.get('cars/'+ id)
     }
 
     return {

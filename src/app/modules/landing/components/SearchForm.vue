@@ -9,7 +9,7 @@
         </div>
         <div class="relative">
             <label for="type" class="absolute -top-2 left-3 px-2  bg-gray-200 text-xs">Name</label>
-            <input type="text" class="w-full h-12 rounded-md px-3 bg-gray-200 border border-gray-500"  v-model="data.name" placeholder="Type to search">
+            <input type="text" @keyup.enter="$emit('getFilteredCars',data)" class="w-full h-12 rounded-md px-3 bg-gray-200 border border-gray-500"  v-model="data.name" placeholder="Type to search">
         </div>
         <div >
             <button @click="$emit('getFilteredCars',data)" class="w-full h-12 rounded-md bg-red-600 text-white">
