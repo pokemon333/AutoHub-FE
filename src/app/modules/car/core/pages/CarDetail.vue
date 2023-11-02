@@ -1,9 +1,9 @@
 <template>
-    <div class=" pb-2  flex">
-        <div class=" lg:w-[7%] h-full pt-14 max-lg:hidden flex  justify-center">
-            <back @click="backToList" class="cursor-pointer"/>
+    <div class=" pb-2  flex" >
+        <div class=" lg:w-[7%]  h-full pt-14 max-lg:hidden flex  justify-center">
+            <back @click="backToList" class="cursor-pointer "/>
         </div>
-        <div class="h-full lg:w-[93%] w-screen lg:pt-6">
+        <div class=" lg:w-[93%] w-screen lg:pt-6 h-full">
             <div class="lg:flex lg:w-full w-screen">
 
                 <div class=" lg:w-7/12  lg:justify-between lg:pr-2 lg:flex lg:flex-col lg:space-y-5 w-full">
@@ -11,7 +11,7 @@
                     <div class="lg:w-5/12 lg:h-40   lg:w-full">
                         <div class="flex  w-full">
 
-                            <div class="lg:hidden flex justify-center items-center">
+                            <div class="lg:hidden lg:mr-0 lg:ml-0 mr-4 ml-1 flex justify-center items-center">
                                 <back @click="backToList" class="w-10 h-10 cursor-pointer"/>
                             </div>
 
@@ -78,7 +78,7 @@
                                 </div>
                            </div>
                             <div class="lg:w-4/12 flex lg:items-end mt-2 lg:justify-end  max-lg:mt-2 text-white">
-                                <button class="h-10 w-30 px-4 py-1 rounded-xl bg-secondary-700  text-[14px]">Call Now</button>
+                                <button class="lg:h-10 lg:rounded-xl h-8  w-30 px-4   rounded-md bg-secondary-700  text-[14px]">Call Now</button>
                             </div>
                         </div>
                     </div>
