@@ -52,14 +52,14 @@
     "src/app/modules/car/**/*",
     "src/app/modules/car/modules/search/**/*",
     "src/app/modules/car/modules/advanceSearch/**/*",
-    "src/app/modules/landing/**/*.",
+    "src/app/modules/landing/**/*."
 
-    "src/app/core/**/*.vue",
-    "src/app/modules/car/**/*.vue",
-    "src/app/modules/car/modules/search/**/*.vue",
-    "src/app/modules/car/modules/advanceSearch/**/*.vue",
-    "src/app/modules/landing/**/*.vue",
-    "src/app/modules/landing/**/*.vue"
+    // "src/app/core/**/*.vue",
+    // "src/app/modules/car/**/*.vue",
+    // "src/app/modules/car/modules/search/**/*.vue",
+    // "src/app/modules/car/modules/advanceSearch/**/*.vue",
+    // "src/app/modules/landing/**/*.vue",
+    // "src/app/modules/landing/**/*.vue"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
