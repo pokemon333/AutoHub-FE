@@ -69,7 +69,7 @@
                 </button>
                 <div class=" py-2 space-y-2" v-if="modelDropDown">
                     <div class="px-2 flex space-x-2" v-for="model in filteredModels">
-                        <input type="checkbox" :value="model?.id" v-model="checkedModels">
+                        <input type="checkbox" :value="model?.name" v-model="checkedModels">
                         <h1>{{ model?.name }}</h1>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
         <!-- Year -->
         <div class="mt-4">
             <div class="mt-2">
-                <button type="button" @click="() => divisionDropDown = !divisionDropDown"
+                <button type="button" @click="() => yearDropDown = !yearDropDown"
                     class="flex items-center border border-gray-500  w-full p-2 text-base text-gray-900 transition duration-75 rounded-md group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Year</span>
@@ -89,9 +89,9 @@
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </button>
-                <div class=" py-2 space-y-2" v-if="divisionDropDown">
+                <div class=" py-2 space-y-2" v-if="yearDropDown">
                     <div class="px-2 flex space-x-2" v-for="year in years">
-                        <input type="checkbox" :value="year?.id" v-model="checkedYears">
+                        <input type="checkbox" :value="year?.name" v-model="checkedYears">
                         <h1>{{ year?.name }}</h1>
                     </div>
                 </div>
@@ -103,11 +103,11 @@
             <label for="">Condition</label>
             <div class="mt-2 flex space-x-3">
                 <div class="flex space-x-1 ">
-                    <input type="checkbox" value="new">
+                    <input type="checkbox" value="new" v-model="condition">
                     <h1>New</h1>
                 </div>
                 <div class="flex space-x-1 ">
-                    <input type="checkbox" value="used">
+                    <input type="checkbox" value="used" v-model="condition">
                     <h1>Used</h1>
                 </div>
             </div>
@@ -120,15 +120,15 @@
             <label for="">Price</label>
             <div class="h-10 flex space-x-1 mt-2  items-center">
                 <div class="w-1/2 h-full">
-                    <input type="text" class="w-full h-full rounded-md border border-gray-500 px-2 bg-slate-300"
-                        placeholder="min">
+                    <input type="text" v-model="minPrice"
+                        class="w-full h-full rounded-md border border-gray-500 px-2 bg-slate-300" placeholder="min">
                 </div>
                 <div>
                     <h1>-</h1>
                 </div>
                 <div class="w-1/2 h-full">
-                    <input type="text" class="w-full h-full rounded-md border border-gray-500 px-2 bg-slate-300"
-                        placeholder="max">
+                    <input type="text" v-model="maxPrice"
+                        class="w-full h-full rounded-md border border-gray-500 px-2 bg-slate-300" placeholder="max">
                 </div>
             </div>
         </div>
@@ -149,7 +149,7 @@
                 </button>
                 <div class=" py-2 space-y-2" v-if="divisionDropDown">
                     <div class="px-2 flex space-x-2" v-for="division in divisions">
-                        <input type="checkbox" :value="division?.id">
+                        <input type="checkbox" :value="division?.name" v-model="checkedDivision">
                         <h1>{{ division?.name }}</h1>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
         </div>
 
         <div class="mt-4 flex justify-center">
-            <button class="bg-red-500 py-1 px-4 rounded-md text-white">
+            <button class="bg-red-500 py-1 px-4 rounded-md text-white" @click="formsubmit">
                 Search
             </button>
         </div>
@@ -169,7 +169,7 @@
 <script setup lang="ts">
 
 import AdvanceSearchController from 'advanceSearch@/api/AdvanceSearchController'
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 
 let advanceSearchController = AdvanceSearchController();
 let brands = ref([]);
@@ -179,20 +179,47 @@ let dealers = ref([]);
 let divisions = ref([]);
 let dealersData = ref([]);
 let dealerWithBrand = ref([]);
+let minPrice = ref(0);
+let maxPrice = ref(0);
+let condition = ref([]);
 
 let divisionDropDown = ref(false);
 let brandDropDown = ref(false);
 let dealerDropDown = ref(false);
 let modelDropDown = ref(false);
-
+let yearDropDown  = ref(false);
 
 let checkedBrands = ref([]);
 let checkedModels = ref([]);
 let checkedYears = ref([]);
 let checkedDealers = ref([]);
+let checkedDivision = ref([]);
 
 let filteredBrands = ref([]);
 let filteredModels = ref([]);
+
+let submitdata = computed(() => ({
+    dealer: dealersData.value.map(dealer => {
+        if (checkedDealers.value.includes(dealer.user.name)) {
+            return dealer.user.name;
+        }
+    }),
+    brand: filteredBrands.value.map(brand => {
+        if (checkedBrands.value.includes(brand.name)) {
+            return brand.name;
+        }
+    }),
+    model: filteredModels.value.map(model => {
+        if (checkedModels.value.includes(model.name)) {
+            return model.name;
+        }
+    }),
+    year: checkedYears.value,
+    minPrice: minPrice.value,
+    maxPrice: maxPrice.value,
+    condition: condition.value,
+    division: checkedDivision.value
+}));
 // let filteredYears = ref([]);
 
 let mainFilterChange = (e) => {
@@ -200,9 +227,11 @@ let mainFilterChange = (e) => {
     if (filter == 'brand') {
         filteredBrands.value = brands.value
         dealersData.value = [];
+        filteredModels.value = [];
     } else {
         dealersData.value = dealers.value
         filteredBrands.value = [];
+        filteredModels.value = [];
     }
 }
 
@@ -249,6 +278,15 @@ let getResource = async () => {
 
     } catch (error) {
         console.error('An error occurred:', error);
+    }
+}
+
+let formsubmit = async () => {
+    try {
+        let res = await advanceSearchController.getFilteredData(submitdata.value)
+        console.log(res);
+    } catch (error) {
+        console.log('an error occur',error);
     }
 }
 
