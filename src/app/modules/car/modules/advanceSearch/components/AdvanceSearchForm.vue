@@ -169,8 +169,8 @@
 <script setup lang="ts">
 
 import AdvanceSearchController from 'advanceSearch@/api/AdvanceSearchController'
-import { onMounted, ref, computed } from 'vue';
-
+import { onMounted, ref, computed,defineEmits } from 'vue';
+const emit = defineEmits(['setCar'])
 let advanceSearchController = AdvanceSearchController();
 let brands = ref([]);
 let models = ref([]);
@@ -284,7 +284,11 @@ let getResource = async () => {
 let formsubmit = async () => {
     try {
         let res = await advanceSearchController.getFilteredData(submitdata.value)
-        console.log(res);
+        let cars =  await res.data.data.cars
+        let count =  await res.data.data.count
+        // console.log(cars);
+        // console.log(count);
+        emit('setCar',{cars,count})
     } catch (error) {
         console.log('an error occur',error);
     }

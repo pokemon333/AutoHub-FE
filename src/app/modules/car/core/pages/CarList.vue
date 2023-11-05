@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="w-full lg:h-[91%] lg:pt-2 overflow-y-auto  h-screen">
-                <AdvanceSearchForm />
+                <AdvanceSearchForm  @setCar="setCar"/>
             </div>
         </div>
         <!-- carlist part -->
@@ -75,7 +75,13 @@ onMounted(() => {
 })
 
 let data = computed(() => cars.value)
-
+// here we need to some how update the data 
+// and Need to check when filtering with dealer is working properly but you need to check when filtering with brand
+let setCar = (car,count)=>{
+    console.log(car)
+    cars.value = car,
+    count.value = count
+}
 let toggleSideBar = () => {
     advanceFileter.value = !advanceFileter.value
 }
