@@ -1,4 +1,5 @@
 export default {
+    25 : '#E0E0E0',
     50 : '#BDBDBD',
     100 : '#AAAAAA',
     200 : '#858585',

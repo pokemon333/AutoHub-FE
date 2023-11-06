@@ -17,14 +17,14 @@
                     class="flex items-center border border-gray-500  w-full p-2 text-base text-gray-900 transition duration-75 rounded-md group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Dealer</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" :class="dealerDropDown ? 'rotate-180' : ''"
                         viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </button>
-                <div class=" py-2 space-y-2" v-if="dealerDropDown">
-                    <div class="px-2 flex space-x-2" v-for="(dealer, index) in dealersData" :key="index">
+                <div class=" py-2 space-y-2 " v-if="dealerDropDown">
+                    <div class="px-2 flex space-x-2 items-center" v-for="(dealer, index) in dealersData" :key="index">
                         <input type="checkbox" :value="dealer?.user?.name" v-model="checkedDealers" @change="dealerChecked">
                         <h1>{{ dealer?.user?.name }}</h1>
                     </div>
@@ -39,13 +39,13 @@
                     class="flex items-center border border-gray-500  w-full p-2 text-base text-gray-900 transition duration-75 rounded-md group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Brand</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" :class="brandDropDown ? 'rotate-180' : ''"
                         viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </button>
-                <div class=" py-2 space-y-2" v-if="brandDropDown">
+                <div class=" py-2 space-y-2  grid grid-cols-2" v-if="brandDropDown">
                     <div class="px-2 flex space-x-2" v-for="(brand, index) in filteredBrands" :key="index">
                         <input type="checkbox" :value="brand.name" v-model="checkedBrands" @change="brandChecked">
                         <h1>{{ brand.name }}</h1>
@@ -61,14 +61,14 @@
                     class="flex items-center border border-gray-500  w-full p-2 text-base text-gray-900 transition duration-75 rounded-md group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Model</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" :class="modelDropDown ? 'rotate-180' : '' "
                         viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </button>
-                <div class=" py-2 space-y-2" v-if="modelDropDown">
-                    <div class="px-2 flex space-x-2" v-for="model in filteredModels">
+                <div class=" py-2 space-y-2 grid grid-cols-2" v-if="modelDropDown">
+                    <div class="px-2 flex space-x-2 items-center" v-for="model in filteredModels">
                         <input type="checkbox" :value="model?.name" v-model="checkedModels">
                         <h1>{{ model?.name }}</h1>
                     </div>
@@ -83,14 +83,14 @@
                     class="flex items-center border border-gray-500  w-full p-2 text-base text-gray-900 transition duration-75 rounded-md group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Year</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" :class="yearDropDown ? 'rotate-180' : ''"
                         viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </button>
-                <div class=" py-2 space-y-2" v-if="yearDropDown">
-                    <div class="px-2 flex space-x-2" v-for="year in years">
+                <div class=" py-2 space-y-2 grid grid-cols-2" v-if="yearDropDown">
+                    <div class="px-2 flex space-x-2 items-center " v-for="year in years">
                         <input type="checkbox" :value="year?.name" v-model="checkedYears">
                         <h1>{{ year?.name }}</h1>
                     </div>
@@ -141,7 +141,7 @@
                     class="flex items-center border border-gray-500  w-full p-2 text-base text-gray-900 transition duration-75 rounded-md group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Division</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" :class="divisionDropDown ? 'rotate-180' : '' "
                         viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 4 4 4-4" />
@@ -173,14 +173,14 @@ import { onMounted, ref, computed,defineEmits } from 'vue';
 const emit = defineEmits(['setCar'])
 let advanceSearchController = AdvanceSearchController();
 let brands = ref([]);
-let models = ref([]);
-let years = ref([]);
+let brandNames = ref([]);
 let dealers = ref([]);
 let divisions = ref([]);
 let dealersData = ref([]);
 let dealerWithBrand = ref([]);
 let minPrice = ref(0);
 let maxPrice = ref(0);
+let mainFilterType = ref('');
 let condition = ref([]);
 
 let divisionDropDown = ref(false);
@@ -197,6 +197,12 @@ let checkedDivision = ref([]);
 
 let filteredBrands = ref([]);
 let filteredModels = ref([]);
+
+let resetCheckedValues = () => {
+    checkedBrands.value = [];
+    checkedDealers.value = [];
+    checkedModels.value = [];
+}
 
 let submitdata = computed(() => ({
     dealer: dealersData.value.map(dealer => {
@@ -220,34 +226,45 @@ let submitdata = computed(() => ({
     condition: condition.value,
     division: checkedDivision.value
 }));
-// let filteredYears = ref([]);
 
 let mainFilterChange = (e) => {
     let filter = e.target.value
     if (filter == 'brand') {
+        mainFilterType.value = 'brand'
         filteredBrands.value = brands.value
+        console.log(filteredBrands.value);
+        
+        resetCheckedValues()
         dealersData.value = [];
         filteredModels.value = [];
     } else {
+        mainFilterType.value = 'dealer'
         dealersData.value = dealers.value
+        resetCheckedValues()
         filteredBrands.value = [];
         filteredModels.value = [];
     }
 }
+//need to be work on  when model is check  I need to  filter the  years
+//Need to think that there are two way of filter and function should not be duplicated
+// let modelChecked = () => {
+
+// }
 
 
 let brandChecked = () => {
-    let arr = []
+    let models  = []
     brands.value.filter((brand) => {
         if (checkedBrands.value.includes(brand.name)) {
-            arr.push(brand.id)
+            brand.carModelWithYear.map((model)=>{
+                models.push({
+                    id : model.id,
+                    name : model.name
+                })
+            })
         }
     })
-    filteredModels.value = models.value.filter((model) => {
-        if (arr.includes(model.car_brand_id)) {
-            return model;
-        }
-    });
+    filteredModels.value = models;
 }
 
 let dealerChecked = () => {
@@ -269,30 +286,29 @@ let getResource = async () => {
         const res = await advanceSearchController.getResources();
         let data = await res.data.data
         brands.value = await data.brands;
-        models.value = await data.models;
-        years.value = await data.years;
         dealers.value = await data.dealers;
         divisions.value = await data.divisions;
-        dealerWithBrand.value = await data.dealerWithBrand
-        console.log(dealerWithBrand.value);
-
+        console.log(data);
+        
     } catch (error) {
         console.error('An error occurred:', error);
     }
 }
 
+
+
 let formsubmit = async () => {
     try {
-        let res = await advanceSearchController.getFilteredData(submitdata.value)
-        let cars =  await res.data.data.cars
-        let count =  await res.data.data.count
-        // console.log(cars);
-        // console.log(count);
-        emit('setCar',{cars,count})
+        let res = await advanceSearchController.getFilteredData(submitdata.value);
+        let data = await res.data.data;
+        let cars = data.cars;
+        let count = data.count;
+        emit('setCar', { cars, count });
     } catch (error) {
-        console.log('an error occur',error);
+        console.log('An error occurred', error);
     }
 }
+
 
 onMounted(() => {
     getResource();

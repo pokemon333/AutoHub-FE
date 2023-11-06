@@ -42,7 +42,7 @@
             </div>
             <div class="w-full h-[82%] mt-8 flex  justify-center"
                 :class="advanceFileter ? 'lg:justify-end pr-2 ' : 'lg:justify-center'">
-                <div class="lg:px-0 md:grid-cols-2 bg-primary-50/10  max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4  px-2   overflow-y-auto  h-full scroll-auto "
+                <div class="lg:px-0 md:grid-cols-2   max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4  px-2   overflow-y-auto  h-full scroll-auto "
                     :class="advanceFileter ? 'lg:w-[90%]  lg:grid-cols-2 ' : 'lg:w-[85%]  lg:grid-cols-3'">
                     <CarCard @car-detail="deatil(car.id)" class="" :car="car" v-for="car in data" :key="car.id" />
                 </div>
@@ -77,10 +77,11 @@ onMounted(() => {
 let data = computed(() => cars.value)
 // here we need to some how update the data 
 // and Need to check when filtering with dealer is working properly but you need to check when filtering with brand
-let setCar = (car,count)=>{
-    console.log(car)
-    cars.value = car,
-    count.value = count
+let setCar = (car)=>{
+    cars.value = car.cars,
+    count.value = car.count
+    carStore.setCars(car.cars)
+    carStore.setCount(car.count)    
 }
 let toggleSideBar = () => {
     advanceFileter.value = !advanceFileter.value
