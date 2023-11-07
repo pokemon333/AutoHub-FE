@@ -1,6 +1,9 @@
 <template>
-    <div class="bg-white w-full h-[400px] rounded-md border-2 border-primary-50/30  font-poppins">
-        <div class="w-full ">
+    <div class="bg-white w-full h-[400px] rounded-lg border-2 border-primary-50/30  font-poppins">
+        <div class="w-full relative">
+            <div v-if="car?.car_info" class="py-1 px-2 rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-1 right-1 border-secondary-300">
+               {{ car?.car_info?.plate_division.name }} / {{car?.car_info?.plate_number[0] + '*'.repeat(car?.car_info?.plate_number.length - 1) }}
+            </div>
             <img class="object-cover w-full rounded-lg"  style="height: 200px;" :src="image" alt="car-img">
         </div>
         <div class="py-4 px-4  flex justify-between bg-white border-b-2 border-b-primary-100/30">

@@ -41,6 +41,9 @@ let filterCars = async (data : FilterData) => {
                             let count = res.data.data.count
                             carStore.setCars(cars)
                             carStore.setCount(count)
+                            console.log(data.type);
+                            
+                            carStore.setType(data.type)
                             router.push({ name: 'cars'})
                         }
                         

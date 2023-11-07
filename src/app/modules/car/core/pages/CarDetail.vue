@@ -90,7 +90,7 @@
                                     <li>{{ car?.car_info?.license_status?.name || '-' }}</li>
                                     <li>{{ car?.car_info?.plate_division?.name  || '-'  }}</li>
                                     <li>{{ car?.car_info?.plate_color || '-'  }}</li>
-                                    <li>{{ car?.car_info?.plate_number  || '-'  }}</li>
+                                    <li>{{ car?.car_info?.plate_number[0] + '*'.repeat(car?.car_info?.plate_number.length - 1)  || '-'  }}</li>
                                 </ul>
                         </div>
                     </div>
