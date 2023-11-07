@@ -12,9 +12,9 @@
 
         <!-- Dealer -->
         <div v-if="dealersData.length">
-            <div class="mt-2">
+            <div class="mt-3">
                 <button type="button" @click="() => dealerDropDown = !dealerDropDown"
-                    class="flex items-center border-b border-b-primary-50 w-full py-2 pr-2 text-base text-gray-900 transition duration-75  group"
+                    class="flex items-center border-b border-b-white bg-secondary-700 w-full py-1 pr-2 text-base text-white transition duration-75  group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Dealer</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -23,7 +23,7 @@
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </button>
-                <div class=" py-2 space-y-2 " v-if="dealerDropDown">
+                <div class=" py-2 space-y-2  " v-if="dealerDropDown">
                     <div class="px-2 flex space-x-2 items-center" v-for="(dealer, index) in dealersData" :key="index">
                         <input type="checkbox" :value="dealer.name" v-model="checkedDealers" @change="dealerChecked">
                         <h1>{{ dealer.name }}</h1>
@@ -34,9 +34,9 @@
 
         <!--Brand-->
         <div v-if="filteredBrands.length != 0">
-            <div class="mt-2">
+            <div class="">
                 <button type="button" @click="() => brandDropDown = !brandDropDown"
-                    class="flex items-center border-b border-b-primary-50 w-full py-2 pr-2 text-base text-gray-900 transition duration-75  group"
+                    class="flex items-center border-b border-b-white bg-secondary-700 w-full py-1 pr-2 text-base text-white transition duration-75  group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Brand</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -56,9 +56,9 @@
 
         <!-- Model -->
         <div v-if="filteredModels.length">
-            <div class="mt-2">
+            <div class="">
                 <button type="button" @click="() => modelDropDown = !modelDropDown"
-                    class="flex items-center border-b border-b-primary-50 w-full py-2 pr-2 text-base text-gray-900 transition duration-75  group"
+                    class="flex items-center border-b border-b-white bg-secondary-700 w-full py-1 pr-2 text-base text-white transition duration-75  group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Model</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -77,10 +77,10 @@
         </div>
 
         <!-- division -->
-        <div class="mt-4">
-            <div class="mt-2">
+        <div class="">
+            <div class="">
                 <button type="button" @click="() => divisionDropDown = !divisionDropDown"
-                    class="flex items-center border-b border-b-primary-50  w-full py-2 pr-2 text-base text-gray-900 transition duration-75  group"
+                    class="flex items-center border-b border-b-white bg-secondary-700 w-full py-1 pr-2 text-base text-white transition duration-75  group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Division</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -138,7 +138,7 @@
 
 
         <div class="mt-4 flex justify-center">
-            <button class="bg-red-500 py-1 px-4 rounded-md text-white" @click="formsubmit">
+            <button class="bg-red-700 py-1 px-4 rounded-md text-white" @click="formsubmit">
                 Search
             </button>
         </div>
