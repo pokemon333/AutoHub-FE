@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-4 pb-4  lg:h-full lg:px-14 md:pl-20 md:pr-32  h-[75%] overflow-y-auto ">
+    <div class="pt-4 pb-4  lg:h-full lg:px-14 md:pl-20 md:pr-32  h-[75%] overflow-y-auto  form-scroll">
         <!-- Search Input and Dropdown -->
         <div class=" w-1/2">
             <select @change="mainFilterChange" name="type" v-model="mainFilterType" 
@@ -10,9 +10,12 @@
         </div>
 
 
+        <!-- spacer -->
+        <div class="mt-3"></div>
+
         <!-- Dealer -->
         <div v-if="dealersData.length">
-            <div class="mt-3">
+            <div class="">
                 <button type="button" @click="() => dealerDropDown = !dealerDropDown"
                     class="flex items-center border-b border-b-white bg-secondary-700 w-full py-1 pr-2 text-base text-white transition duration-75  group"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
@@ -138,7 +141,10 @@
 
 
         <div class="mt-4 flex justify-center">
-            <button class="bg-red-700 py-1 px-4 rounded-md text-white" @click="formsubmit">
+            <button class="bg-red-700 py-1 lg:block hidden px-4 rounded-md text-white" @click="formsubmit">
+                Search
+            </button>
+            <button class="bg-red-700 py-1 px-4 max-lg:block lg:hidden  rounded-md text-white" @click="mobileSubmit">
                 Search
             </button>
         </div>
@@ -152,7 +158,7 @@
 import AdvanceSearchController from 'advanceSearch@/api/AdvanceSearchController'
 import { useCarStore } from 'car@/core/stores/CarStore';
 import { onMounted, ref, computed, defineEmits } from 'vue';
-const emit = defineEmits(['setCar','loading'])
+const emit = defineEmits(['setCar','loading','toggleSideBar'])
 let advanceSearchController = AdvanceSearchController();
 let brands = ref([]);
 let dealers = ref([]);
@@ -268,6 +274,7 @@ let dealerChecked = () => {
         }
     });
     checkedBrands.value = []
+    filteredModels.value = []
     filteredBrands.value = Array.from(uniqueBrandNames).sort().map((name) => ({ name }));
 }
 
@@ -291,7 +298,10 @@ let getResource = async () => {
   
 }
 
-
+let mobileSubmit = ()=> {
+    emit('toggleSideBar')
+    formsubmit()
+}
 
 let formsubmit = async () => {
     emit('loading')
@@ -312,3 +322,36 @@ onMounted(() => {
     getResource();
 })
 </script>
+
+
+<style scoped>
+.form-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+/* Style the scrollbar thumb (the draggable part) */
+.form-scroll::-webkit-scrollbar-thumb {
+    background: rgb(182, 27, 45) ;
+    border-radius: 5px;
+    padding: 0;
+}
+
+/* Style the scrollbar track on Firefox */
+.form-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Style the scrollbar thumb on Firefox */
+.form-scroll::-webkit-scrollbar-thumb:active {
+    background: #8794a3;
+}
+
+/* Style the scrollbar thumb on Internet Explorer and Edge */
+.form-scroll::-webkit-scrollbar-thumb:hover {
+    background: #6a6f76;
+}
+
+/* Style the scrollbar track on Internet Explorer and Edge */
+.form-scroll::-webkit-scrollbar-track:hover {
+    background: #f1f1f1;
+}
+</style>

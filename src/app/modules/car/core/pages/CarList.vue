@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="w-full lg:h-[91%] lg:pt-2 overflow-y-auto  h-screen">
-                <AdvanceSearchForm  @setCar="setCar" @loading="()=>loading = !loading"/>
+                <AdvanceSearchForm  @setCar="setCar" @loading="()=>loading = !loading" @toggleSideBar="toggleSideBar"/>
             </div>
         </div>
         <!-- carlist part -->
@@ -43,7 +43,7 @@
             <div class="w-full h-[82%] mt-8 flex  justify-center"
                 :class="advanceFileter ? 'lg:justify-end pr-2 ' : 'lg:justify-center'">
                 <PageLoading v-if="loading" class="h-full"/>
-                <div v-if="!loading" class="lg:px-0 md:grid-cols-2   max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4  px-2   overflow-y-auto  h-full scroll-auto "
+                <div v-if="!loading" class="lg:px-0 md:grid-cols-2   max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4  px-2 form-scroll  overflow-y-auto  h-full scroll-auto "
                     :class="advanceFileter ? 'lg:w-[90%]  lg:grid-cols-2 ' : 'lg:w-[85%]  lg:grid-cols-3'">
                     <CarCard @car-detail="deatil(car.id)" class="" :car="car" v-for="car in data" :key="car.id" />
                 </div>
@@ -79,8 +79,7 @@ onMounted(() => {
 })
 
 let data = computed(() => cars.value)
-// here we need to some how update the data 
-// and Need to check when filtering with dealer is working properly but you need to check when filtering with brand
+
 let setCar = (car)=>{
     cars.value = car.cars,
     count.value = car.count
@@ -88,6 +87,8 @@ let setCar = (car)=>{
     carStore.setCount(car.count)    
 }
 let toggleSideBar = () => {
+    console.log('kk');
+    
     advanceFileter.value = !advanceFileter.value
 }
 
@@ -122,3 +123,35 @@ let overallSearch = () => {
 
 }
 </script>
+
+<style scoped>
+.form-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+/* Style the scrollbar thumb (the draggable part) */
+.form-scroll::-webkit-scrollbar-thumb {
+    background: rgb(182, 27, 45) ;
+    border-radius: 5px;
+    padding: 0;
+}
+
+/* Style the scrollbar track on Firefox */
+.form-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Style the scrollbar thumb on Firefox */
+.form-scroll::-webkit-scrollbar-thumb:active {
+    background: #8794a3;
+}
+
+/* Style the scrollbar thumb on Internet Explorer and Edge */
+.form-scroll::-webkit-scrollbar-thumb:hover {
+    background: #6a6f76;
+}
+
+/* Style the scrollbar track on Internet Explorer and Edge */
+.form-scroll::-webkit-scrollbar-track:hover {
+    background: #f1f1f1;
+}
+</style>
