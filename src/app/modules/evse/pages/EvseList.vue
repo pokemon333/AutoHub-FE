@@ -1,7 +1,7 @@
 <template>
     <div class="lg:px-8 pl-5 h-28 flex items-center ">
         <div class="">
-            <back @click="()=>$router.back()"  class="cursor-pointer"/>
+            <back @click="()=>$router.back()"  class="cursor-pointer" fill="black"/>
         </div>
         <div class="lg:pl-8 pl-3">
             <h1 class="lg:text-2xl text-xl roboto font-[500]">Electronic Vehicle Supply Equipment </h1>

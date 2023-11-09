@@ -1,7 +1,7 @@
 <template>
     <div class=" pb-2  flex" >
         <div class=" lg:w-[7%]  h-full pt-14 max-lg:hidden flex  justify-center">
-            <back @click="backToList" class="cursor-pointer "/>
+            <back @click="backToList" class="cursor-pointer " fill="black"/>
         </div>
         <div class=" lg:w-[93%] w-screen lg:pt-6 h-full">
             <div class="lg:flex lg:w-full w-screen">
@@ -12,7 +12,7 @@
                         <div class="flex  w-full">
 
                             <div class="lg:hidden lg:mr-0 lg:ml-0 mr-4 ml-1 flex justify-center items-center">
-                                <back @click="backToList" class="w-10 h-10 cursor-pointer"/>
+                                <back @click="backToList" class="w-10 h-10 cursor-pointer" fill="black"/>
                             </div>
 
                             <div class="flex  lg:w-full justify-between">
