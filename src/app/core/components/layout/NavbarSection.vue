@@ -9,7 +9,7 @@
             </div>
         </div>
         <div>
-            <div class=" py-1 bg-primary-400 border  border-secondary-500 text-white flex items-center justify-between px-3 rounded-md">
+            <div @click="()=>router.push({name: 'evse'})" class=" py-1 bg-primary-400 border  cursor-pointer border-secondary-500 text-white flex items-center justify-between px-3 rounded-md">
                 <ChargingStation/>
                 <p class="ml-2">
                     EVSE
