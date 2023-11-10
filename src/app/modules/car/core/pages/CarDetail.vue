@@ -107,7 +107,7 @@
                                     <li>{{car?.car_specification?.fuel_type?.name || ''}}</li>
                                     <li>{{car?.car_specification?.milage?.name+' Km' || ''}}</li>
                                     <li>{{ car?.car_info?.color?.name || '-' }}</li>
-                                    <li>{{ car?.car_info?.vehicle_id || '-' }}</li>
+                                    <li>{{ car?.car_info?.vehicel_id || '-' }}</li>
                                 </ul>
                             </div>
                             <!-- <div class="lg:w-4/12 max-lg:pl-5 max-lg:mt-1">

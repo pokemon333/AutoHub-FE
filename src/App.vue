@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="h-screen w-full">
+    <div class="h-screen w-full ">
       <NavbarSection @toggle-side-bar="toggleSideBar"/>
       <div class="h-[12%]" name="nav-bar-filler-div"></div>
       <SidebarSection :is-menu-open="isMenuOpen"/>
