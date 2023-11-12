@@ -286,7 +286,11 @@ let getResource = async () => {
         brands.value = await data.brands.sort((a, b) => a.name.localeCompare(b.name));
         dealers.value = await data.dealers.sort((a, b) => a.name.localeCompare(b.name));
         divisions.value = await data.divisions;
-        mainFilterType.value =  carStore.type
+        if (carStore.type) {
+            mainFilterType.value =  carStore.type
+        }else{
+            mainFilterType.value = 'dealer'
+        }
         if (carStore.type == 'brand') {
             filteredBrands.value = brands.value
         }else{

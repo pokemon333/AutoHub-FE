@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="w-full lg:h-[91%] lg:pt-2 overflow-y-auto  h-screen">
-                <AdvanceSearchForm  @setCar="setCar" @loading="()=>loading = !loading" @toggleSideBar="toggleSideBar"/>
+                <AdvanceSearchForm @setCar="setCar" @loading="() => loading = !loading" @toggleSideBar="toggleSideBar" />
             </div>
         </div>
         <!-- carlist part -->
@@ -42,10 +42,16 @@
             </div>
             <div class="w-full h-[82%] mt-8 flex  justify-center"
                 :class="advanceFileter ? 'lg:justify-end pr-2 ' : 'lg:justify-center'">
-                <PageLoading v-if="loading" class="h-full"/>
-                <div v-if="!loading" class="lg:px-0 md:grid-cols-2   max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4  px-2 form-scroll  overflow-y-auto  h-full scroll-auto "
+                <PageLoading v-if="loading" class="h-full" />
+                <div v-if="cars.length == 0"
+                    class="w-full h-full flex items-center justify-center ">
+                    No Car Found!
+                </div>
+                <div v-if="!loading && cars.length != 0"
+                    class="lg:px-0 md:grid-cols-2    max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4  px-2 form-scroll  overflow-y-auto  h-full scroll-auto "
                     :class="advanceFileter ? 'lg:w-[90%]  lg:grid-cols-2 ' : 'lg:w-[85%]  lg:grid-cols-3'">
-                    <CarCard @car-detail="deatil(car.id)" class="" :car="car" v-for="car in data" :key="car.id" />
+                    <CarCard @car-detail="deatil(car.id)" class="" :car="car" v-for="car in data"
+                        :key="car.id" />
                 </div>
             </div>
         </div>
@@ -61,6 +67,8 @@ import { useCarStore } from 'car@/core/stores/CarStore';
 import { useRouter } from 'vue-router';
 import { AdvanceSearchForm } from '../services/getCarCompoent';
 import PageLoading from '@/app/core/components/PageLoading.vue';
+import CarController from 'car@/core/api/carController'
+import { noData } from 'car@/core/services/getCarSvg';
 // import { back } from 'car@/core/services/getCarCardSvg'
 
 
@@ -71,24 +79,40 @@ let count = ref<number | string>(0)
 let keyword = ref('')
 let carStore = useCarStore()
 let loading = ref(true)
+let carController = CarController();
+let { getCars } = carController
 
 onMounted(() => {
-    cars.value = carStore.cars
-    count.value = carStore.count
-    loading.value =false
+    if (carStore.cars.length != 0) {
+        cars.value = carStore.cars
+        count.value = carStore.count
+    } else {
+        fetchData()
+    }
+
+    loading.value = false
 })
 
 let data = computed(() => cars.value)
 
-let setCar = (car)=>{
+let fetchData = async () => {
+    let res = await getCars({ type: "dealer", name: '' });
+    let carStore = useCarStore()
+    let carsFromRes = await res.data.data.cars
+    let countFromRes = await res.data.data.count
+    cars.value = carsFromRes
+    count.value = countFromRes
+    carStore.setCars(carsFromRes)
+    carStore.setCount(countFromRes)
+}
+
+let setCar = (car) => {
     cars.value = car.cars,
-    count.value = car.count
+        count.value = car.count
     carStore.setCars(car.cars)
-    carStore.setCount(car.count)    
+    carStore.setCount(car.count)
 }
 let toggleSideBar = () => {
-    console.log('kk');
-    
     advanceFileter.value = !advanceFileter.value
 }
 
@@ -128,9 +152,10 @@ let overallSearch = () => {
 .form-scroll::-webkit-scrollbar {
     width: 4px;
 }
+
 /* Style the scrollbar thumb (the draggable part) */
 .form-scroll::-webkit-scrollbar-thumb {
-    background: rgb(182, 27, 45) ;
+    background: rgb(182, 27, 45);
     border-radius: 5px;
     padding: 0;
 }

@@ -9,7 +9,7 @@
                 <h1 class="lg:text-4xl md:text-2xl text-2xl poppins  font-[500]">{{ evse?.title }}</h1>
             </div>
             <div class="lg:text-2xl text-md mt-2  font-[200]">
-              <h1> Open - {{ evse?.open_time }} To {{ evse?.close_time }} AM</h1>
+              <h1> Open - {{ evse?.open_time }} To {{ evse?.close_time }} </h1>
             </div>
             <div class=" max-sm:text-sm mt-8 border-s-2 border-primary-300 p-3">
                {{ evse?.descriptions }}

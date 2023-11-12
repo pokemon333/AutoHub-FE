@@ -90,7 +90,7 @@
                                     <li>{{ car?.car_info?.license_status?.name || '-' }}</li>
                                     <li>{{ car?.car_info?.plate_division?.name  || '-'  }}</li>
                                     <li>{{ car?.car_info?.plate_color || '-'  }}</li>
-                                    <li>{{ car?.car_info?.plate_number[0] + '*'.repeat(car?.car_info?.plate_number.length - 1)  || '-'  }}</li>
+                                    <li>{{car?.car_info?.plate_number.slice(0,3)  + '*'.repeat(car?.car_info?.plate_number.length - 3) }}</li>
                                 </ul>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                                     <li>{{car?.car_specification?.fuel_type?.name || ''}}</li>
                                     <li>{{car?.car_specification?.milage?.name+' Km' || ''}}</li>
                                     <li>{{ car?.car_info?.color?.name || '-' }}</li>
-                                    <li>{{ car?.car_info?.vehicel_id || '-' }}</li>
+                                    <li>{{ car?.car_info?.vehicleid || '-' }}</li>
                                 </ul>
                             </div>
                             <!-- <div class="lg:w-4/12 max-lg:pl-5 max-lg:mt-1">
