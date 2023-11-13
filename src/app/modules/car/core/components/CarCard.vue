@@ -40,7 +40,7 @@
                     <div class="flex items-center space-x-2">
                         <gear/>
                         <p class="">
-                            {{ milage ??'-' }}
+                            {{ milage ??'-' }} KM
                         </p>
                     </div>
                     <div class="flex item-center space-x-2">

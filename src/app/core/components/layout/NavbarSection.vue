@@ -4,8 +4,8 @@
             <div @click="$emit('toggleSideBar')"  class="rounded-full cursor-pointer flex justify-center items-center min-w-9 min-h-9 border text-white border-white">
                 <MenuLogo :class="rotate" @click="rotateMenu" class="transition duration-300 ease-in" />
             </div>  
-            <div @click="()=>router.push({name: 'landing'})" class="cursor-pointer h-auto p-1">
-                <img :src="imageUrl" class="h-full w-3/4 cursor-pointer" alt="">
+            <div @click="()=>router.push({name: 'landing'})" class="cursor-pointer  h-full">
+                <img :src="imageUrl" class="h-full  cursor-pointer" alt="">
             </div>
         </div>
         <div>
@@ -19,11 +19,13 @@
     </nav>
 </template>
 <script setup lang="ts">
+
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import MenuLogo from 'asset@/icon/menu.svg'
 import imageUrl from 'asset@/img/logo.png' 
 import ChargingStation from 'asset@/icon/charging-station.svg'
+
 let rotate = ref('')
 let router = useRouter()
 let rotateMenu = () =>{

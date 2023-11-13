@@ -43,9 +43,9 @@
             <div class="w-full h-[82%] mt-8 flex  justify-center"
                 :class="advanceFileter ? 'lg:justify-end pr-2 ' : 'lg:justify-center'">
                 <PageLoading v-if="loading" class="h-full" />
-                <div v-if="cars.length == 0"
+                <div v-if="cars.length == 0 && !loading"
                     class="w-full h-full flex items-center justify-center ">
-                    No Car Found!
+                    <noCarFound/>
                 </div>
                 <div v-if="!loading && cars.length != 0"
                     class="lg:px-0 md:grid-cols-2    max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4  px-2 form-scroll  overflow-y-auto  h-full scroll-auto "
@@ -68,9 +68,7 @@ import { useRouter } from 'vue-router';
 import { AdvanceSearchForm } from '../services/getCarCompoent';
 import PageLoading from '@/app/core/components/PageLoading.vue';
 import CarController from 'car@/core/api/carController'
-import { noData } from 'car@/core/services/getCarSvg';
-// import { back } from 'car@/core/services/getCarCardSvg'
-
+import noCarFound from '@/assets/icon/nocarfound.svg'
 
 let advanceFileter = ref<boolean>(false)
 let router = useRouter();
