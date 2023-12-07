@@ -19,15 +19,10 @@
     </div>
 </template>
 
-<script setup lang="ts" >
+<script setup   >
 import {ref,onMounted} from 'vue'
 
-interface Data {
-    name : string,
-    type: string
-}
-
-let data  = ref<Data>({
+let data  = ref({
     name : '',
     type : ''
 }) 

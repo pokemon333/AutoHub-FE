@@ -26,7 +26,8 @@
        "car@/*" : ["./src/app/modules/car/*"],
        "evse@/*" : ["./src/app/modules/evse/*"],
        "search@/*" : ["./src/app/modules/car/modules/search/*"],
-       "advanceSearch@/*" : ["./src/app/modules/car/modules/advanceSearch/*"]
+       "advanceSearch@/*" : ["./src/app/modules/car/modules/advanceSearch/*"],
+       "auth@/*"        : ["./src/app/modules/auth/*"]
     }
   },
   "include": [
@@ -64,5 +65,6 @@
     // "src/app/modules/landing/**/*.vue",
     // "src/app/modules/landing/**/*.vue"
   ],
+  "exclude": ["src/**/*.vue", "**/*.vue","./*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

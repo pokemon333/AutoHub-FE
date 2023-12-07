@@ -59,7 +59,8 @@
 </template>
 
 
-<script setup lang="ts">
+<script setup >
+
 import { ref, onMounted, computed } from 'vue'
 import { advanceFilter } from 'car@/core/services/getCarCardSvg';
 import CarCard from 'car@/core/components/CarCard.vue';
@@ -70,10 +71,10 @@ import PageLoading from '@/app/core/components/PageLoading.vue';
 import CarController from 'car@/core/api/carController'
 import noCarFound from '@/assets/icon/nocarfound.svg'
 
-let advanceFileter = ref<boolean>(false)
+let advanceFileter = ref(false)
 let router = useRouter();
-let cars = ref<any>([])
-let count = ref<number | string>(0)
+let cars = ref([])
+let count = ref(0)
 let keyword = ref('')
 let carStore = useCarStore()
 let loading = ref(true)
@@ -114,7 +115,7 @@ let toggleSideBar = () => {
     advanceFileter.value = !advanceFileter.value
 }
 
-let deatil = (id: string) => {
+let deatil = (id) => {
     return router.push({ name: "car-detail", params: { id: id } })
 }
 

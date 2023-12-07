@@ -18,7 +18,8 @@ export default defineConfig({
       'landing@':fileURLToPath(new URL('./src/app/modules/landing',import.meta.url)),
       'search@':fileURLToPath(new URL('./src/app/modules/car/modules/search',import.meta.url)),
       'advanceSearch@':fileURLToPath(new URL('./src/app/modules/car/modules/advanceSearch',import.meta.url)),
-      'asset@'  : fileURLToPath(new URL('./src/assets',import.meta.url))
+      'asset@'  : fileURLToPath(new URL('./src/assets',import.meta.url)),
+      'auth@'   : fileURLToPath(new URL('./src/app/modules/auth',import.meta.url))
     }
   }
 })

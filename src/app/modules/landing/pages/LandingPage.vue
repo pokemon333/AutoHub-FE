@@ -15,17 +15,16 @@
             </div>
         </div>
         <div class="lg:w-1/2 w-full h-screen">
-            <img class="lg:landing-page-img object-cover  w-full h-full"  src="https://assetsforlife.co.uk/wp-content/uploads/2022/02/buying-property-concept-man-uniform-giving-keys-black-man-1024x683.jpg" alt="" >
+            <img class="lg:cutEdgeImage object-cover  w-full h-full"  src="https://assetsforlife.co.uk/wp-content/uploads/2022/02/buying-property-concept-man-uniform-giving-keys-black-man-1024x683.jpg" alt="" >
         </div>
     </section>
 </template>
 
 
-<script setup lang="ts">
+<script setup  >
 
 import { SearchForm } from 'landing@/services/getLandingComponent'
 import  CarController  from 'car@/core/api/carController'
-import { FilterData  } from 'car@/core/api/carController';
 import { useCarStore } from 'car@/core/stores/CarStore';
 import { useRouter } from 'vue-router';
 
@@ -34,7 +33,8 @@ let carController = CarController();
 let {getCars} = carController
 let router = useRouter()
 
-let filterCars = async (data : FilterData) => {
+let filterCars = async (data) => {
+    
                             let res = await getCars(data)
                             let carStore = useCarStore()
                             let cars =  res.data.data.cars

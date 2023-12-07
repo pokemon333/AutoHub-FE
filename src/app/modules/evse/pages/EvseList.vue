@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script lang="ts" setup>
+<script   setup>
 import { ref, onMounted } from 'vue'
 import  EvseCard  from 'evse@/components/EvseCard.vue'
 import {Back } from 'evse@/services/getEvseSvg'

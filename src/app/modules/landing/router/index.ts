@@ -2,9 +2,9 @@ import { RouteRecordRaw } from "vue-router";
 
 const landingRoutes : Array<RouteRecordRaw> = [
     {
-        path : "/",
+        path : "",
         name : 'landing',
-        component : ()=> import("../pages/LandingPage.vue")
+        component : ()=> import("landing@/pages/LandingPage.vue")
     }
 ]
 

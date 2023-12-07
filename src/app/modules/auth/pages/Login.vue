@@ -1,0 +1,56 @@
+<template>
+    <div class="w-screen flex max-md:flex-col-reverse h-screen  ">
+        <div class="lg:w-5/12 lg:flex lg:flex-col lg:items-end">
+            <div class="h-1/4 lg:w-10/12 lg:px-0 px-2 flex items-center">
+                <img :src="logo" class="w-48">
+            </div>
+            <div class="h-3/4 lg:w-10/12 lg:px-0 px-3 ">
+                <div>
+                    <h1 class="lg:text-6xl lg:mt-0 text-4xl mt-2 text-secondary-500">WELCOME !</h1>
+                    <h3 class="lg:text-2xl lg:mt-3 lg:ml-2">to AUTO HUB</h3>
+                </div>
+                <div class="mt-11 lg:w-4/6 w-full ">
+                    <div class="relative  mb-6">
+                        <label for="type" class="absolute -top-2 left-3 px-2 bg-white  text-xs">Name</label>
+                        <input v-model="data.name" type="text"  class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Name">
+                    </div>
+                    <div class="relative ">
+                        <label for="type" class="absolute -top-2 left-3 px-2  bg-white  text-xs">Name</label>
+                        <input v-model="data.password" type="text"  class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Password">
+                    </div>
+                    <div class=" mt-3  flex justify-center text-gray-500">
+                        <a  class="underline cursor-pointer hover:text-gray-800">Forget Password</a>
+                    </div>
+                    <div class=" mt-3  flex justify-center pb-3">
+                        <button @click="submit" class="w-2/4 h-12 rounded-md bg-red-600 text-white">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lg:w-7/12">
+            <img class="lg:cutEdgeImage  md:object-cover object-fit  w-full h-full"  :src="bgImage" alt="" >
+        </div>
+    </div>
+</template>
+
+
+<script lang="ts" setup>
+import logo from 'asset@/img/logo-login.png'
+import bgImage from 'asset@/img/login-bg-img.png'
+import useAuthController from 'auth@/api/authController'
+import { ref } from 'vue'
+
+let { login }  = useAuthController()
+
+
+let data =  ref({
+    name : '',
+    password : ''
+})
+
+let submit = () => {
+    login(data.value)
+}
+
+
+</script>

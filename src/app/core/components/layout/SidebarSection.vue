@@ -10,7 +10,7 @@
     </Transition>
 </template>
 
-<script setup lang="ts">
+<script setup  >
 import sideBarItems from 'core@/services/sideBarItems'
 let props = defineProps({
     isMenuOpen :  Boolean

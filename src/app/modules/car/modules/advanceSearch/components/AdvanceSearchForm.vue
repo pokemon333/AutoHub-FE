@@ -153,7 +153,7 @@
 </template>
 
 
-<script setup lang="ts">
+<script setup  >
 
 import AdvanceSearchController from 'advanceSearch@/api/AdvanceSearchController'
 import { useCarStore } from 'car@/core/stores/CarStore';
@@ -357,5 +357,11 @@ onMounted(() => {
 /* Style the scrollbar track on Internet Explorer and Edge */
 .form-scroll::-webkit-scrollbar-track:hover {
     background: #f1f1f1;
+}
+
+
+input[type=checkbox]:checked {
+    accent-color: black;
+    color: #ffffff !important;
 }
 </style>

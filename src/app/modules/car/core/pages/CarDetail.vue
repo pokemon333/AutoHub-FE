@@ -8,7 +8,7 @@
 
                 <div class=" lg:w-7/12  lg:justify-between lg:pr-2 lg:flex lg:flex-col lg:space-y-5 w-full">
 
-                    <div class="lg:w-5/12 lg:h-40   lg:w-full">
+                    <div class="lg:w-5/12 lg:h-40 ">
                         <div class="flex  w-full">
 
                             <div class="lg:hidden lg:mr-0 lg:ml-0 mr-4 ml-1 flex justify-center items-center">
@@ -135,7 +135,7 @@
 </template>
 
 
-<script setup lang="ts">
+<script setup>
 
 import { onMounted , ref  } from 'vue';
 import CarController from 'car@/core/api/carController';
@@ -148,8 +148,9 @@ let { getCarDetial } = carController
 let route  = useRoute()
 let router = useRouter()
 let car = ref({})
-let images = ref<any>([])
+let images = ref([])
 let currentIndex = ref(0)
+
 let getData = async () => {
     let res = await  getCarDetial(route.params.id)
     car.value =  res.data.data
@@ -161,7 +162,7 @@ let getData = async () => {
 }
 
 
-let currentImage = ref<any>('')
+let currentImage = ref('')
 
 let autoChangeImageSlide =async ()=>{
     setInterval(()=>{

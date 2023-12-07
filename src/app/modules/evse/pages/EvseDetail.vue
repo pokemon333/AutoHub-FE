@@ -50,7 +50,7 @@
         </div>
     </div>
 </template>
-<script lang="ts" setup>
+<script   setup>
 import { onMounted , ref } from 'vue';
 import {Back,Phone,Address} from 'evse@/services/getEvseSvg'
 import evseController from 'evse@/api/evseController'

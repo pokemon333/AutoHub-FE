@@ -69,7 +69,7 @@
         </div>
     </div>
 </template>
-<script setup lang="ts">
+<script setup  >
 
 import { 
     condition,
@@ -80,22 +80,22 @@ import {
     lighting
 } from 'car@/core/services/getCarCardSvg';
 
-const props : any = defineProps({
+const props = defineProps({
   car: {},
 })
 
-let image : string = props?.car.media[0].url
-let model : string = props.car?.car_model?.name
-let year : string = props.car?.product_year?.name
-let trim_name : string = props?.car.trim_name
-let price : string =  props?.car.price
-let car_condition : string = props?.car?.car_specification?.condition
-let car_transmission : string  = props?.car?.car_specification?.transmission
-let fuel_type : string = props?.car?.car_specification?.fuel_type.name
-let milage : string = props?.car?.car_specification?.milage.name
-let engine_power : string = props?.car?.car_specification?.engine_power
-let car_steering : string =  props?.car?.car_specification?.steering
-let dealer_name: string = props?.car.dealer.user.name
-let brand: string = props?.car.car_model?.car_brand.name
+let image  = props?.car.media[0].url
+let model  = props.car?.car_model?.name
+let year  = props.car?.product_year?.name
+let trim_name  = props?.car.trim_name
+let price  =  props?.car.price
+let car_condition  = props?.car?.car_specification?.condition
+let car_transmission   = props?.car?.car_specification?.transmission
+let fuel_type  = props?.car?.car_specification?.fuel_type.name
+let milage  = props?.car?.car_specification?.milage.name
+let engine_power  = props?.car?.car_specification?.engine_power
+let car_steering  =  props?.car?.car_specification?.steering
+let dealer_name = props?.car.dealer.user.name
+let brand = props?.car.car_model?.car_brand.name
 
 </script>
