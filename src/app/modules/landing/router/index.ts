@@ -4,7 +4,7 @@ const landingRoutes : Array<RouteRecordRaw> = [
     {
         path : "",
         name : 'landing',
-        component : ()=> import("landing@/pages/LandingPage.vue")
+        component : ()=> import("../pages/LandingPage.vue")
     }
 ]
 

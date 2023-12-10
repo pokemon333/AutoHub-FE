@@ -1,8 +1,8 @@
 <template>
-    <div class="w-screen flex max-md:flex-col-reverse h-screen  ">
-        <div class="lg:w-5/12 lg:flex lg:flex-col lg:items-end">
+    <div class="w-screen flex  max-lg:flex-col h-screen ">
+        <div class="lg:w-5/12 lg:flex lg:flex-col lg:order-1  order-2 lg:items-end ">
             <div class="h-1/4 lg:w-10/12 lg:px-0 px-2 flex items-center">
-                <img :src="logo" class="w-48">
+               <img @click="this.$router.back()" :src="logo" class="w-48 cursor-pointer">
             </div>
             <div class="h-3/4 lg:w-10/12 lg:px-0 px-3 ">
                 <div>
@@ -15,7 +15,7 @@
                         <input v-model="data.name" type="text"  class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Name">
                     </div>
                     <div class="relative ">
-                        <label for="type" class="absolute -top-2 left-3 px-2  bg-white  text-xs">Name</label>
+                        <label for="type" class="absolute -top-2 left-3 px-2  bg-white  text-xs">Password</label>
                         <input v-model="data.password" type="text"  class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Password">
                     </div>
                     <div class=" mt-3  flex justify-center text-gray-500">
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="lg:w-7/12">
+        <div class="lg:w-7/12 lg:order-2 order-1">
             <img class="lg:cutEdgeImage  md:object-cover object-fit  w-full h-full"  :src="bgImage" alt="" >
         </div>
     </div>
@@ -35,6 +35,7 @@
 
 
 <script lang="ts" setup>
+
 import logo from 'asset@/img/logo-login.png'
 import bgImage from 'asset@/img/login-bg-img.png'
 import useAuthController from 'auth@/api/authController'

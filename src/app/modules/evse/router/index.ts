@@ -4,14 +4,13 @@ const landingRoutes : Array<RouteRecordRaw> = [
     {
         path : "/evses",
         name : 'evse',
-        component : ()=> import("evse@/pages/EvseList.vue")
+        component : ()=> import("../pages/EvseList.vue")
     },
     {
         path : "/evses/:id",
         name : 'evse-detail',
-        component : ()=> import("evse@/pages/EvseDetail.vue")
+        component : ()=> import("../pages/EvseDetail.vue")
     }
 ]
-
 
 export default landingRoutes;

@@ -5,12 +5,12 @@ const carRoutes: Array<RouteRecordRaw> = [
     {
         path : "/cars",
         name : "cars",
-        component : () => import('car@/core/pages/CarList.vue') 
+        component : () => import('../pages/CarList.vue') 
     },
     {
         path : "/cars/:id",
         name : "car-detail",
-        component : () => import('car@/core/pages/CarDetail.vue') 
+        component : () => import('../pages/CarDetail.vue') 
     }
 ]
 

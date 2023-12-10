@@ -21,8 +21,7 @@
 </template>
 
 
-<script setup  >
-
+<script setup>
 import { SearchForm } from 'landing@/services/getLandingComponent'
 import  CarController  from 'car@/core/api/carController'
 import { useCarStore } from 'car@/core/stores/CarStore';
@@ -34,7 +33,6 @@ let {getCars} = carController
 let router = useRouter()
 
 let filterCars = async (data) => {
-    
                             let res = await getCars(data)
                             let carStore = useCarStore()
                             let cars =  res.data.data.cars

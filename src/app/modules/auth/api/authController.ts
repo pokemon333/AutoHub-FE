@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import apiService from 'core@/services/apiService';
 import tokenService from 'core@/services/tokenService'
 
@@ -16,16 +17,16 @@ interface authController{
 export default function useAuthController() : authController {
         function login (userData : UserData ){
             apiService.post('login', userData)
-            .then((res : Response )=> {
+            .then((res : AxiosResponse )=> {
                 let { token  } = res?.data
                 setToken('token', token)
             })
-            .catch((error : Response)=>console.log('error',error))  
+            .catch((error : AxiosResponse)=>console.log('error',error))  
         }
         function logout (){
             apiService.get('logout')
-            .then((res : Response )=> console.log(res))
-            .catch((error : Response)=>console.log('error',error))
+            .then((res : AxiosResponse)=> console.log(res))
+            .catch((error : AxiosResponse)=>console.log('error',error))
         }
 
         return {

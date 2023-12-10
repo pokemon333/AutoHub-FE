@@ -1,70 +1,36 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
+    "composite": true,
+    "baseUrl": ".",
     "paths": {
-       "@/*": ["./src/*"],
-       "core@/*" : ["./src/app/core/*"],
-       "landing@/*" : ["./src/app/modules/landing/*"],
-       "car@/*" : ["./src/app/modules/car/*"],
-       "evse@/*" : ["./src/app/modules/evse/*"],
-       "search@/*" : ["./src/app/modules/car/modules/search/*"],
-       "advanceSearch@/*" : ["./src/app/modules/car/modules/advanceSearch/*"],
-       "auth@/*"        : ["./src/app/modules/auth/*"]
+      "@/*": ["./src/*"],
+      "core@/*": ["./src/app/core/*"],
+      "landing@/*": ["./src/app/modules/landing/*"],
+      "car@/*": ["./src/app/modules/car/*"],
+      "evse@/*": ["./src/app/modules/evse/*"],
+      "search@/*": ["./src/app/modules/car/modules/search/*"],
+      "advanceSearch@/*": ["./src/app/modules/car/modules/advanceSearch/*"],
+      "auth@/*": ["./src/app/modules/auth/*"]
     }
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.d.ts", 
-    "src/**/*.tsx", 
-    "src/**/*.vue",
-    "src/**/*",
-
+    "src/**/*.d.ts",
 
     "src/app/core/**/*.ts",
     "src/app/modules/car/**/*.ts",
-    "src/app/modules/car/modules/search**/*.ts",
+    "src/app/modules/car/modules/search/**/*.ts",
     "src/app/modules/car/modules/advanceSearch/**/*.ts",
     "src/app/modules/landing/**/*.ts",
     "src/app/modules/evse/**/*.ts",
-    
+
     "src/app/core/**/*.d.ts",
     "src/app/modules/car/**/*.d.ts",
     "src/app/modules/car/modules/search/**/*.d.ts",
     "src/app/modules/car/modules/advanceSearch/**/*.d.ts",
-    "src/app/modules/landing/**/*.d.ts",
-    
-    "src/app/core/**/*",
-    "src/app/modules/car/**/*",
-    "src/app/modules/car/modules/search/**/*",
-    "src/app/modules/car/modules/advanceSearch/**/*",
-    "src/app/modules/evse/**/*",
-    "src/app/modules/landing/**/*"
-
-    // "src/app/core/**/*.vue",
-    // "src/app/modules/car/**/*.vue",
-    // "src/app/modules/car/modules/search/**/*.vue",
-    // "src/app/modules/car/modules/advanceSearch/**/*.vue",
-    // "src/app/modules/landing/**/*.vue",
-    // "src/app/modules/landing/**/*.vue"
+    "src/app/modules/landing/**/*.d.ts"
   ],
-  "exclude": ["src/**/*.vue", "**/*.vue","./*.vue"],
+  "exclude": ["src/**/*.vue", "**/*.vue", "./*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,7 +1,7 @@
 import  axios  from "axios";
 
 const ApiService = axios.create({
-    baseURL: import.meta.env.VITE_API_ROUTE
+    baseURL: 'http://localhost:8000/api/v1/'
 });
 
 export default ApiService

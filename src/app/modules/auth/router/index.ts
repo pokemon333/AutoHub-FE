@@ -4,7 +4,7 @@ const carRoutes: Array<RouteRecordRaw> = [
     {
         path : "/login",
         name : "login",
-        component : () => import('auth@/pages/Login.vue') 
+        component : () => import('../pages/Login.vue') 
     },
 ]
 

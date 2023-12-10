@@ -8,7 +8,7 @@ import authRoutes from "auth@/router"
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        component: ()=> import("core@/components/layout/Main.vue"),
+        component: ()=> import("../components/layout/Main.vue"),
         children: [
             ...landingRoutes,
             ...carRoutes,
@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path : '/404',
         name : 'not-found',
-        component : () => import('core@/components/404.vue')
+        component : () => import('../components/404.vue')
     },
     {
         path: '/:catchAll(.*)',
