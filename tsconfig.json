@@ -20,6 +20,7 @@
 
     "src/app/core/**/*.ts",
     "src/app/modules/car/**/*.ts",
+    "src/app/modules/auth/**/*.ts",
     "src/app/modules/car/modules/search/**/*.ts",
     "src/app/modules/car/modules/advanceSearch/**/*.ts",
     "src/app/modules/landing/**/*.ts",

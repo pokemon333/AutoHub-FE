@@ -1,12 +1,15 @@
 import { RouteRecordRaw } from "vue-router";
 
-const carRoutes: Array<RouteRecordRaw> = [
+const authRoutes: Array<RouteRecordRaw> = [
     {
         path : "/login",
         name : "login",
+        meta : {
+            guards : ['Login',]
+        },
         component : () => import('../pages/Login.vue') 
     },
 ]
 
 
-export default carRoutes;
+export default authRoutes;

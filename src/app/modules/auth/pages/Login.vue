@@ -1,10 +1,10 @@
 <template>
     <div class="w-screen flex  max-lg:flex-col h-screen ">
-        <div class="lg:w-5/12 lg:flex lg:flex-col lg:order-1  order-2 lg:items-end ">
-            <div class="h-1/4 lg:w-10/12 lg:px-0 px-2 flex items-center">
+        <div class="lg:w-5/12 flex flex-col items-center lg:order-1  order-2 lg:items-end ">
+            <div class="h-1/4 lg:w-10/12   md:w-1/2 w-full lg:px-0 max-md:max-w-md px-2 flex items-center">
                <img @click="this.$router.back()" :src="logo" class="w-48 cursor-pointer">
             </div>
-            <div class="h-3/4 lg:w-10/12 lg:px-0 px-3 ">
+            <div class="h-3/4 lg:w-10/12 lg:px-0  md:w-1/2 w-full  px-3 ">
                 <div>
                     <h1 class="lg:text-6xl lg:mt-0 text-4xl mt-2 text-secondary-500">WELCOME !</h1>
                     <h3 class="lg:text-2xl lg:mt-3 lg:ml-2">to AUTO HUB</h3>
@@ -39,7 +39,7 @@
 import logo from 'asset@/img/logo-login.png'
 import bgImage from 'asset@/img/login-bg-img.png'
 import useAuthController from 'auth@/api/authController'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 let { login }  = useAuthController()
 
@@ -52,6 +52,7 @@ let data =  ref({
 let submit = () => {
     login(data.value)
 }
+
 
 
 </script>

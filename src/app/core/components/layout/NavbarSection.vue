@@ -8,26 +8,45 @@
                 <img :src="imageUrl" class="h-full  cursor-pointer" alt="">
             </div>
         </div>
-        <div>
-            <div @click="()=>router.push({name: 'evse'})" class=" py-1 bg-primary-400 border  cursor-pointer border-secondary-500 text-white flex items-center justify-between px-3 rounded-md">
-                <ChargingStation/>
-                <p class="ml-2">
-                    EVSE
-                </p>
-            </div>
+        <div class="flex space-x-2">
+            <CustomButton  
+                text="EVSE" 
+                class="bg-primary-400"
+                @click="()=>router.push({name: 'evse'})" 
+            >
+                <ChargingStation />
+            </CustomButton>
+            <CustomButton 
+                v-if="!loginStatus" 
+                text="Login"
+                class="bg-primary-500"
+                @click="()=>router.push({name: 'login'})"
+            >
+                <Login/>
+            </CustomButton>
+            <Profile/>
         </div>
     </nav>
 </template>
+
 <script setup  >
 
-import { ref } from 'vue'
+import { ref,computed } from 'vue'
 import { useRouter } from 'vue-router'
 import MenuLogo from 'asset@/icon/menu.svg'
 import imageUrl from 'asset@/img/logo.png' 
+import { icon } from '@fortawesome/fontawesome-svg-core'
 import ChargingStation from 'asset@/icon/charging-station.svg'
+import CustomButton from "core@/components/CustomButton.vue"
+import Login from "asset@/icon/login.svg"
+import {useUserStore} from "core@/store/UserStore"
+import Profile from "core@/components/profile.vue"
 
+let userStore = useUserStore()
 let rotate = ref('')
 let router = useRouter()
+let loginStatus = computed(()=>userStore.getLoginStatus)
+console.log(loginStatus);
 let rotateMenu = () =>{
     rotate.value = rotate.value == 'rotate-90' ? '' : 'rotate-90'
 }

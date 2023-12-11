@@ -26,7 +26,13 @@ import { SearchForm } from 'landing@/services/getLandingComponent'
 import  CarController  from 'car@/core/api/carController'
 import { useCarStore } from 'car@/core/stores/CarStore';
 import { useRouter } from 'vue-router';
+import { useUserStore } from '@/app/core/store/UserStore';
 
+
+const userStore = useUserStore()
+
+console.log(userStore.getUser);
+console.log(userStore.getLoginStatus);
 
 let carController = CarController();
 let {getCars} = carController
