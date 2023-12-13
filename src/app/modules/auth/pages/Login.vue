@@ -12,17 +12,17 @@
                 <div class="mt-11 lg:w-4/6 w-full ">
                     <div class="relative  mb-6">
                         <label for="type" class="absolute -top-2 left-3 px-2 bg-white  text-xs">Name</label>
-                        <input v-model="data.name" type="text"  class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Name">
+                        <input v-model="data.name" type="text"   class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Name">
                     </div>
                     <div class="relative ">
                         <label for="type" class="absolute -top-2 left-3 px-2  bg-white  text-xs">Password</label>
-                        <input v-model="data.password" type="text"  class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Password">
+                        <input v-model="data.password" @keyup.enter="submit" type="text"  class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Password">
                     </div>
                     <div class=" mt-3  flex justify-center text-gray-500">
                         <a  class="underline cursor-pointer hover:text-gray-800">Forget Password</a>
                     </div>
                     <div class=" mt-3  flex justify-center pb-3">
-                        <button @click="submit" class="w-2/4 h-12 rounded-md bg-red-600 text-white">Login</button>
+                        <button @click="submit"  class="w-2/4 h-12 rounded-md bg-red-600 text-white">Login</button>
                     </div>
                 </div>
             </div>
@@ -34,12 +34,12 @@
 </template>
 
 
-<script lang="ts" setup>
+<script setup>
 
 import logo from 'asset@/img/logo-login.png'
 import bgImage from 'asset@/img/login-bg-img.png'
 import useAuthController from 'auth@/api/authController'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 let { login }  = useAuthController()
 

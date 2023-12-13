@@ -8,7 +8,7 @@
                 <img :src="imageUrl" class="h-full  cursor-pointer" alt="">
             </div>
         </div>
-        <div class="flex space-x-2">
+        <div class="flex space-x-2 items-center">
             <CustomButton  
                 text="EVSE" 
                 class="bg-primary-400"
@@ -24,7 +24,10 @@
             >
                 <Login/>
             </CustomButton>
-            <Profile/>
+            <Profile   
+                v-if="loginStatus" 
+                @click="()=>router.push({name: 'dealer-profile'})"
+            />
         </div>
     </nav>
 </template>

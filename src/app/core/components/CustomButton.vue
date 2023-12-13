@@ -1,5 +1,5 @@
 <template>
-        <div class=" py-1 border  cursor-pointer border-secondary-500 text-white flex items-center justify-between px-3 rounded-md">
+        <div class=" py-1 border   cursor-pointer border-secondary-500 text-white flex items-center justify-between px-3 rounded-md">
             <slot></slot>
             <p class="ml-2 hidden md:block">
                 {{ text }}

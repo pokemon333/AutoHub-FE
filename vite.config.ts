@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath } from 'node:url'
 import svgLoader from 'vite-svg-loader'
+import { url } from 'node:inspector'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,7 +20,8 @@ export default defineConfig({
       'search@':fileURLToPath(new URL('./src/app/modules/car/modules/search',import.meta.url)),
       'advanceSearch@':fileURLToPath(new URL('./src/app/modules/car/modules/advanceSearch',import.meta.url)),
       'asset@'  : fileURLToPath(new URL('./src/assets',import.meta.url)),
-      'auth@'   : fileURLToPath(new URL('./src/app/modules/auth',import.meta.url))
+      'auth@'   : fileURLToPath(new URL('./src/app/modules/auth',import.meta.url)),
+      "dealer@" : fileURLToPath(new URL('./src/app/modules/dealer',import.meta.url))
     }
   }
 })

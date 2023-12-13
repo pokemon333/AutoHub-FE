@@ -181,7 +181,7 @@ let selectImage = (index)=>{
 }
 
 let backToList =  () => {    
-    router.push({name : 'cars'})
+    router.back()
 }
 
 let formatDate = (date) =>{

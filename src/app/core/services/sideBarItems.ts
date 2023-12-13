@@ -2,22 +2,22 @@ export default
 [
     {
         name : "Car Sales",
-        link : "/"
+        link : "landing"
     },
     {
         name : "Work Shops",
-        link : "/"
+        link : "landing"
     },
     {
         name : "Car Spa",
-        link : "/"
+        link : "landing"
     },
     {
         name : "Car Accessories",
-        link : "/"
+        link : "landing"
     },
     {
         name : "Promotions",
-        link : "/"
+        link : "landing"
     }
 ]

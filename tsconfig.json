@@ -11,7 +11,8 @@
       "evse@/*": ["./src/app/modules/evse/*"],
       "search@/*": ["./src/app/modules/car/modules/search/*"],
       "advanceSearch@/*": ["./src/app/modules/car/modules/advanceSearch/*"],
-      "auth@/*": ["./src/app/modules/auth/*"]
+      "auth@/*": ["./src/app/modules/auth/*"],
+      "dealer@/*": ["./src/app/modules/dealer/*"]
     }
   },
   "include": [
@@ -25,6 +26,7 @@
     "src/app/modules/car/modules/advanceSearch/**/*.ts",
     "src/app/modules/landing/**/*.ts",
     "src/app/modules/evse/**/*.ts",
+    "src/app/modules/dealer/**/*.ts",
 
     "src/app/core/**/*.d.ts",
     "src/app/modules/car/**/*.d.ts",
