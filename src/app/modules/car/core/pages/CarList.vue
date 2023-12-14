@@ -8,7 +8,7 @@
                 <div @click="toggleSideBar"
                     class="flex cursor-pointer justify-center  pt-2 border-red-800  w-10 h-10  border  rounded-full items-center "
                     :class="advanceFileter ? 'bg-secondary-700 ' : ''">
-                    <advanceFilter :class="advanceFileter ? 'fill-gray-100' : 'fill-secondary-700'" />
+                    <advanceFilter class="w-5 h-5" :class="advanceFileter ? 'fill-gray-100' : 'fill-secondary-700'" />
                 </div>
             </div>
             <div class="w-full lg:h-[91%] lg:pt-2 overflow-y-auto  h-screen">
@@ -30,7 +30,7 @@
                     <div @click="toggleSideBar"
                         class="flex cursor-pointer   justify-center   border-red-800  w-10 h-10  border  rounded-full items-center "
                         :class="advanceFileter ? 'bg-secondary-700 ' : ''">
-                        <advanceFilter :class="advanceFileter ? 'fill-gray-100' : 'fill-secondary-700'" />
+                        <advanceFilter class="w-5 h-5" :class="advanceFileter ? 'fill-gray-100' : 'fill-secondary-700'" />
                     </div>
                 </div>
                 <div class="lg:order-2 lg:px-0  lg:ml-[70px] px-2 w-full "

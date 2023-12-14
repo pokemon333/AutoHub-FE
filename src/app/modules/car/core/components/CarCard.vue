@@ -63,7 +63,7 @@
                 Details
             </button>
             <button class="bg-primary-300 hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  px-4 rounded py-1">
-                <font-awesome-icon icon="phone" class="text-sm mr-2" />
+                <phone class="w-[13px] h-[13px] mr-4 fill-white"/>
                 {{ dealer_name }}
             </button>
         </div>
@@ -78,7 +78,8 @@ import {
     steering,
     transmission,
     gear,
-    lighting
+    lighting,
+    phone
 } from 'car@/core/services/getCarCardSvg';
 
 const props = defineProps({

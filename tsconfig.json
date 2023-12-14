@@ -12,7 +12,8 @@
       "search@/*": ["./src/app/modules/car/modules/search/*"],
       "advanceSearch@/*": ["./src/app/modules/car/modules/advanceSearch/*"],
       "auth@/*": ["./src/app/modules/auth/*"],
-      "dealer@/*": ["./src/app/modules/dealer/*"]
+      "dealer@/*": ["./src/app/modules/dealer/*"],
+      "dealerAdvanceSearch@/*": ["./src/app/modules/dealer/modules/advanceSearch/*"]
     }
   },
   "include": [

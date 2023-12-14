@@ -21,7 +21,8 @@ export default defineConfig({
       'advanceSearch@':fileURLToPath(new URL('./src/app/modules/car/modules/advanceSearch',import.meta.url)),
       'asset@'  : fileURLToPath(new URL('./src/assets',import.meta.url)),
       'auth@'   : fileURLToPath(new URL('./src/app/modules/auth',import.meta.url)),
-      "dealer@" : fileURLToPath(new URL('./src/app/modules/dealer',import.meta.url))
+      "dealer@" : fileURLToPath(new URL('./src/app/modules/dealer',import.meta.url)),
+      "dealerAdvanceSearch@" : fileURLToPath(new URL('./src/app/modules/dealer/modules/advanceSearch',import.meta.url))
     }
   }
 })

@@ -18,14 +18,14 @@
             <div class="relative w-full lg:mt-12">
                 <label 
                     for="type" 
-                    class="absolute -top-2 left-3 px-2  bg-white text-xs"
-                    :class="mode == 'edit' ? 'text-blue-400  shadow-sm ':''"
+                    class="absolute -top-2 left-3 px-2 z-10  bg-white text-xs"
+                    :class="mode == 'edit' ? 'text-blue-400   ':''"
                 >
                     Name
                 </label>
                 <input type="text" 
                     v-model="user.name" 
-                    class="w-full h-12 focus:outline-none focus:ring-0 focus:border-blue-600 focus:border-2 rounded-md px-3 bg-white border caret-blue-500"
+                    class="w-full h-12 z-0  focus:outline-none focus:ring-0 focus:border-blue-600 focus:border-2 rounded-md px-3 bg-white border caret-blue-500"
                     :class="mode == 'edit' ? 'border-blue-300 shadow-sm   shadow-blue-200':'border-gray-500'"
                     placeholder="Enter your name"
                     :disabled="mode == 'profile'"
@@ -34,15 +34,15 @@
             <div class="relative w-full">
                 <label 
                     for="type" 
-                    class="absolute -top-2 left-3 px-2  bg-white text-xs "
-                    :class="mode == 'edit' ? 'text-blue-400 shadow-sm ':''"
+                    class="absolute -top-2 left-3 px-2  z-10 bg-white text-xs "
+                    :class="mode == 'edit' ? 'text-blue-400  ':''"
                 >
                     Email
                 </label>
                 <input 
                     type="text" 
                     v-model="user.email" 
-                    class="w-full h-12 rounded-md px-3 bg-white border  focus:outline-none focus:ring-0 focus:border-blue-600 focus:border-2"
+                    class="w-full h-12 z-0 rounded-md px-3 bg-white border  focus:outline-none focus:ring-0 focus:border-blue-600 focus:border-2"
                     :class="mode == 'edit' ? 'border-blue-300 shadow-sm shadow-blue-200':'border-gray-500'"
                     placeholder="Enter your email"
                     :disabled="mode == 'profile'"
@@ -51,15 +51,15 @@
             <div class="relative w-full">
                 <label 
                     for="type" 
-                    class="absolute -top-2 left-3 px-2  bg-white text-xs"
-                    :class="mode == 'edit' ? 'text-blue-400 shadow-sm ':''"
+                    class="absolute -top-2 left-3 px-2 z-10  bg-white text-xs"
+                    :class="mode == 'edit' ? 'text-blue-400  ':''"
                 >
                     Phone
                 </label>
                 <input 
                     type="text" 
                     v-model="user.phone_number" 
-                    class="w-full h-12 rounded-md px-3 bg-white border   focus:outline-none focus:ring-0 focus:border-blue-600 focus:border-2"
+                    class="w-full h-12 z-0 rounded-md px-3 bg-white border   focus:outline-none focus:ring-0 focus:border-blue-600 focus:border-2"
                     :class="mode == 'edit' ? 'border-blue-300 shadow-sm shadow-blue-200':'border-gray-500'"
                     placeholder="Enter your phone"
                     :disabled="mode == 'profile'"
@@ -68,15 +68,15 @@
             <div class="relative w-full">
                 <label 
                     for="type" 
-                    class="absolute -top-2 left-3 px-2  bg-white text-xs"
-                    :class="mode == 'edit' ? 'text-blue-400 shadow-sm ':''"
+                    class="absolute -top-2 left-3 px-2 z-10   bg-white text-xs"
+                    :class="mode == 'edit' ? 'text-blue-400  ':''"
                 >
                     Address
                 </label>
                 <textarea id="message" 
                     rows="4" 
                     v-model="user.address"
-                    class="block   p-2.5 w-full border  focus:outline-none focus:ring-0 focus:border-blue-600 focus:border-2 text-sm text-gray-900 bg-gray-50 rounded-lg   dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="block   p-2.5 w-full border  focus:outline-none focus:ring-0 focus:border-blue-600 focus:border-2 text-sm text-gray-900  rounded-lg"
                     :class="mode == 'edit' ? 'border-blue-300 shadow-sm shadow-blue-200':'border-gray-500'"
                     placeholder="Enter your address"
                     :disabled="mode == 'profile'"

@@ -1,8 +1,8 @@
 <template>
-    <div class="pt-4 pb-4  lg:h-full lg:px-14 md:pl-20 md:pr-32  h-[75%] overflow-y-auto  form-scroll">
+    <div class="pt-4 pb-4   lg:h-full lg:px-14 md:pl-20 md:pr-32  h-[75%] overflow-y-auto  form-scroll">
         <!-- Search Input and Dropdown -->
         <div class=" w-1/2">
-            <select @change="mainFilterChange" name="type" v-model="mainFilterType" 
+            <select @change="mainFilterChange" name="type" v-model="mainFilterType"
                 class="w-full border bg-slate-300 mt-2  border-primary-100   peer h-10 rounded-md px-3">
                 <option value="dealer" style="background-color:#cbd5e1;">Dealer</option>
                 <option value="brand" style="background-color:#cbd5e1;">Brand</option>
@@ -101,7 +101,7 @@
             </div>
         </div>
 
-       
+
 
         <!-- condition -->
         <div class="mt-4">
@@ -158,7 +158,7 @@
 import AdvanceSearchController from 'advanceSearch@/api/AdvanceSearchController'
 import { useCarStore } from 'car@/core/stores/CarStore';
 import { onMounted, ref, computed, defineEmits } from 'vue';
-const emit = defineEmits(['setCar','loading','toggleSideBar'])
+const emit = defineEmits(['setCar', 'loading', 'toggleSideBar'])
 let advanceSearchController = AdvanceSearchController();
 let brands = ref([]);
 let dealers = ref([]);
@@ -168,7 +168,7 @@ let minPrice = ref(0);
 let maxPrice = ref(0);
 let mainFilterType = ref('');
 let condition = ref([]);
-let carStore  =  useCarStore();
+let carStore = useCarStore();
 
 let divisionDropDown = ref(true);
 let brandDropDown = ref(true);
@@ -190,9 +190,9 @@ let resetCheckedValues = () => {
 }
 
 let resetDropDown = () => {
-     brandDropDown.value = true;
-     dealerDropDown.value= true;
-     modelDropDown.value = true;
+    brandDropDown.value = true;
+    dealerDropDown.value = true;
+    modelDropDown.value = true;
 }
 
 let submitdata = computed(() => ({
@@ -211,7 +211,7 @@ let submitdata = computed(() => ({
             return model.name;
         }
     }),
-   
+
     minPrice: minPrice.value,
     maxPrice: maxPrice.value,
     condition: condition.value,
@@ -286,22 +286,22 @@ let getResource = async () => {
         dealers.value = await data.dealers.sort((a, b) => a.name.localeCompare(b.name));
         divisions.value = await data.divisions;
         if (carStore.type) {
-            mainFilterType.value =  carStore.type
-        }else{
+            mainFilterType.value = carStore.type
+        } else {
             mainFilterType.value = 'dealer'
         }
         if (carStore.type == 'brand') {
             filteredBrands.value = brands.value
-        }else{
-            dealersData.value  = dealers.value
+        } else {
+            dealersData.value = dealers.value
         }
     } catch (error) {
         console.error('An error occurred:', error);
     }
-  
+
 }
 
-let mobileSubmit = ()=> {
+let mobileSubmit = () => {
     emit('toggleSideBar')
     formsubmit()
 }
@@ -331,9 +331,10 @@ onMounted(() => {
 .form-scroll::-webkit-scrollbar {
     width: 4px;
 }
+
 /* Style the scrollbar thumb (the draggable part) */
 .form-scroll::-webkit-scrollbar-thumb {
-    background: rgb(182, 27, 45) ;
+    background: rgb(182, 27, 45);
     border-radius: 5px;
     padding: 0;
 }
