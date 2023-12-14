@@ -3,7 +3,7 @@ import tokenService  from "./tokenService";
 
 
 const ApiService = axios.create({
-    baseURL: 'http://autohub.test/api/v1/'
+    baseURL: 'http://192.168.100.10:9000/api/v1/'
 });
 
 ApiService.interceptors.request.use(

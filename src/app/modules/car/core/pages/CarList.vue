@@ -135,7 +135,7 @@ let overallSearch = () => {
             let firstStep = car_brand.name + ' ' + car_model.name + ' ' + product_year.name + ' ' + trim;
             const regex = new RegExp(inputKeywordLower, 'i');
             if (regex.test(firstStep.toLowerCase()) || regex.test(dealer.user.name.toLowerCase())) {
-                return car;
+                return car; 
             }
         });
 

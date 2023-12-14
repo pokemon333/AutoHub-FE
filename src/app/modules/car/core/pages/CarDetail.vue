@@ -42,7 +42,7 @@
                     <div class="lg:w-full w-screen "  v-if="car">
                         <Carousel> 
                             <template v-slot:main>
-                                <img alt="Big Image"  :src="currentImage" class=" w-full h-full  object-cover  absolute"/>
+                                <img alt="Big Image"  :src="currentImage" class=" w-full h-full aspect-video  object-cover  absolute"/>
                             </template>
                             <template v-slot:images>
                                 <div v-for="(image, index) in images" :key="index"

@@ -3,8 +3,8 @@
     <div class="pt-2">
         <!-- Car for sales  wrapper-->
         <div class="px-3 pt-3 pb-2 flex justify-between items-center ">
-            <h1 class="text-2xl">Car For Sales</h1>
-            <button class="bg-secondary-500 py-1 px-2 text-white rounded-md ">
+            <h1 class="md:text-3xl text-2xl">Car For Sales</h1>
+            <button class="bg-secondary-500 md:py-2 py-1 px-2 text-white rounded-md ">
                 Sell My Car
             </button>
         </div>
@@ -26,7 +26,7 @@
         </div>
 
         <!-- Car list parts -->
-        <div class="px-3 py-2 grid grid-cols-1 gap-y-3">
+        <div class="px-3 py-2 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2  gap-3 grid-cols-1 ">
             <CarCard 
                 @car-detail="detail(car.id)"
                 v-for="car in cars" 

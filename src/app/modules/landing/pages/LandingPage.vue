@@ -31,8 +31,7 @@ import { useUserStore } from '@/app/core/store/UserStore';
 
 const userStore = useUserStore()
 
-console.log(userStore.getUser);
-console.log(userStore.getLoginStatus);
+
 
 let carController = CarController();
 let {getCars} = carController
@@ -45,7 +44,7 @@ let filterCars = async (data) => {
                             let count = res.data.data.count
                             carStore.setCars(cars)
                             carStore.setCount(count)
-                            console.log(data.type);
+        
                             
                             carStore.setType(data.type)
                             router.push({ name: 'cars'})

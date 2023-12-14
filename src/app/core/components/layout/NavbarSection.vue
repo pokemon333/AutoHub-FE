@@ -8,7 +8,7 @@
                 <img :src="imageUrl" class="h-full  cursor-pointer" alt="">
             </div>
         </div>
-        <div class="flex space-x-2 items-center">
+        <div class="flex space-x-4 items-center">
             <CustomButton  
                 text="EVSE" 
                 class="bg-primary-400"
@@ -38,7 +38,7 @@ import { ref,computed } from 'vue'
 import { useRouter } from 'vue-router'
 import MenuLogo from 'asset@/icon/menu.svg'
 import imageUrl from 'asset@/img/logo.png' 
-import { icon } from '@fortawesome/fontawesome-svg-core'
+// import { icon } from '@fortawesome/fontawesome-svg-core'
 import ChargingStation from 'asset@/icon/charging-station.svg'
 import CustomButton from "core@/components/CustomButton.vue"
 import Login from "asset@/icon/login.svg"
@@ -49,7 +49,7 @@ let userStore = useUserStore()
 let rotate = ref('')
 let router = useRouter()
 let loginStatus = computed(()=>userStore.getLoginStatus)
-console.log(loginStatus);
+
 let rotateMenu = () =>{
     rotate.value = rotate.value == 'rotate-90' ? '' : 'rotate-90'
 }

@@ -228,7 +228,6 @@ let mainFilterChange = (e) => {
         filteredModels.value = [];
     } else {
         dealersData.value = dealers.value
-        console.log(dealersData.value);
         resetDropDown()
         resetCheckedValues()
         filteredBrands.value = [];
