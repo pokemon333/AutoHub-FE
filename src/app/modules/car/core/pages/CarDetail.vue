@@ -1,7 +1,7 @@
 <template>
     <div class=" pb-2  flex" >
         <div class=" lg:w-[7%]  h-full pt-14 max-lg:hidden flex  justify-center">
-            <back @click="backToList" class="cursor-pointer " fill="black"/>
+            <back @click="backToList" class="cursor-pointer w-14 h-14 " fill="black"/>
         </div>
         <div class=" lg:w-[93%] w-screen lg:pt-6 h-full">
             <div class="lg:flex lg:w-full w-screen">
@@ -110,15 +110,6 @@
                                     <li>{{ car?.car_info?.vehicleid || '-' }}</li>
                                 </ul>
                             </div>
-                            <!-- <div class="lg:w-4/12 max-lg:pl-5 max-lg:mt-1">
-                                    <ul class="list-disc flex flex-col space-y-1  font-[500]   ">
-                                        <li>2 owners before</li>
-                                        <li>Saloon</li>
-                                        <li>No Trim Name</li>
-                                        <li>Edited 3 days ago</li>
-                                        <li>#76949494</li>
-                                    </ul>
-                            </div> -->
                         </div>
                     </div>
                 </div>

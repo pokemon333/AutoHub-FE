@@ -55,7 +55,7 @@ export default function useAuthController() : authController {
                     removeToken()
                     userStore.reset();
                     if (isDealerRoute) {
-                        router.push({name:'login'})
+                        router.push({name:'landing'})
                     }
                 }
             })

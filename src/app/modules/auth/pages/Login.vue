@@ -16,7 +16,7 @@
                     </div>
                     <div class="relative ">
                         <label for="type" class="absolute -top-2 left-3 px-2  bg-white  text-xs">Password</label>
-                        <input v-model="data.password" @keyup.enter="submit" type="text"  class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Password">
+                        <input v-model="data.password" @keyup.enter="submit" type="password"  class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Password">
                     </div>
                     <div class=" mt-3  flex justify-center text-gray-500">
                         <a  class="underline cursor-pointer hover:text-gray-800">Forget Password</a>
