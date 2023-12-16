@@ -13,7 +13,7 @@ interface UserData {
 }
 
 interface authController{
-    login(userData : UserData ) : void
+    login(userData : UserData ) : Promise<AxiosResponse> 
     logout(): void
     getUser() : void
 }
@@ -24,6 +24,8 @@ export default function useAuthController() : authController {
         let router = useRouter();
 
         function getUser(){
+            console.log('fine');
+            
             apiService.get('user')
             .then((res : AxiosResponse)=> {
                 let user = res?.data.data
@@ -34,23 +36,14 @@ export default function useAuthController() : authController {
         }
 
         function login (userData : UserData ) {
-            apiService.post('login', userData)
-            .then((res : AxiosResponse )=> {
-               if(res.data.success){
-                    let { token  } = res?.data.data
-                    setToken(token)
-                    getUser();
-                    router.go(-1)
-               }
-            })
-            .catch((error : AxiosResponse)=>console.log('error',error))  
+           return  apiService.post('login', userData)
         }
 
         function logout (){
             const currentRoute = router.currentRoute.value;
             const isDealerRoute = currentRoute.path.startsWith('/dealer');
             apiService.post('logout')
-            .then((res : AxiosResponse)=>{
+            .then((res : AxiosResponse) => {
                 if (res.data.success) {
                     removeToken()
                     userStore.reset();
@@ -59,7 +52,9 @@ export default function useAuthController() : authController {
                     }
                 }
             })
-            .catch((error : AxiosResponse) => console.log('error',error))
+            .catch((error : any) =>{
+                console.log(error.response.data);
+            })
         }
 
         return {

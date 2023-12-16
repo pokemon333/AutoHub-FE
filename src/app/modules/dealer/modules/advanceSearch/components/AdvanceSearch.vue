@@ -6,7 +6,7 @@
             <div
                 v-if="isAdvanceSearchMenuOpen"
                 class="flex md:rounded-full md:w-10 md:h-10  w-8 h-8   rounded-md  cursor-pointer  justify-center   border-red-800    border   items-center ">
-                <div class="icon-wrapper w-5 h-5">
+                <div class="icon-wrapper md:w-5 md:h-5 w-4 h-4">
                     <advanceFilter 
                         @click="() => $emit('toggle-menu')"
                         :class="false ? 'fill-gray-100' : 'fill-secondary-700'" 
@@ -20,16 +20,18 @@
             <div >
                 <div class="">
                     <button type="button"
+                        @click="brandDropDown = !brandDropDown"
                         class="flex items-center border-b border-b-white bg-secondary-700 w-full py-1 pr-2 text-base text-white transition duration-75  group"
                         aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                         <span class="flex-1 ml-3 text-left whitespace-nowrap">Brand</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none">
-                          
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        :class="brandDropDown ? 'rotate-180 mb-2' : 'mt-2'" 
+                        >
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 1 4 4 4-4" />
                         </svg>
                     </button>
-                    <div class=" py-2 space-y-2  grid grid-cols-2" >
+                    <div v-if="brandDropDown" class=" py-2 space-y-2  grid grid-cols-2" >
                         <div 
                             v-for="(brand,index) in brandArray"
                             :key="index"
@@ -51,6 +53,7 @@
             <div >
                 <div class="">
                     <button type="button"
+                        @click="modelDropDown = !modelDropDown"
                         class="flex items-center border-b border-b-white bg-secondary-700 w-full py-1 pr-2 text-base text-white transition duration-75  group"
                         aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                         <span class="flex-1 ml-3 text-left whitespace-nowrap">Model</span>
@@ -60,7 +63,7 @@
                                 d="m1 1 4 4 4-4" />
                         </svg>
                     </button>
-                    <div class=" py-2 space-y-2 grid grid-cols-2" >
+                    <div v-if="modelDropDown && modelArray.lenth != 0 " class=" py-2 space-y-2 grid grid-cols-2" >
                         <div 
                             v-for="(model,index) in modelArray"
                             :key="index"
@@ -157,9 +160,11 @@
                     <div class="w-1/2 h-full">
                         <input 
                             v-model="filterData.minPrice"
-                            type="text" 
+                            type="number" 
+                            min="0"
                             class="w-full h-full rounded-md border border-gray-500 px-2 bg-slate-300" 
-                            placeholder="min">
+                            placeholder="0">
+
                     </div>
                     <div>
                         <h1>-</h1>
@@ -167,9 +172,10 @@
                     <div class="w-1/2 h-full">
                         <input 
                             v-model="filterData.maxPrice"
-                            type="text" 
+                            type="number" 
+                            min="0"
                             class="w-full h-full rounded-md border border-gray-500 px-2 bg-slate-300" 
-                            placeholder="max"
+                            placeholder="0"
                         >
                     </div>
                 </div>
@@ -243,10 +249,10 @@
 
     async function prePareReource (){
         try {
-        let response = await getResources(dealerId)
-        originalData.value = await response.data.data
-        brandArray.value    = await response.data.data.brands.sort(sortByName())
-        divisionArray.value = await response.data.data.divisions.sort(sortByName())
+            let response = await getResources(dealerId)
+            originalData.value = await response.data.data
+            brandArray.value    = await response.data.data.brands.sort(sortByName())
+            divisionArray.value = await response.data.data.divisions.sort(sortByName())
         } catch (error) {
             console.log(error.message);
         }

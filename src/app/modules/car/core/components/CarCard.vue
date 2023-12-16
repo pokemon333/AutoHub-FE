@@ -1,15 +1,26 @@
 <template>
     <div class="bg-white w-full h-[400px] rounded-lg border-2 border-primary-50/30  font-poppins">
         <div class="w-full relative">
-            <div v-if="car?.car_info" class="py-1 px-2 rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-1 right-1 border-secondary-300">
+            <div v-if="car?.car_info" class="py-1 px-2  rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-1 right-1 border-secondary-300">
                {{ car?.car_info?.plate_division.name }} / {{car?.car_info?.plate_number.slice(0,3)  + '*'.repeat(car?.car_info?.plate_number.length - 3) }}
             </div>
             <img class="object-cover w-full aspect-video rounded-lg"  style="height: 200px;" :src="image" alt="car-img">
         </div>
         <div class="py-4 px-4  flex justify-between bg-white border-b-2 border-b-primary-100/30">
-            <h1 class=" text-text-400 text-card-title ">
-                {{ brand }} {{ model }} {{ year }} {{ trim_name ? '('+trim_name+')' : '' }}
-            </h1>
+            <div class="relative inline-block group w-1/2">
+                <div class="flex items-center" @click="()=>isModelOpen = !isModelOpen">
+                    <h1 class="text-text-400 overflow-hidden w-full  text-card-title truncate  cursor-pointer">
+                        {{ brand }} {{ model }} {{ year }} {{ trim_name ? '('+trim_name+')' : '' }}
+                    </h1>
+                    <h1 class="rotate-90 text-gray-500 text-md">
+                        >
+                    </h1>
+                </div>
+
+                <div  :class="isModelOpen ? 'opacity-100 bg-red-600' : 'opacity-0'" class=" bg-gray-800 whitespace-nowrap   text-white text-xs rounded-md px-2 py-1 absolute  left-[70%] botton-0 transform   transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+                    {{ brand }} {{ model }} {{ year }} {{ trim_name ? '('+trim_name+')' : '' }}
+                </div>
+            </div>
             <h1 class=" font-roboto-price   text-card-price ">
                 {{ price }} Lakhs
             </h1>
@@ -81,10 +92,11 @@ import {
     lighting,
     phone
 } from 'car@/core/services/getCarCardSvg';
-
+import {ref} from 'vue'
 const props = defineProps({
   car: {},
 })
+let isModelOpen = ref(false)
 
 let image  = props?.car?.media[0]?.url
 let model  = props.car?.car_model?.name

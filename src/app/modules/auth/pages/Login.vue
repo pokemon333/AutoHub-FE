@@ -11,12 +11,40 @@
                 </div>
                 <div class="mt-11 lg:w-4/6 w-full ">
                     <div class="relative  mb-6">
-                        <label for="type" class="absolute -top-2 left-3 px-2 bg-white  text-xs">Name</label>
-                        <input v-model="data.name" type="text"   class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Name">
+                        <label 
+                            for="type" 
+                            class="absolute -top-2 left-3 px-2 bg-white  text-xs"
+                            :class="errors.name ? 'text-secondary-500' : ''" 
+                        >
+                            Name
+                        </label>
+                        <input 
+                            v-model="data.name" 
+                            type="text"   
+                            class="w-full h-12 rounded-md px-3  border "  
+                            placeholder="Enter Name"
+                             :class="errors.name ? 'border-secondary-500' : 'border-gray-500'" 
+                        >
+                        <span v-if="errors.name" class="text-secondary-500 text-sm mt-1">{{ errors.name[0] }}</span>
                     </div>
+                    
                     <div class="relative ">
-                        <label for="type" class="absolute -top-2 left-3 px-2  bg-white  text-xs">Password</label>
-                        <input v-model="data.password" @keyup.enter="submit" type="password"  class="w-full h-12 rounded-md px-3  border border-gray-500"  placeholder="Enter Password">
+                        <label 
+                            for="type" 
+                            class="absolute -top-2 left-3 px-2  bg-white  text-xs"
+                            :class="errors.password ? 'text-secondary-500' : ''" 
+                        >
+                            Password
+                        </label>
+                        <input 
+                            v-model="data.password" 
+                            @keyup.enter="submit" 
+                            type="password"  
+                            class="w-full h-12 rounded-md px-3  border border-gray-500"  
+                            placeholder="Enter Password"
+                            :class="errors.password ? 'border-secondary-500' : 'border-gray-500'" 
+                        >
+                        <span v-if="errors.password" class="text-secondary-500 text-sm mt-1">{{ errors.password[0] }}</span>
                     </div>
                     <div class=" mt-3  flex justify-center text-gray-500">
                         <a  class="underline cursor-pointer hover:text-gray-800">Forget Password</a>
@@ -40,17 +68,40 @@ import logo from 'asset@/img/logo-login.png'
 import bgImage from 'asset@/img/login-bg-img.png'
 import useAuthController from 'auth@/api/authController'
 import { ref } from 'vue'
+import apiService from 'core@/services/apiService';
+import tokenService from 'core@/services/tokenService'
+import { useUserStore  } from '@/app/core/store/UserStore';
+import { useRouter } from 'vue-router';
 
-let { login }  = useAuthController()
+let router = useRouter();
+let { setToken , removeToken  } = tokenService
+let userStore = useUserStore()
+let { login , getUser }  = useAuthController()
 
+let errors = ref({})
 
 let data =  ref({
     name : '',
     password : ''
 })
 
-let submit = () => {
-    login(data.value)
+let submit = async () => {
+    try {
+        let res = await login(data.value)
+        console.log(res.data.data);
+        if(res.data.success){
+            let { token   } = await res?.data.data
+            console.log(token);
+            await setToken(token)
+            await getUser()
+            await router.go(-1)
+        }
+    } catch (error) {
+        if (error.response.data.errors) {
+            errors.value = error.response.data.errors
+            console.log(errors.value);
+        }
+    }
 }
 
 

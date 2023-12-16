@@ -6,10 +6,25 @@
             </div>
             <img class="object-cover w-full rounded-lg"  style="height: 200px;" :src="image" alt="car-img">
         </div>
-        <div class="py-4 px-4  flex justify-between bg-white border-b-2 border-b-primary-100/30">
-            <h1 class=" text-text-400 text-card-title ">
-                {{ brand }} {{ model }} {{ year }} {{ trim_name ? '('+trim_name+')' : '' }}
-            </h1>
+        <div class="py-4 px-4  flex justify-between  items-center bg-white border-b-2 border-b-primary-100/30">
+
+            <div class="relative inline-block group w-1/2">
+
+                <div class="flex items-center" @click="()=>isModelOpen = !isModelOpen">
+                    <h1 class="text-text-400 overflow-hidden w-full  text-card-title truncate  cursor-pointer">
+                        {{ brand }} {{ model }} {{ year }} {{ trim_name ? '('+trim_name+')' : '' }}
+                    </h1>
+                    <h1 class="rotate-90 text-gray-500 text-md">
+                        >
+                    </h1>
+                </div>
+
+                <div  :class="isModelOpen ? 'opacity-100 bg-red-600' : 'opacity-0'" class=" bg-gray-800 whitespace-nowrap   text-white text-xs rounded-md px-2 py-1 absolute  left-[70%] botton-0 transform   transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+                    {{ brand }} {{ model }} {{ year }} {{ trim_name ? '('+trim_name+')' : '' }}
+                </div>
+            </div>
+
+
             <h1 class=" font-roboto-price   text-card-price ">
                 {{ price }} Lakhs
             </h1>
@@ -62,8 +77,11 @@
             <button  @click="$emit('carDetail',car?.id)" class="bg-transparent hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
                 Details
             </button>
-            <button class="bg-primary-300 hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  px-4 rounded py-1">
-               
+            <button class="bg-primary-300 hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  space-x-4  px-4 rounded py-1">
+                <div >
+                    <edit  class="w-4 h-4"/>
+                </div>
+                <h1> Edit Information</h1>
             </button>
         </div>
     </div>
@@ -78,12 +96,17 @@
         steering,
         transmission,
         gear,
-        lighting
-    } from 'car@/core/services/getCarCardSvg';
+        lighting,
+        edit
+    } from 'dealer@/core/services/getCarCardSvg';
+    
+    import {ref} from 'vue'
 
     const props = defineProps({
-    car: {},
+        car: {},
     })
+
+    let isModelOpen = ref(false);
 
     let image  = props?.car?.images[0]?.url
     let model  = props.car?.car_model?.name
