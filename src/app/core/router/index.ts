@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
-import carRoutes from 'car@/core/router';
-import landingRoutes from 'landing@/router';
-import evseRoutes from 'evse@/router'
-import initMiddleware from "core@/middleware/coreMiddleware"
-import authRoutes from '@/app/modules/auth/router';
-import dealerRoutes from 'dealer@/core/router/index';
+import carRoutes from 'car@/core/router/index.ts';
+import landingRoutes from 'landing@/router/index.ts';
+import evseRoutes from 'evse@/router/index.ts'
+import initMiddleware from "core@/middleware/coreMiddleware.ts"
+import authRoutes from '@/app/modules/auth/router/index.ts';
+import dealerRoutes from 'dealer@/core/router/index.ts';
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',

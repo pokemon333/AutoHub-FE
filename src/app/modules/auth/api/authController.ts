@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
-import apiService from 'core@/services/apiService';
-import tokenService from 'core@/services/tokenService'
-import { useUserStore  } from '@/app/core/store/UserStore';
+import apiService from 'core@/services/apiService.ts';
+import tokenService from 'core@/services/tokenService.ts'
+import { useUserStore  } from '@/app/core/store/UserStore.ts';
 import { useRouter } from 'vue-router';
 
 let { setToken , removeToken  } = tokenService

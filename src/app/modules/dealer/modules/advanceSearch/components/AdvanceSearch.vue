@@ -191,7 +191,7 @@
                     Search
                 </button>
                 <button 
-                    @click="submit"
+                    @click="mobileSubmit"
                     class="bg-red-700 py-1 px-4 max-lg:block lg:hidden  rounded-md text-white" 
                 >
                     Search
@@ -204,13 +204,14 @@
 
 <script setup>
 
-    import {ref , onMounted , computed  } from 'vue'
+    import {ref , onMounted , defineEmits  } from 'vue'
     import  advanceFilter  from 'asset@/icon/advance-filter.svg';
     import useAdvanceServiceController from 'dealerAdvanceSearch@/api/advanceSearchController'
     import {useUserStore} from 'core@/store/UserStore'
     import helpers from 'core@/helper/helper'
     import apiService from 'core@/services/apiService'
     import {useCarStore } from 'dealer@/core/store/CarStore'
+ 
 
     const advanceSearchController = useAdvanceServiceController()
     const { getResources  } = advanceSearchController
@@ -218,6 +219,11 @@
     const dealerId        = userStore.user.dealer_id
     const { sortByName } = helpers
     const carStore        = useCarStore()
+
+    const emit =  defineEmits([
+        'toggleMenu'
+    ])
+
     //drop down section
     const brandDropDown = ref(true)
     const modelDropDown = ref(true)
@@ -258,6 +264,7 @@
         }
     }
 
+   
 
     const submit   = () => {
         apiService.post(`dealer/cars/filter/${dealerId}`,filterData.value).then((res) => {
@@ -265,6 +272,11 @@
         }).catch((err) => {
             console.log(err);
         })
+    }
+
+    const mobileSubmit = () =>{
+        submit()
+        emit('toggleMenu');
     }
 
     onMounted(() => {

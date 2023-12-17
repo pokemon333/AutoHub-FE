@@ -1,4 +1,4 @@
-import ApiService from '@/app/core/services/apiService'
+import ApiService from '@/app/core/services/apiService.ts'
 
 import { AxiosResponse } from 'axios'
 

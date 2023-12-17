@@ -1,8 +1,8 @@
 import  axios  from "axios";
-import tokenService  from "./tokenService";
+import tokenService  from "./tokenService.ts";
 
 const ApiService = axios.create({
-    baseURL: 'http://localhost:8000/api/v1/'
+    baseURL: import.meta.env.VITE_API_ROUTE 
 });
 
 ApiService.interceptors.request.use(

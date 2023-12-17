@@ -1,5 +1,5 @@
-import ApiService from '@/app/core/services/apiService'
-import useAuthController from 'auth@/api/authController'
+import ApiService from '@/app/core/services/apiService.ts'
+import useAuthController from 'auth@/api/authController.ts'
 
 let { getUser }  = useAuthController()
 

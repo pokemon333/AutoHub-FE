@@ -16,7 +16,7 @@
             </div>
             <div class="md:flex mt-5 w-full">
                 <div class="flex space-x-4 md:w-44  items-center ">
-                    <Phone style="fill:#5F5F5F"/>
+                    <Phone class="w-5" style="fill:#5F5F5F"/>
                     <h1 class="roboto">Phone Number</h1>
                 </div>
                 <h1 class="max-md:mt-2 max-md:ml-8 poppion">{{ evse?.phone }}</h1>

@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "allowJs": true,
-    "composite": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
@@ -36,5 +39,4 @@
     "src/app/modules/landing/**/*.d.ts"
   ],
   "exclude": ["src/**/*.vue", "**/*.vue", "./*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
 }

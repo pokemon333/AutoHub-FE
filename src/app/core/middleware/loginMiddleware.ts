@@ -1,5 +1,5 @@
-import {useUserStore}   from "core@/store/UserStore";
-import tokenService from 'core@/services/tokenService'
+import {useUserStore}   from "core@/store/UserStore.ts";
+import tokenService from 'core@/services/tokenService.ts'
 import { useRouter } from 'vue-router';
 
 const handle = (to,from,next)=>{

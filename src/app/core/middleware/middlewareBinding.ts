@@ -1,6 +1,6 @@
-import LoginMiddleware from 'core@/middleware/loginMiddleware'
+import LoginMiddleware from 'core@/middleware/loginMiddleware.ts'
 // import DealerMiddleware from 'core@/middleware/dealerMiddleware'
-import AuthMiddleware from 'core@/middleware/authMiddleware'
+import AuthMiddleware from 'core@/middleware/authMiddleware.ts'
 
 const middlewares = {
     "Login"  : LoginMiddleware,

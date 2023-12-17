@@ -17,7 +17,7 @@
                     </h1>
                 </div>
 
-                <div  :class="isModelOpen ? 'opacity-100 bg-red-600' : 'opacity-0'" class=" bg-gray-800 whitespace-nowrap   text-white text-xs rounded-md px-2 py-1 absolute  left-[70%] botton-0 transform   transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+                <div  :class="isModelOpen ? 'opacity-100    ' : 'opacity-0'" class=" bg-gray-800 whitespace-nowrap   text-white text-xs rounded-md px-2 py-1 absolute  left-[70%] botton-0 transform   transition-opacity duration-300 ease-in-out group-hover:opacity-100">
                     {{ brand }} {{ model }} {{ year }} {{ trim_name ? '('+trim_name+')' : '' }}
                 </div>
             </div>
