@@ -4,7 +4,7 @@
             <div v-if="car?.car_info" class="py-1 px-2  rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-1 right-1 border-secondary-300">
                {{ car?.car_info?.plate_division.name }} / {{car?.car_info?.plate_number.slice(0,3)  + '*'.repeat(car?.car_info?.plate_number.length - 3) }}
             </div>
-            <img class="object-cover w-full aspect-video rounded-lg"  style="height: 200px;" :src="image" alt="car-img">
+            <img @click="$emit('carDetail',car?.id)" class="object-cover cursor-pointer w-full aspect-video rounded-lg"  style="height: 200px;" :src="image" alt="car-img">
         </div>
         <div class="py-4 px-4  flex justify-between bg-white border-b-2 border-b-primary-100/30">
             <div class="relative inline-block group w-1/2">
@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="flex justify-between text-card-title rounded-b-md  bg-primary-50/20 py-3 px-4">
-            <button @click="$emit('carDetail',car?.id)" class="bg-transparent hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
+            <button   @click="$emit('carDetail',car?.id)" id="detail-btn" class="bg-transparent select-none hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
                 Details
             </button>
             <button class="bg-primary-300 hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  px-4 rounded py-1">
@@ -93,9 +93,11 @@ import {
     phone
 } from 'car@/core/services/getCarCardSvg';
 import {ref} from 'vue'
+
 const props = defineProps({
   car: {},
 })
+
 let isModelOpen = ref(false)
 
 let image  = props?.car?.media[0]?.url
@@ -111,5 +113,31 @@ let engine_power  = props?.car?.car_specification?.engine_power
 let car_steering  =  props?.car?.car_specification?.steering
 let dealer_name = props?.car.dealer.user.name
 let brand = props?.car.car_model?.car_brand.name
+
+
+
+function preventLongPressMenu(nodes) {
+    console.log(nodes);
+    //  nodes.ontouchstart = (event) =>{
+    //     event.preventDefault()
+    //     event.preventDefault()
+    //  };
+    //  nodes.ontouchmove = (event) =>{
+    //     event.preventDefault()
+    //     event.preventDefault()
+    //  };
+    //  nodes.ontouchend = (event) =>{
+    //     event.preventDefault()
+    //     event.preventDefault()
+    //  };
+    //  nodes.ontouchcancelevent = (event) =>{
+    //     event.preventDefault()
+    //     event.preventDefault()
+    //  };
+}
+
+
+
+preventLongPressMenu(document.getElementById("detail-btn"));
 
 </script>

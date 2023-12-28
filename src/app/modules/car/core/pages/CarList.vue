@@ -48,7 +48,7 @@
                     <noCarFound/>
                 </div>
                 <div v-if="!loading && cars.length != 0"
-                    class="lg:px-0 md:grid-cols-2    max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4 md:gap-x-2 md:gap-y-2 gap-y-2  px-2 form-scroll  overflow-y-auto  h-full scroll-auto "
+                    class="lg:px-0 md:grid-cols-2    max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4 md:gap-x-2 md:gap-y-2 gap-y-2  px-2 form-scroll  overflow-y-auto  h-full overflow-x-hidden "
                     :class="advanceFileter ? 'lg:w-[90%]  lg:grid-cols-2 ' : 'lg:w-[85%]  lg:grid-cols-3'">
                     <CarCard @car-detail="deatil(car.id)" :car="car" v-for="car in data"
                         :key="car.id" />

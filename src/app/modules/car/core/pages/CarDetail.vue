@@ -19,8 +19,8 @@
                                 <div class="flex flex-col space-y-1 pb-2">
                                     <h1 class="text-[30px]">{{ car.car_model?.car_brand?.name || '-' }} {{ car?.car_model?.name  || '-'}}</h1>
                                     <div class="flex text-success-800 text-[25px] space-x-1">
-                                        <h1 class="font-bold">$</h1>
-                                        <h1>{{ parseInt( car?.price)  || '-'}}</h1>
+                                        <h1 class="font-bold">{{ parseInt( car?.price)  || '-'}}</h1>
+                                        <h1>Lakhs</h1>
                                     </div>
                                     <h1 class="text-secondary-500 font-bold">{{  car?.car_specification?.condition.charAt(0).toUpperCase() + car?.car_specification?.condition.slice(1) || '-'}}</h1>
                                     <div class="text-gray-700/80 text-xs mt-2">
