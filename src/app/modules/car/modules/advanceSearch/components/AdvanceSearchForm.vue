@@ -125,14 +125,14 @@
             <label for="">Price</label>
             <div class="h-10 flex space-x-1 mt-2  items-center">
                 <div class="w-1/2 h-full">
-                    <input type="text" v-model="minPrice"
+                    <input type="number" min="0" v-model="minPrice"
                         class="w-full h-full rounded-md border border-gray-500 px-2 bg-slate-300" placeholder="min">
                 </div>
                 <div>
                     <h1>-</h1>
                 </div>
                 <div class="w-1/2 h-full">
-                    <input type="text" v-model="maxPrice"
+                    <input type="number" min="0" v-model="maxPrice"
                         class="w-full h-full rounded-md border border-gray-500 px-2 bg-slate-300" placeholder="max">
                 </div>
             </div>

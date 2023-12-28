@@ -2,7 +2,7 @@
     <div class="lg:grid-cols-2 lg:px-20 pb-6  grid   gird-rows-6  px-2  ">
         <div class=" mt-3 flex items-center justify-between col-span-full row-span-1">
             <h1 class="lg:text-5xl lg:ms-0 md:ms-20 text-4xl ">Profile</h1>
-            <button @click="this.$router.push({name:'car-for-sale'})" class="lg:me-0 md:me-20 border border-red-500 bg-primary-500 flex  px-2 py-1 rounded-md text-white">
+            <button @click="goToMySaleCar" class="lg:me-0 md:me-20 border border-red-500 bg-primary-500 flex  px-2 py-1 rounded-md text-white">
                 <carIcon 
                     class="w-6 h-6 md:me-2 fill-white"
                 />
@@ -116,7 +116,10 @@
     import CustomButton from 'dealer@/core/components/Button.vue'
     import usedealerController from 'dealer@/core/api/dealerController'
     import carIcon from 'asset@/icon/car.svg'
+    import { useRouter } from 'vue-router'
 
+    const router = useRouter()
+   
     const userStore = useUserStore()
     const user = ref({...userStore.user})
     let mode = ref('profile')
@@ -130,6 +133,10 @@
             mode.value = 'profile'
             loading.value = false
         }
+    }
+
+    function goToMySaleCar(){
+        router.push({name:'car-for-sale'})
     }
 
     function cancel(){

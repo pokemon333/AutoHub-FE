@@ -1,6 +1,5 @@
 import {defineStore} from "pinia"
 
-
 export const  useCarStore = defineStore('car',{
     state:() => ({
         cars  : [],
@@ -8,7 +7,7 @@ export const  useCarStore = defineStore('car',{
         type  : ''
     }),
    actions :{
-        setCars(data:any) : void { 
+        setCars(data:any) : void {   
             this.cars = data
         }, 
         setCount(data:any) : void { 

@@ -28,6 +28,7 @@
             <h1 class=" font-roboto-price   text-card-price ">
                 {{ price }} Lakhs
             </h1>
+
         </div>
         <div class="py-2 text-card-title flex flex-col space-y-4 px-6 border-b-2  border-b-primary-100/20 bg-primary-50/20 ">
             <div class="flex">
@@ -74,7 +75,7 @@
             </div>
         </div>
         <div class="flex justify-between text-card-title rounded-b-md  bg-primary-50/20 py-3 px-4">
-            <button  @click="$emit('carDetail',car?.id)" class="bg-transparent hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
+            <button  @click="$emit('carDetail',car?.id)"  @contextmenu.prevent="handleContextMenu" class="bg-transparent hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
                 Details
             </button>
             <button class="bg-primary-300 hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  space-x-4  px-4 rounded py-1">
@@ -120,5 +121,9 @@
     let engine_power  = props?.car?.car_specification?.engine_power
     let car_steering  =  props?.car?.car_specification?.steering
     let brand = props?.car.car_model?.car_brand.name
+
+    function handleContextMenu(event) {
+      event.preventDefault();
+    },
 
 </script>

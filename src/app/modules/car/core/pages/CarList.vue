@@ -43,11 +43,15 @@
             <div class="w-full h-[82%] mt-8 flex  justify-center"
                 :class="advanceFileter ? 'lg:justify-end pr-2 ' : 'lg:justify-center'">
                 <PageLoading v-if="loading" class="h-full" />
-                <div v-if="cars.length == 0 && !loading"
+                <div v-if="cars.length == 0 && !loading && !fetchAllData"
                     class="w-full h-full flex items-center justify-center ">
                     <noCarFound/>
                 </div>
-                <div v-if="!loading && cars.length != 0"
+                <div v-if="fetchAllData"
+                    class="w-full h-full flex items-center justify-center ">
+                    No car found! ,fetching all data...
+                </div>
+                <div v-if="!loading && cars.length != 0 && !fetchAllData"
                     class="lg:px-0 md:grid-cols-2    max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4 md:gap-x-2 md:gap-y-2 gap-y-2  px-2 form-scroll  overflow-y-auto  h-full overflow-x-hidden "
                     :class="advanceFileter ? 'lg:w-[90%]  lg:grid-cols-2 ' : 'lg:w-[85%]  lg:grid-cols-3'">
                     <CarCard @car-detail="deatil(car.id)" :car="car" v-for="car in data"
@@ -78,6 +82,7 @@ let count = ref(0)
 let keyword = ref('')
 let carStore = useCarStore()
 let loading = ref(true)
+let fetchAllData = ref(false)
 let carController = CarController();
 let { getCars } = carController
 
@@ -86,6 +91,11 @@ onMounted(() => {
         cars.value = carStore.cars
         count.value = carStore.count
     } else {
+        fetchAllData.value = true
+        console.log(fetchAllData.value);
+        setTimeout(()=>{
+            fetchAllData.value  = false
+        },3000)
         fetchData()
     }
 
@@ -107,7 +117,7 @@ let fetchData = async () => {
 
 let setCar = (car) => {
     cars.value = car.cars,
-        count.value = car.count
+    count.value = car.count
     carStore.setCars(car.cars)
     carStore.setCount(car.count)
 }

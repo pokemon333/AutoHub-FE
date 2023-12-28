@@ -5,7 +5,7 @@
         <div class=" md:flex  md:justify-between  px-2 pt-3 pb-2 justify-between items-center ">
             <div class=" flex lg:justify-start justify-start items-center   md:w-6/12 w-full   ">
                 <div class="md:ms-6 w-1/12 ">
-                    <Back @click="this.$router.push({ name: 'dealer-profile' })" class="fill-black w-[30px] h-[30px] " />
+                    <Back @click="goToDealerProfile" class="fill-black w-[30px] h-[30px] " />
                 </div>
                 <h1 class="lg:ms-0 md:text-3xl md:ms-3   md:me-0  me-12   text-3xl" :class="isAdvanceSearchMenuOpen ? 'lg:ms-2' : ''">
                     Car For Sales
@@ -45,7 +45,7 @@
         </div>
 
         <!-- Car list parts -->
-        <div class="py-2 grid overflow-y-auto form-scroll max-h-[70vh]"
+        <div class="py-2 grid overflow-y-auto overflow-x-hidden form-scroll max-h-[70vh]"
             :class="isAdvanceSearchMenuOpen ? ' 2xl:grid-cols-3 lg:grid-cols-2 lg:pe-2 lg:ps-20 lg:gap-3 px-4' : ' 2xl:grid-cols-4  px-4  gap-3 grid-cols-1  lg:grid-cols-3 lg:gap-8 md:grid-cols-2 md:px-20 '">
             <CarCard @car-detail="detail(car.id)" v-for="car in cars" :car="car" :key="car.id" />
         </div>
@@ -73,7 +73,7 @@ const carStore = useCarStore()
 
 const userStore = useUserStore();
 
-const originalData = computed(() => { carStore.cars });
+const originalData = computed(() => carStore.getCars );
 
 const cars = ref([]);
 
@@ -94,7 +94,7 @@ let detail = (id) => {
 const getDealerCar = () => {
     apiService.get(`dealer/cars/${userStore.user.dealer_id}`).then(res => {
         carStore.setCars(res.data.data)
-        cars.value = carStore.cars
+        cars.value = carStore.getCars
     })
 }
 
@@ -112,6 +112,10 @@ const overallSearch = () => {
     } else {
         cars.value = filteredCars
     }
+}
+
+function goToDealerProfile () {
+    router.push({ name: 'dealer-profile' })
 }
 
 onMounted(() => {

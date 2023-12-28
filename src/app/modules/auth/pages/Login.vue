@@ -2,7 +2,7 @@
     <div class="w-screen flex  max-lg:flex-col h-screen ">
         <div class="lg:w-5/12 flex flex-col items-center lg:order-1  order-2 lg:items-end ">
             <div class="h-1/4 lg:w-10/12   md:w-1/2 w-full lg:px-0 max-md:max-w-md px-2 flex items-center">
-               <img @click="this.$router.back()" :src="logo" class="w-48 cursor-pointer">
+               <img @click="back" :src="logo" class="w-48 cursor-pointer">
             </div>
             <div class="h-3/4 lg:w-10/12 lg:px-0  md:w-1/2 w-full  px-3 ">
                 <div>
@@ -102,6 +102,10 @@ let submit = async () => {
             console.log(errors.value);
         }
     }
+}
+
+function back() {
+    router.back()
 }
 
 
