@@ -16,11 +16,7 @@
                 Search
             </button>
         </div>
-        <div class=" text-secondary-500 flex justify-center mt-5" id="apk_download">
-            <h1>
-                <a href="https://admin.autohubmyanmar.com/storage/AutoHub.apk">Download apk</a>
-            </h1>
-        </div>
+        
     </div>
 </template>
 

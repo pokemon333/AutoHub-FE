@@ -70,17 +70,16 @@
             </div>
         </div>
         <div class="flex justify-between text-card-title rounded-b-md  bg-primary-50/20 py-3 px-4">
-            <button   @contextmenu.prevent="handleContextMenu"  @click="$emit('carDetail',car?.id)" id="detail-btn" class="bg-transparent select-none hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
+            <div   @contextmenu="handleContextMenu"  @click="$emit('carDetail',car?.id)" id="detail-btn" class="bg-transparent select-none hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
                 Details
-            </button>
-            <button  class="bg-primary-300 hover:bg-primary-500 hidden w-[68%] text-white  md:flex items-center justify-center  px-4 rounded py-1">
+            </div>
+            <button  @click="initiatePhoneCall"  class="bg-primary-300  hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  px-4 rounded py-1">
                 <phone class="w-4 h-4 mr-4 fill-white"/>
                 {{ dealer_name }}
             </button>
-            <button  @click="initiatePhoneCall"  class="bg-primary-300 md:hidden  hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  px-4 rounded py-1">
-                <phone class="w-4 h-4 mr-4 fill-white"/>
-                {{ dealer_name }}
-            </button>
+        </div>
+        <div class="hidden">
+             <a href="" id="call-now"></a>
         </div>
     </div>
 </template>
@@ -125,7 +124,9 @@ function handleContextMenu(event) {
 }
 
 function initiatePhoneCall() {
-    window.location.href = 'tel:' + phone_number;
+    let callNow = document.getElementById('call-now')
+    callNow.href = 'tel:' + phone_number
+    callNow.click()
 }
 
 

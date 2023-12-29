@@ -88,7 +88,7 @@
     </div>
 </template>
 
-<!-- -->
+
 <script setup>
 
     import { 
@@ -124,6 +124,6 @@
 
     function handleContextMenu(event) {
       event.preventDefault();
-    },
+    }
 
 </script>
