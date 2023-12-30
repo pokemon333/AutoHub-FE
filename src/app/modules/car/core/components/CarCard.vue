@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="flex justify-between text-card-title rounded-b-md  bg-primary-50/20 py-3 px-4">
-            <div   @contextmenu="handleContextMenu"  @click="$emit('carDetail',car?.id)" id="detail-btn" class="bg-transparent select-none hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
+            <div   @contextmenu="handleContextMenu"  @click="$emit('carDetail',car?.id)" id="detail-btn" class="bg-transparent select-none text-center hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
                 Details
             </div>
             <button  @click="initiatePhoneCall"  class="bg-primary-300  hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  px-4 rounded py-1">

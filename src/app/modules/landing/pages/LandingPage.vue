@@ -11,7 +11,9 @@
                 <h1 >Explore Now</h1>
             </div>
             <div class="lg:pt-3 lg:pb-2 lg:pr-32 lg:justify-start p-[4vw] flex justify-center items-center">
-                <SearchForm class=" md:p-8 h-72 md:w-[70%] max-md:p-8  bg-primary-50/40 border-b-2 border-primary-200 flex flex-col justify-between rounded-lg" @get-filtered-cars="filterCars"/> 
+                <SearchForm 
+                    :loading="loading"
+                     class=" md:p-8 h-72 md:w-[70%] max-md:p-8  bg-primary-50/40 border-b-2 border-primary-200 flex flex-col justify-between rounded-lg" @get-filtered-cars="filterCars"/> 
             </div>
         </div>
         <div class="lg:w-1/2 w-full h-screen">
@@ -22,6 +24,7 @@
 
 
 <script setup>
+import {ref} from 'vue'
 import { SearchForm } from 'landing@/services/getLandingComponent'
 import  CarController  from 'car@/core/api/carController'
 import { useCarStore } from 'car@/core/stores/CarStore';
@@ -32,21 +35,21 @@ import LandingImgUrl from 'asset@/img/landing.png'
 const userStore = useUserStore()
 
 
-
+let loading = ref(false);
 let carController = CarController();
 let {getCars} = carController
 let router = useRouter()
 
 let filterCars = async (data) => {
+                            loading.value  = true
                             let res = await getCars(data)
                             let carStore = useCarStore()
                             let cars =  res.data.data.cars
                             let count = res.data.data.count
                             carStore.setCars(cars)
                             carStore.setCount(count)
-        
-                            
                             carStore.setType(data.type)
+                            loading.value  = false 
                             router.push({ name: 'cars'})
                         }
                         

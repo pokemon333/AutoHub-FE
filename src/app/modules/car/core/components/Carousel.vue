@@ -7,8 +7,8 @@
         </transition>
       </div>
 
-      <div class="lg:w-full w-screen bg-gray-900 pb-2 pt-6   overflow-x-auto  ">
-        <div class="flex space-x-4 p-2  w-full" ref="imageContainer">
+      <div class="lg:w-full w-screen bg-gray-900 pb-2 pt-6   overflow-x-auto" id='image-container'>
+        <div class="flex space-x-4 p-2  w-full"   ref="imageContainer">
           <slot name="images" ></slot>
         </div>
       </div>

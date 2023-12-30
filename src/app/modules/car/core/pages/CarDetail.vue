@@ -1,5 +1,6 @@
 <template>
-    <div class=" pb-2  flex" >
+    <PageLoading v-if="loading"/>
+    <div class=" pb-2  flex"  v-if="!loading">
         <div class=" lg:w-[7%]  h-full pt-14 max-lg:hidden flex  justify-center">
             <back @click="backToList" class="cursor-pointer w-11 h-11 " fill="black"/>
         </div>
@@ -44,8 +45,9 @@
                             <template v-slot:main>
                                 <img alt="Big Image"  :src="currentImage" class=" w-full h-full aspect-video  object-cover  absolute"/>
                             </template>
-                            <template v-slot:images>
+                            <template v-slot:images class="carousel-image-container">
                                 <div v-for="(image, index) in images" :key="index"
+                                    :id="'image-'+index"
                                      class="pr-2 cursor-pointer"
                                     @click="">
                                     <img :src="image" alt="Thumbnail" @click="selectImage(index)" :class="currentIndex == index ? 'opacity-100 scale-125' : 'opacity-50'" style="min-width: 120px; min-height: 80px; max-width: 120; max-height: 80px;" class=" object-cover" />
@@ -78,7 +80,7 @@
                                 </div>
                            </div>
                             <div class="lg:w-4/12 flex lg:items-end mt-2 lg:justify-end  max-lg:mt-2 text-white">
-                                <button class="lg:h-10 lg:rounded-xl h-8  w-30 px-4   rounded-md bg-secondary-700  text-[14px]">Call Now</button>
+                                <button @click="" class="lg:h-10 lg:rounded-xl h-8  w-30 px-4   rounded-md bg-secondary-700  text-[14px]">Call Now</button>
                             </div>
                         </div>
                     </div>
@@ -128,11 +130,12 @@
 
 <script setup>
 
-import { onMounted , ref  } from 'vue';
+import { onMounted , ref, watch ,nextTick } from 'vue';
 import CarController from 'car@/core/api/carController';
 import { useRoute ,useRouter  } from 'vue-router';
 import { back } from 'car@/core/services/getCarCardSvg'
 import Carousel from 'car@/core/components/Carousel.vue'
+import PageLoading from 'core@/components/PageLoading.vue'
 
 let carController = CarController()
 let { getCarDetial } = carController
@@ -141,8 +144,10 @@ let router = useRouter()
 let car = ref({})
 let images = ref([])
 let currentIndex = ref(0)
+let loading = ref(false)
 
 let getData = async () => {
+    loading.value = true
     let res = await  getCarDetial(route.params.id)
     car.value =  res.data.data
     let media = res.data.data.media
@@ -150,6 +155,7 @@ let getData = async () => {
         images.value.push(img.url);
     });    
     currentImage.value =  images.value[currentIndex.value]
+    loading.value = false
 }
 
 
@@ -164,6 +170,10 @@ let autoChangeImageSlide =async ()=>{
         }
         currentImage.value =  images.value[currentIndex.value]
     },3000)
+}
+
+let scrollCurrentElementToCenter = () => {
+   
 }
 
 let selectImage = (index)=>{
@@ -196,7 +206,19 @@ let  dateDifference = (date) =>  {
 let checkEdited = (create,update) =>{
    return create == update ? false : true;
 }
+
+watch(()=> currentIndex.value,()=>{
+  nextTick().then(()=>{
+    let container = document.getElementById('image-container')
+    let selectedImage =  document.getElementById('image-'+currentIndex.value)
+    const scrollPosition = selectedImage.offsetLeft - (container.offsetWidth - selectedImage.offsetWidth) / 2;
+    console.log(scrollPosition)
+    container.scrollLeft = scrollPosition;
+  })
+})
+
 onMounted(()=>{
+    scrollCurrentElementToCenter()
     getData();
     autoChangeImageSlide();
 })
