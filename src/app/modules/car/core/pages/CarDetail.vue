@@ -80,7 +80,7 @@
                                 </div>
                            </div>
                             <div class="lg:w-4/12 flex lg:items-end mt-2 lg:justify-end  max-lg:mt-2 text-white">
-                                <button @click="" class="lg:h-10 lg:rounded-xl h-8  w-30 px-4   rounded-md bg-secondary-700  text-[14px]">Call Now</button>
+                                <button @click="initiatePhoneCall(car?.dealer?.phone_number)" class="lg:h-10 lg:rounded-xl h-8  w-30 px-4   rounded-md bg-secondary-700  text-[14px]">Call Now</button>
                             </div>
                         </div>
                     </div>
@@ -125,6 +125,10 @@
             </div>
         </div>
     </div>
+  <div class="hidden">
+    <a href="" id="call-now"></a>
+  </div>
+
 </template>
 
 
@@ -207,12 +211,17 @@ let checkEdited = (create,update) =>{
    return create == update ? false : true;
 }
 
+function initiatePhoneCall(phoneNumber) {
+    let callNow = document.getElementById('call-now')
+    callNow.href = 'tel:' + phoneNumber
+    callNow.click()
+}
+
 watch(()=> currentIndex.value,()=>{
   nextTick().then(()=>{
     let container = document.getElementById('image-container')
     let selectedImage =  document.getElementById('image-'+currentIndex.value)
     const scrollPosition = selectedImage.offsetLeft - (container.offsetWidth - selectedImage.offsetWidth) / 2;
-    console.log(scrollPosition)
     container.scrollLeft = scrollPosition;
   })
 })
