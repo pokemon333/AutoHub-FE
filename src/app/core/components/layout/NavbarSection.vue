@@ -11,7 +11,7 @@
         </div>
         <div class="flex space-x-4 items-center">
             <CustomButton  
-                text="EVSE" 
+                text="Fuel Station" 
                 class="bg-primary-400"
                 @click="()=>router.push({name: 'evse'})" 
             >

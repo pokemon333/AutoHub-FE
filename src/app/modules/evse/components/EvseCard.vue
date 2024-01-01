@@ -13,8 +13,9 @@
                     Details
                 </button>
             </div>
+       
             <div class="">
-                <button  @click="goToGoogleMap(evse?.link)" class="bg-primary-300 hover:bg-primary-500  text-white  flex items-center justify-center  px-4 rounded py-1">
+                <button  @click="handleMap" class="bg-primary-300 hover:bg-primary-500  text-white  flex items-center justify-center  px-4 rounded py-1">
                     View in Map
                 </button>
             </div>
@@ -25,9 +26,25 @@
 <script   setup>
 import  { defineProps} from 'vue'
 import { useRouter } from 'vue-router';
+
 const props = defineProps({
-  evse: Object
-})
+  evse: Object,
+  currentLocation : Object
+})  
+
+let handleMap = () =>{
+    if (props.evse.latitude && props.evse.longitude ) {
+        generateGoogleMapDirectionUrl()
+    }else{
+        goToGoogleMap(props.evse.link)
+    }
+}
+let generateGoogleMapDirectionUrl = () =>{
+    console.log(props.currentLocation);
+    let url =  `https://www.google.com/maps/dir/${props.currentLocation.latitude},${props.currentLocation.longitude}/${props.evse.latitude},${props.evse.longitude}`;
+    goToGoogleMap(url)
+}
+
 let router = useRouter();
 let goToGoogleMap = (link) => {
     window.open(link);

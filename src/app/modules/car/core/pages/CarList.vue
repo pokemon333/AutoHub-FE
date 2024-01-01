@@ -176,16 +176,22 @@ let overallSearch = () => {
 
 /* Style the scrollbar thumb on Firefox */
 .form-scroll::-webkit-scrollbar-thumb:active {
-    background: #8794a3;
+    background: rgb(182, 27, 45);
+    border-radius: 5px;
+    padding: 0;
 }
 
 /* Style the scrollbar thumb on Internet Explorer and Edge */
 .form-scroll::-webkit-scrollbar-thumb:hover {
-    background: #6a6f76;
+    background: rgb(182, 27, 45);
+    border-radius: 5px;
+    padding: 0;
 }
 
 /* Style the scrollbar track on Internet Explorer and Edge */
 .form-scroll::-webkit-scrollbar-track:hover {
-    background: #f1f1f1;
+    background: rgb(182, 27, 45);
+    border-radius: 5px;
+    padding: 0;
 }
 </style>
