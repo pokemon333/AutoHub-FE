@@ -148,7 +148,7 @@ onMounted(() => {
     background: rgb(182, 27, 45);
     border-radius: 5px;
     padding: 0;
-
+}
 /* Style the scrollbar thumb on Internet Explorer and Edge */
 .form-scroll::-webkit-scrollbar-thumb:hover {
     background: rgb(182, 27, 45);

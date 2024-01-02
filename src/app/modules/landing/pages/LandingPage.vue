@@ -10,10 +10,15 @@
             <div class="lg:text-[4vw] lg:justify-start lg:pl-20  lg:landing-page-explore lg:w-11/12 flex justify-center bg-red-600 font-[600] text-white p-auto items-center text-[7vw]">
                 <h1 >Explore Now</h1>
             </div>
-            <div class="lg:pt-3 lg:pb-2 lg:pr-32 lg:justify-start p-[4vw] flex justify-center items-center">
+            <div class="lg:pt-3 lg:pb-2 lg:pr-32 lg:justify-start p-[4vw] flex flex-col justify-center items-center">
                 <SearchForm 
                     :loading="loading"
-                     class=" md:p-8 h-72 md:w-[70%] max-md:p-8  bg-primary-50/40 border-b-2 border-primary-200 flex flex-col justify-between rounded-lg" @get-filtered-cars="filterCars"/> 
+                     class="p-8  h-72 md:w-[70%]   bg-primary-50/40 border-b-2 border-primary-200 flex flex-col justify-between rounded-lg" @get-filtered-cars="filterCars"/> 
+                <div class="text-secondary-500 md:font-[60px]  flex justify-center items-center mb-3 mt-5 cursor-pointer  md:text-[15px] " id="apk_download">
+                    <h1>
+                        <a href="https://admin.autohubmyanmar.com/storage/AutoHub.apk">Download apk</a>
+                    </h1>
+                </div>     
             </div>
         </div>
         <div class="lg:w-1/2 w-full h-screen">

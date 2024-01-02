@@ -1,7 +1,7 @@
 <template>
     <div class="lg:px-8 pl-5 h-28 flex items-center ">
         <div class="">
-            <back @click="()=>router.push({name : 'cars'})"  class="cursor-pointer w-5 " fill="black"/>
+            <Back @click="()=>router.push({name : 'cars'})"  class="cursor-pointer w-5 " fill="black"/>
         </div>
         <div class="lg:pl-8 pl-3">
             <h1 class="lg:text-3xl text-2xl roboto font-[500]">Fuel Station</h1>
@@ -20,16 +20,26 @@
                 </p>
             </div>
         </div>
-        <div class="bg-gray-200 lg:p-4 md:p-4 p-4 flex justify-between">
-           <div class="">
+        <div class="bg-gray-200 lg:p-4 md:p-4 p-4 md:flex md:justify-between">
+           <div class=" md:w-1/2 ">
                 <h1 class="lg:text-xl text-lg">{{currentHeader}}</h1>
                 <p class=" text-md">{{currentSubHeader}}</p>
            </div>
-           <!-- <div class="">
-                <CustomButton text="Nearby" class="bg-secondary-600">
-                    <FuelStation class="text-blue-500  w-5 h-5 " />
-                </CustomButton>
-           </div> -->
+           <div class="md:w-1/2 flex  space-x-2 justify-end items-center pr-2 mt-3" >
+                <input 
+                    v-model="state.searchWord"
+                    @keyup="searchByState"
+                    type="text" 
+                    :placeholder="currentTabName+' Name'" 
+                    class="md:w-60 w-full px-2 h-10 rounded-sm border border-secondary-500 bg-gray-200 " 
+                /> 
+                <!-- <button @click="searchWithNearBy" class="text-white flex justify-center space-x-2 bg-secondary-500 p-2 rounded-sm" >
+                    <FuelStation fill="white" class="w-5 h-5"/>
+                    <h1>
+                        NearBy                   
+                    </h1>
+                </button> -->
+           </div>
         </div>
         <div v-if="loading" class="w-full h-[60vh] bg-gray-200 ">
             <PageLoading/>
@@ -40,34 +50,33 @@
     </div>
 </template>
 
-<script   setup>
+<script setup>
 
 import { ref, onMounted } from 'vue'
 import { PageLoading , EvseCard } from 'evse@/services/getEvseComponent.ts'
-// import CustomButton from '@/app/core/components/CustomButton.vue'
 import {Back ,FuelStation} from 'evse@/services/getEvseSvg'
 import evseController from 'evse@/api/evseController'
 import { useRouter } from 'vue-router'
+import { haversineDistance } from 'evse@/services/locationServices.ts'
 
+import { mapActions } from 'pinia'
 let router = useRouter()
 let controller = evseController();
-let { getEvses , getEvsesByLocation }  = controller
+let { getEvses  }  = controller
 let evses = ref([]);
+let originalData = []
 let loading = ref(false)
+let currentTabName = ref('Evse')
 
 
-let getData = async (type) =>{
-    loading.value = true
-    let res = await getEvses(type);
-    evses.value = await res.data.data
-    loading.value = false
-}
 
-let state  = {
+let state  = ref({
     latitude : null,
     longitude : null,
     kilometer : null,
-}
+    type  : '',
+    searchWord : ''
+})
 
 let currentHeader = ref('Electronic Vehicle Supply Equipment')
 let currentSubHeader = ref("Station Lists")
@@ -77,6 +86,61 @@ let currentLocation = ref({
     latitude : '',
     longitude : ''
 })
+
+
+
+function textSearch(text) {
+    let inputKeywordLower = state.value.searchWord.toLowerCase()
+    const regex = new RegExp(inputKeywordLower, 'i');
+    if (regex.test(text.toLowerCase())) {
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+let handleTabChange = (tab) =>{
+    currentTab.value = tab.value
+    currentTabName.value = tab.name
+    currentHeader.value = tab.header 
+    currentSubHeader.value = tab.sub_header
+    searchByState()
+}
+
+let searchByState  = () => {
+    loading.value = true
+    let filteredData = originalData.filter((evse) =>{ 
+                                              return evse.type  ==  currentTab.value && textSearch(evse.title);
+                                            })
+    evses.value = filteredData;
+    loading.value = false
+}
+
+let getData = async () =>{
+    loading.value = true
+    let res = await getEvses();
+    originalData = await res.data.data
+    await searchByState()
+    loading.value = false
+}
+
+
+// let searchWithNearBy = () => {
+//     loading.value = true
+//     let filteredData = originalData.filter((evse) =>{ 
+//                                                 if (evse.latitude && evse.longitude) {
+//                                                     let lat1 = currentLocation.value.latitude;
+//                                                     let lon1 = currentLocation.value.longitude
+//                                                     let lat2 = evse.latitude;
+//                                                     let lon2 = evse.longitude;
+//                                                     let distance  = haversineDistance(lat1,lon1,lat2,lon2)
+//                                                     return distance < 800;
+//                                                 }
+//                                             })
+//     evses.value = filteredData;
+//     loading.value = false
+// }
 
 let tabs = ref([
   {
@@ -100,23 +164,19 @@ let tabs = ref([
 ])
 
 
-let handleTabChange = (tab) =>{
-    currentTab.value = tab.value
-    currentHeader.value = tab.header 
-    currentSubHeader.value = tab.sub_header
-    getData(tab.value)
-}
 
 onMounted(()=>{
-    getData('evse')
+    getData()
 })
 
 
 
-navigator.geolocation.getCurrentPosition(async (position)=>{
-    currentLocation.value.latitude  = await  position.coords.latitude
-    currentLocation.value.longitude = await position.coords.longitude
-});
+
+
+// navigator.geolocation.getCurrentPosition(async (position)=>{
+//     currentLocation.value.latitude  = await  position.coords.latitude
+//     currentLocation.value.longitude = await position.coords.longitude
+// });
 
 </script>
 

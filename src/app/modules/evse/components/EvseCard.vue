@@ -33,11 +33,15 @@ const props = defineProps({
 })  
 
 let handleMap = () =>{
-    if (props.evse.latitude && props.evse.longitude ) {
-        generateGoogleMapDirectionUrl()
-    }else{
-        goToGoogleMap(props.evse.link)
-    }
+    
+    goToGoogleMap(props.evse.link)
+
+    // Google map with direction
+    // if (props.evse.latitude && props.evse.longitude ) {
+    //     generateGoogleMapDirectionUrl()
+    // }else{
+    //     goToGoogleMap(props.evse.link)
+    // }
 }
 let generateGoogleMapDirectionUrl = () =>{
     console.log(props.currentLocation);
@@ -46,6 +50,7 @@ let generateGoogleMapDirectionUrl = () =>{
 }
 
 let router = useRouter();
+
 let goToGoogleMap = (link) => {
     window.open(link);
 }

@@ -49,7 +49,7 @@
                 </div>
                 <div v-if="fetchAllData"
                     class="w-full h-full flex items-center justify-center ">
-                    No car found! ,fetching all data...
+                    No car found! ,getting all data...
                 </div>
                 <div v-if="!loading && cars.length != 0 && !fetchAllData"
                     class="lg:px-0 md:grid-cols-2    max-sm:grid-cols-1 grid lg:gap-x-4 lg:gap-y-4 md:gap-x-2 md:gap-y-2 gap-y-2  px-2 form-scroll  overflow-y-auto  h-full overflow-x-hidden "

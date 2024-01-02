@@ -17,18 +17,18 @@
             >
                 <ChargingStation />
             </CustomButton>
-            <CustomButton 
+            <!-- <CustomButton 
                 v-if="!loginStatus" 
                 text="Login"
                 class="bg-primary-500"
                 @click="()=>router.push({name: 'login'})"
             >
                 <Login/>
-            </CustomButton>
-            <Profile   
+            </CustomButton> -->
+            <!-- <Profile   
                 v-if="loginStatus" 
                 @click="()=>router.push({name: 'dealer-profile'})"
-            />
+            /> -->
         </div>
     </nav>
 </template>

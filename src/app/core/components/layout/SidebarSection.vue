@@ -5,14 +5,9 @@
                 <div v-for="sideBarItem in sideBarItems" class="text-white md:font-[60px]  cursor-pointer  md:text-[20px]">
                     <router-link @click="itemClicked" :to="{name :sideBarItem.link}">{{ sideBarItem.name }}</router-link>
                 </div>
-                <div class="text-secondary-500 md:font-[60px]  cursor-pointer  md:text-[20px] " id="apk_download">
-                    <h1>
-                        <a href="https://admin.autohubmyanmar.com/storage/AutoHub.apk">Download apk</a>
-                    </h1>
-                </div>
-                <div v-if="loginStatus" @click="logoutClick" class="text-white md:font-[60px]  cursor-pointer  md:text-[20px]">
+                <!-- <div v-if="loginStatus" @click="logoutClick" class="text-white md:font-[60px]  cursor-pointer  md:text-[20px]">
                     Logout
-                </div>
+                </div> -->
             </div>
         </aside>
     </Transition>

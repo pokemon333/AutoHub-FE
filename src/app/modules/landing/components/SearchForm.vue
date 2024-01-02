@@ -16,7 +16,7 @@
                 Search
             </button>
         </div>
-        <div v-if="loading" >
+        <div v-if="loading"  >
             <button  class="w-full flex justify-center items-center space-x-2  h-12 rounded-md bg-red-600 text-white">
                 <img :src="loadingImg" width="28" height="28" class="animate-spin"> 
                 <span>Loading...</span>

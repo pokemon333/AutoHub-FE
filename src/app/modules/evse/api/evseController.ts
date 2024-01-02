@@ -10,15 +10,15 @@ interface state {
 }
 
 interface EvseController {
-    getEvses(type:string) : Promise<AxiosResponse>
+    getEvses() : Promise<AxiosResponse>
     getDetail(id:string) : Promise<AxiosResponse>
     getEvsesByLocation(state:state) : Promise<AxiosResponse>
 }
 
 export default function EvseController() : EvseController{
 
-    function getEvses(type : string): Promise<AxiosResponse>{
-        return ApiService.get('evses/type/'+type)
+    function getEvses(): Promise<AxiosResponse>{
+        return ApiService.get('evses')
     }
 
     function getDetail(id:string|string[]): Promise<AxiosResponse>{
