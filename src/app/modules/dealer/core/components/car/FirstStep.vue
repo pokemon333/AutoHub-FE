@@ -1,11 +1,10 @@
 <template>
         <div class="grid md:grid-cols-2 grid-cols-1 md:gap-6">
             <Select
-                class="md:col-span-1 col-span-2"
+                class="md:col-span-1 col-span-2 text-sm"
                 title="Brand"
                 v-model="brand_id"
                 @change="handleBrandChange"
-                :options="option"
             >
                 <template v-slot:option>
                     <option  value="">Select  Brands</option>
@@ -16,9 +15,8 @@
             </Select>
             <Select
                 v-model="firstStep.car_model_id"
-                class="md:col-span-1 col-span-2"
+                class="md:col-span-1 col-span-2 text-sm"
                 title="Model"
-                :options="option"
             >
                 <template v-slot:option>
                     <option  value="">Select Models</option>
@@ -29,17 +27,19 @@
             </Select>
             <Select
                 v-model="firstStep.product_year_id"
-                class="md:col-span-1 col-span-2"
+                class="md:col-span-1 col-span-2 text-sm"
                 title="Product Year"
-                :options="option"
             >
                 <template v-slot:option>
-                    <option>Somthing</option>
+                    <option  value="">Select Product Year</option>
+                    <option :value="year.id" v-for="year in firstStepResource.productYear" :key="year.id">
+                        {{ year.name }}
+                    </option>
                 </template>
             </Select>
             <Input
                 v-model="firstStep.price"
-                class="md:col-span-1 col-span-2"
+                class="md:col-span-1 col-span-2 "
                 type="number"
                 title="price"
             />
@@ -55,9 +55,6 @@
                 class="dropzone preview-container grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-4  w-[100%]   justify-around  py-4"
                 ></div>
             </div>
-            <button @click="()=>console.log(firstStep)">
-                click
-            </button>
         </div>
 </template>
 
@@ -97,7 +94,7 @@
 
     let handleBrandChange = () =>{
         let filteredModels = props.firstStepResource.models.filter((model)=>{
-            return model.car_brand_id =  brand_id.value
+            return model.car_brand_id ==  brand_id.value
         }) 
         models.value  = filteredModels
     }
@@ -155,7 +152,6 @@
              message = response.errors.file;
           }
 
-
           dropZone.removeFile(file);
 
           const errorDiv = document.querySelector("#error");
@@ -180,7 +176,7 @@
                   <i class="bi bi-cloud-arrow-up-fill" style="font-size: 5rem;"></i>
                 </div>
                 <p style="text-align: center; margin: 0;"><strong>Drag and drop files to upload</strong></p>
-              `;
+          `;
         }
       }
     });

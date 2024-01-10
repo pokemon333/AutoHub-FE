@@ -25,6 +25,12 @@
         <template v-slot:first>
           <FirstStep :firstStepResource="resources?.firstStep"/>
         </template>
+        <template v-slot:second>
+          <SecondStep :secondStepResource="resources?.secondStep"/>
+        </template>
+        <template v-slot:third>
+          <ThirdStep :thirdStepResource="resources?.thirdStep"/>
+        </template>
       </Stepper>
     </div>
   </div>
@@ -35,12 +41,14 @@
     import { back } from "dealer@/core/services/getSellMyCarSvg";
     import Stepper from "dealer@/core/components/Stepper.vue";
     import FirstStep from "dealer@/core/components/car/FirstStep.vue";
+    import SecondStep from "dealer@/core/components/car/SecondStep.vue";
+    import ThirdStep from "dealer@/core/components/car/ThirdStep.vue";
     import DealerSellMyCarController from "dealer@/core/api/dealerSellMyCarController.ts"
     import {ref , onMounted}  from "vue" 
 
     let resources = ref()
-    let {getResource }= DealerSellMyCarController()
-
+    let { getResource }= DealerSellMyCarController()
+  
     let getPreRequirementData =  async  () =>{
         let res = await  getResource()
         resources.value = res.data.data
