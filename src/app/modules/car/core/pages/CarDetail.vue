@@ -23,7 +23,7 @@
                                         <h1 class="font-bold">{{ parseInt( car?.price)  || '-'}}</h1>
                                         <h1>Lakhs</h1>
                                     </div>
-                                    <h1 class="text-secondary-500 font-bold">{{  car?.car_specification?.condition.charAt(0).toUpperCase() + car?.car_specification?.condition.slice(1) || '-'}}</h1>
+                                    <h1 class="text-secondary-500 font-bold">{{ car.is_soldout ? 'Sold Out' :  car?.car_specification?.condition.charAt(0).toUpperCase() + car?.car_specification?.condition.slice(1) }}</h1>
                                     <div class="text-gray-700/80 text-xs mt-2">
                                         <div class="flex"  v-if="!checkEdited(car?.created_at,car?.updated_at)">
                                             <h1 class="font-bold">Added at : </h1>
@@ -186,7 +186,7 @@ let selectImage = (index)=>{
 }
 
 let backToList =  () => {    
-    router.back()
+    router.push({name : 'cars'})
 }
 
 let formatDate = (date) =>{
