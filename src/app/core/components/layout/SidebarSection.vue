@@ -5,9 +5,9 @@
                 <div v-for="sideBarItem in sideBarItems" class="text-white md:font-[60px]  cursor-pointer  md:text-[20px]">
                     <router-link @click="itemClicked" :to="{name :sideBarItem.link}">{{ sideBarItem.name }}</router-link>
                 </div>
-                <!-- <div v-if="loginStatus" @click="logoutClick" class="text-white md:font-[60px]  cursor-pointer  md:text-[20px]">
+                <div v-if="loginStatus" @click="logoutClick" class="text-white md:font-[60px]  cursor-pointer  md:text-[20px]">
                     Logout
-                </div> -->
+                </div>
             </div>
         </aside>
     </Transition>

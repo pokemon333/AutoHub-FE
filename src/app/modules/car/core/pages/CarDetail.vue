@@ -43,9 +43,14 @@
                     <div class="lg:w-full w-screen "  v-if="car">
                         <Carousel> 
                             <template v-slot:main>
-                                <img alt="Big Image"  :src="currentImage" class=" w-full h-full aspect-video  object-cover  absolute"/>
+                                <div class="absolute w-full h-full bg-red-500">
+                                    <img alt="Big Image"  :src="currentImage" class="w-full h-full aspect-video  object-cover"/>
+                                    <div class="absolute md:w-28 w-20 rounded-md top-2 left-2 z-10 bg-gray-900/80">
+                                        <img :src="logoImageUrl"  class="w-full h-full">
+                                    </div>
+                                </div>
                             </template>
-                            <template v-slot:images class="carousel-image-container">
+                           <template v-slot:images class="carousel-image-container">
                                 <div v-for="(image, index) in images" :key="index"
                                     :id="'image-'+index"
                                      class="pr-2 cursor-pointer"
@@ -72,7 +77,6 @@
                                     </ul>
                                 </div>
                                 <div class="pl-1 font-[500] flex flex-col space-y-1 roboto ">
-                                   
                                     <h1>{{ car?.dealer?.user?.name || '-' }}</h1>
                                     <h1>{{ car?.dealer?.user?.email|| '-' }}</h1>
                                     <h1>{{ car?.dealer?.address || '-' }}</h1>
@@ -109,7 +113,7 @@
                                     <li>{{car?.car_specification?.fuel_type?.name || ''}}</li>
                                     <li>{{car?.car_specification?.milage?.name+' Km' || ''}}</li>
                                     <li>{{ car?.car_info?.color?.name || '-' }}</li>
-                                    <li>{{ car?.car_info?.vehicleid || '-' }}</li>
+                                    <li v-if="car?.car_info?.vehicleid">{{ car?.car_info?.vehicleid || '-' }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -140,6 +144,7 @@ import { useRoute ,useRouter  } from 'vue-router';
 import { back } from 'car@/core/services/getCarCardSvg'
 import Carousel from 'car@/core/components/Carousel.vue'
 import PageLoading from 'core@/components/PageLoading.vue'
+import logoImageUrl from 'asset@/img/logo.png'
 
 let carController = CarController()
 let { getCarDetial } = carController

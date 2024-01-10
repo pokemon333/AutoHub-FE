@@ -24,8 +24,6 @@ export default function useAuthController() : authController {
         let router = useRouter();
 
         function getUser(){
-            console.log('fine');
-            
             apiService.get('user')
             .then((res : AxiosResponse)=> {
                 let user = res?.data.data
