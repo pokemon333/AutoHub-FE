@@ -17,8 +17,13 @@ const dealerRoutes: Array<RouteRecordRaw> = [
                 path : "car-for-sale",
                 name : "car-for-sale",
                 component : () => import('../pages/CarForSale.vue')
+            },
+            {
+                path : "car-for-sale/sell-my-car",
+                name : "sell-my-car",
+                component : () => import('../pages/SellMyCar.vue')
             }
-        ]
+       ]
     },
 ]
 

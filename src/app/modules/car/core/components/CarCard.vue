@@ -1,10 +1,13 @@
 <template>
     <div class="bg-white w-full h-[400px] rounded-lg border-2 border-primary-50/30  font-poppins">
         <div class="w-full relative">
-            <div v-if="car?.car_info" class="py-1 px-2  rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-1 right-1 border-secondary-300">
+            <div v-if="car?.car_info" class=" w-[110px] h-[30px]  flex justify-center items-center px-2 py-1 rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-2 right-2 border-secondary-300">
                {{ car?.car_info?.plate_division.name }} / {{car?.car_info?.plate_number.slice(0,3)  + '*'.repeat(car?.car_info?.plate_number.length - 3) }}
             </div>
-            <img @click="$emit('carDetail',car?.id)" class="object-cover cursor-pointer w-full aspect-video rounded-lg"  style="height: 200px;" :src="image" alt="car-img">
+            <img @click="$emit('carDetail',car?.id)" class="object-cover cursor-pointer w-full aspect-video rounded-lg "  style="height: 200px;" :src="image" alt="car-img">
+            <div class="absolute z-20 w-[98px] h-[28px]   bg-gray-900/80 rounded-md top-2 left-2">
+                <img :src="logoImageUrl" class="w-full h-full">
+            </div>
         </div>
         <div class="py-4 px-4  flex justify-between bg-white border-b-2 border-b-primary-100/30">
             <div class="relative inline-block group w-1/2">
@@ -78,7 +81,8 @@
                 {{ dealer_name }}
             </button>
         </div>
-        <div class="hidden">
+        <logo/>
+       <div class="hidden">
              <a href="" id="call-now"></a>
         </div>
     </div>
@@ -86,6 +90,7 @@
 
 <script setup  >
 
+import {ref} from 'vue'
 import { 
     condition,
     fuelType,
@@ -95,7 +100,7 @@ import {
     lighting,
     phone
 } from 'car@/core/services/getCarCardSvg';
-import {ref} from 'vue'
+import logoImageUrl from 'asset@/img/logo.png'
 
 const props = defineProps({
   car: {},
