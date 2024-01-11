@@ -11,7 +11,7 @@
       <select
         v-model="selectedOption"
         @change="onChange"
-        class="w-full h-12 rounded-md px-3 border border-gray-400"
+        class="w-full h-12 rounded-md px-3  bg-white border border-gray-400"
         :class="selectClass"
       >
         <slot name="option"></slot>

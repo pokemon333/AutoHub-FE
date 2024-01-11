@@ -109,7 +109,7 @@
 
     let isModelOpen = ref(false);
 
-    let image  = props?.car?.images[0]?.url
+    let image  = props?.car?.images[0]?.url || ''
     let model  = props.car?.car_model?.name
     let year  = props.car?.product_year?.name
     let trim_name  = props?.car.trim_name

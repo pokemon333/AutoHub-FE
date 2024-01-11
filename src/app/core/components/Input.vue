@@ -37,10 +37,11 @@
         default:''
     },
   });
+
   const emit = defineEmits(['update:modelValue'])
 
-    function onInput(event) {
-    emit('update:modelValue', event.target.value)
-    }
+  function onInput(event) {
+  emit('update:modelValue', event.target.value)
+  }
   </script>
   

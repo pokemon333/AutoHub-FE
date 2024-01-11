@@ -22,14 +22,33 @@
     <!-- Form section -->
     <div class="">
       <Stepper class="mt-6 border-b-2 pb-4">
-        <template v-slot:first>
-          <FirstStep :firstStepResource="resources?.firstStep"/>
+        <template 
+            v-slot:first="{handleStepChange,setFirstStepState}
+        ">
+          <FirstStep 
+            @handleStepChange="handleStepChange"
+            @setFirstStepState="setFirstStepState"
+            :firstStepResource="resources?.firstStep"
+          />
         </template>
-        <template v-slot:second>
-          <SecondStep :secondStepResource="resources?.secondStep"/>
+        <template 
+           v-slot:second="{handleStepChange,setSecondStepState}"
+        >
+          <SecondStep 
+            @handleStepChange="handleStepChange"
+            @setSecondStepState="setSecondStepState"
+            :secondStepResource="resources?.secondStep"
+          />
         </template>
-        <template v-slot:third>
-          <ThirdStep :thirdStepResource="resources?.thirdStep"/>
+        <template 
+            v-slot:third="{handleStepChange , setThirdStepState ,handleFormSubmit}"
+        >
+          <ThirdStep 
+            @handleFormSubmit="handleFormSubmit"
+            @handleStepChange="handleStepChange"
+            @setThirdStepState="setThirdStepState"
+            :thirdStepResource="resources?.thirdStep"
+          />
         </template>
       </Stepper>
     </div>
@@ -46,13 +65,16 @@
     import DealerSellMyCarController from "dealer@/core/api/dealerSellMyCarController.ts"
     import {ref , onMounted}  from "vue" 
 
+
     let resources = ref()
     let { getResource }= DealerSellMyCarController()
   
     let getPreRequirementData =  async  () =>{
         let res = await  getResource()
         resources.value = res.data.data
-   }
+    }
+
+
     onMounted(() => {
       getPreRequirementData()
     })

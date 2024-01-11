@@ -1,9 +1,11 @@
 <template>
         <div class="grid md:grid-cols-2 grid-cols-1 md:gap-6">
             <Select
+                :labelClass="errors?.car_brand_id ? 'text-red-500': ''"
+                :selectClass="errors?.car_brand_id? 'border border-red-500' : ''"
                 class="md:col-span-1 col-span-2 text-sm"
                 title="Brand"
-                v-model="brand_id"
+                v-model="firstStep.car_brand_id"
                 @change="handleBrandChange"
             >
                 <template v-slot:option>
@@ -12,8 +14,18 @@
                         {{ brand.name }}
                     </option>
                 </template>
+                <template v-slot:error>
+                    <span  
+                      class="text-red-500 text-sm "
+                      v-if="errors?.car_brand_id"
+                    >
+                      {{ getValidationMessage(errors?.car_brand_id) }}
+                    </span>
+                </template>
             </Select>
             <Select
+                :labelClass="errors?.car_model_id? 'text-red-500': ''"
+                :selectClass="errors?.car_model_id? 'border border-red-500' : ''"
                 v-model="firstStep.car_model_id"
                 class="md:col-span-1 col-span-2 text-sm"
                 title="Model"
@@ -24,8 +36,18 @@
                         {{ model.name }}
                     </option>
                 </template>
+                <template v-slot:error>
+                    <span  
+                      class="text-red-500 text-sm "
+                      v-if="errors?.car_model_id"
+                    >
+                      {{ getValidationMessage(errors?.car_model_id) }}
+                    </span>
+                </template>
             </Select>
             <Select
+                :labelClass="errors?.product_year_id ? 'text-red-500': ''"
+                :selectClass="errors?.product_year_id ? 'border border-red-500' : ''"
                 v-model="firstStep.product_year_id"
                 class="md:col-span-1 col-span-2 text-sm"
                 title="Product Year"
@@ -36,13 +58,30 @@
                         {{ year.name }}
                     </option>
                 </template>
+                <template v-slot:error>
+                    <span  
+                      class="text-red-500 text-sm "
+                      v-if="errors?.product_year_id"
+                    >
+                      {{ getValidationMessage(errors?.product_year_id) }}
+                    </span>
+                </template>
             </Select>
             <Input
                 v-model="firstStep.price"
                 class="md:col-span-1 col-span-2 "
+                :labelClass="errors?.price ? 'text-red-500': ''"
+                :inputClass="errors?.price ? 'border border-red-500' : ''"
                 type="number"
                 title="price"
-            />
+            >
+              <span  
+                class="text-red-500 text-sm "
+                v-if="errors?.price"
+              >
+                {{ getValidationMessage(errors?.price) }}
+              </span>
+            </Input>
             <Input
                 v-model="firstStep.trim_name"
                 class="col-span-2"
@@ -56,30 +95,53 @@
                 ></div>
             </div>
         </div>
+        <div class="flex justify-end">
+          <div
+            v-if="loading"
+            class="bg-secondary-500 cursor-pointer  flex justify-center items-center px-2 py-1  w-20 rounded-sm text-white"
+          >
+            <img :src="loadingImg" width="24" height="24" class="animate-spin"> 
+          </div>
+          <button 
+              v-if="!loading"
+              @click="handleNext"
+              class="bg-secondary-500 cursor-pointer  px-2 py-1  w-20 rounded-sm text-white"
+          >
+            Next 
+          </button>
+        </div>
 </template>
 
 <script setup>
 
+    import loadingImg from 'asset@/img/loading.png'
     import { useUserStore } from "@/app/core/store/UserStore";
     import { Dropzone } from "dropzone";
     import { ref, onMounted } from "vue";
     import Select from "core@/components/Select.vue";
     import Input from "core@/components/Input.vue"
     import tokenService from "@/app/core/services/tokenService.ts";
+    import DealerSellMyCarController from 'dealer@/core/api/dealerSellMyCarController.ts'
 
     const userStore = useUserStore();
-    let dropRef = ref(null);
+
 
     let props = defineProps({
         firstStepResource : {
             type : Object,
             default : {}
+        },
+        testing :{
+          type : String,
+          default : ''
         }
     })
+
     
     let { getToken } = tokenService;
-
+    
     let firstStep = ref({
+      car_brand_id : '',
       dealer_id: userStore.getUser.dealer_id,
       car_model_id: "",
       product_year_id: "",
@@ -88,13 +150,45 @@
       trim_name: "",
       images: [],
     });
+    
+    let dropRef = ref(null);
 
-    let brand_id = ref('')
+    let {firstStepValidation} = DealerSellMyCarController()
+
     let models = ref([])
+    let errors = ref(null)
+    let loading =ref(false)
+    
+    let imageMapper = ref([])
+
+
+    let emit = defineEmits([
+      'handleStepChange',
+      'setFirstStepState'
+    ])
+
+    let getValidationMessage = (data) =>{
+      return data[0];
+    }
+
+    let handleNext = async () =>{
+        loading.value = true
+        try{
+          errors.value = null
+          let res = await firstStepValidation(firstStep.value)
+          if(res.stutus= 200){
+            emit('handleStepChange','second')
+            emit('setFirstStepState', firstStep.value)
+          }
+        }catch(error){
+          errors.value = error.response.data.errors ;
+        }
+        loading.value = false
+    }
 
     let handleBrandChange = () =>{
         let filteredModels = props.firstStepResource.models.filter((model)=>{
-            return model.car_brand_id ==  brand_id.value
+            return model.car_brand_id ==  firstStep.value.car_brand_id
         }) 
         models.value  = filteredModels
     }
@@ -135,12 +229,17 @@
 
         dropZone.on("removedfile", (file) => {
             let fileName = file.name;
-            delete firstStep.value.images[fileName];
+            firstStep.value.images = firstStep.value.images.filter((image)=>{
+              return image !=  imageMapper.value[fileName]
+            })
+            delete imageMapper.value[fileName];
         });
 
         dropZone.on("success", (file, response) => {
           let fileName = response.name;
-          firstStep.value.images[response.original_name] = fileName;
+          imageMapper.value[response.original_name] = fileName;
+          //ToDo : handle image mapper
+          // firstStep..value.images.push(fileName)
         });
 
         dropZone.on("error", (file, response) => {
