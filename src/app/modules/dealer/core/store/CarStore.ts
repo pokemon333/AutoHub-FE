@@ -1,6 +1,6 @@
 import {defineStore} from "pinia"
 
-export const  useCarStore = defineStore('car',{
+export const  useCarStore = defineStore('dealer-car',{
     state:() => ({
         cars  : [],
         count : '',

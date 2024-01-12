@@ -92,7 +92,6 @@ onMounted(() => {
         count.value = carStore.count
     } else {
         fetchAllData.value = true
-        console.log(fetchAllData.value);
         setTimeout(()=>{
             fetchAllData.value  = false
         },3000)
@@ -126,7 +125,7 @@ let toggleSideBar = () => {
 }
 
 let deatil = (id) => {
-    return router.push({ name: "car-detail", params: { id: id } })
+    return router.push({ name: "car-detail", params: { id: id,type :'user' } })
 }
 
 let overallSearch = () => {

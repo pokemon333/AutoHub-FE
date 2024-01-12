@@ -66,7 +66,7 @@
           class="md:col-span-1 col-span-2"
           title="Plate Number"
       >
-        <span v-if="errors?.plate_number" class="text-red-600">{{ getValidationMessage(errors?.plate_number) }}</span>
+        <span v-if="errors?.plate_number" class="text-red-600 text-sm">{{ getValidationMessage(errors?.plate_number) }}</span>
       </Input>
       <Select
         :labelClass="errors?.color_id? 'text-red-500': ''"
@@ -86,6 +86,7 @@
         </template>
       </Select> 
       <Input
+          placeholder="Vehicle ID ( optional  )"
           v-model="secondStep.vehicleid"
           class="md:col-span-1 col-span-2"
           title="Vehicle ID"

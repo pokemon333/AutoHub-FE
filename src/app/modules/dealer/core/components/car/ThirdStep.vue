@@ -145,7 +145,7 @@
 
 
   let handleBack = () =>{
-    emit('handleStepChange','second')
+    emit('handleStepChange','second')      
   }
 
   let getValidationMessage = (data) =>{
@@ -170,13 +170,14 @@
       errors.value = null
       try{
         let res =  await thirdStepValidation(thirdStep.value)
-        emit('setThirdStepState',thirdStep.value)
-        emit('handleFormSubmit')
+        if(res.status == 200){
+          emit('setThirdStepState',thirdStep.value)
+          emit('handleFormSubmit')
+        }
       }catch(error){
         errors.value = error.response.data.errors ;
         console.log(errors.value);
       }
-      loading.value = false 
   }
 
 </script>

@@ -1,10 +1,13 @@
 <template>
       <div class="bg-white w-full h-[400px] rounded-lg border-2 border-primary-50/30  font-poppins">
         <div class="w-full relative">
-            <div v-if="car?.car_info" class="py-1 px-2 rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-1 right-1 border-secondary-300">
+            <div v-if="car?.car_info" class=" w-[110px] h-[30px]  flex justify-center items-center px-2 py-1 rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-2 right-2 border-secondary-300">
                {{ car?.car_info?.plate_division }} / {{car?.car_info?.plate_number.slice(0,3)  + '*'.repeat(car?.car_info?.plate_number.length - 3) }}
             </div>
-            <img class="object-cover w-full rounded-lg"  style="height: 200px;" :src="image" alt="car-img">
+            <img @click="$emit('carDetail',car?.id)" class="object-cover cursor-pointer w-full aspect-video rounded-lg "  style="height: 200px;" :src="image ?? ''" alt="car-img">
+            <div class="absolute z-20 w-[98px] h-[28px]   bg-gray-900/80 rounded-md top-2 left-2">
+                <img :src="logoImageUrl" class="w-full h-full">
+            </div>
         </div>
         <div class="py-4 px-4  flex justify-between  items-center bg-white border-b-2 border-b-primary-100/30">
 
@@ -106,21 +109,22 @@
     const props = defineProps({
         car: {},
     })
+    import logoImageUrl from 'asset@/img/logo.png'
 
     let isModelOpen = ref(false);
 
-    let image  = props?.car?.images[0]?.url || ''
-    let model  = props.car?.car_model?.name
-    let year  = props.car?.product_year?.name
-    let trim_name  = props?.car.trim_name
-    let price  =  props?.car.price
-    let car_condition  = props?.car?.car_specification?.condition
-    let car_transmission   = props?.car?.car_specification?.transmission
-    let fuel_type  = props?.car?.car_specification?.fuel_type.name
-    let milage  = props?.car?.car_specification?.mileage.name
-    let engine_power  = props?.car?.car_specification?.engine_power
-    let car_steering  =  props?.car?.car_specification?.steering
-    let brand = props?.car.car_model?.car_brand.name
+    let image  = props?.car?.images[0]?.url ?? ''
+    let model  = props.car?.car_model?.name?? ''
+    let year  = props.car?.product_year?.name?? ''
+    let trim_name  = props?.car.trim_name?? ''
+    let price  =  props?.car.price?? ''
+    let car_condition  = props?.car?.car_specification?.condition?? ''
+    let car_transmission   = props?.car?.car_specification?.transmission?? ''
+    let fuel_type  = props?.car?.car_specification?.fuel_type.name?? ''
+    let milage  = props?.car?.car_specification?.mileage.name?? ''
+    let engine_power  = props?.car?.car_specification?.engine_power?? ''
+    let car_steering  =  props?.car?.car_specification?.steering?? ''
+    let brand = props?.car.car_model?.car_brand.name?? ''
 
     function handleContextMenu(event) {
       event.preventDefault();

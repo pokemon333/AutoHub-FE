@@ -4,8 +4,12 @@
     style="background-color: #fcf9f9; border: 0.5px solid #fcd7d7"
   >
     <!-- Stepper header -->
-    <div class="md:flex items-center md:space-x-4 md:space-y-0 space-y-4">
-      <div class="flex items-center space-x-2 cursor-pointer">
+    <div class="flex md:items-center items-start md:space-x-4 md:space-y-0 space-y-4 justify-between">
+
+      <div 
+        class="flex items-center space-x-2 cursor-pointer"
+        :class="step =='first' ? '' : 'md:flex hidden'"
+      >
         <div
           class="border-2 border-red-500 w-4 h-4 bg-white rounded-full"
         ></div>
@@ -26,7 +30,10 @@
         "
       ></div>
 
-      <div class="flex items-center space-x-2 cursor-pointer">
+      <div 
+          class="flex items-center space-x-2 cursor-pointer"
+          :class="step =='second' ? '' : 'md:flex hidden'"
+      >
         <div
           class="border-2 w-4 h-4 bg-white rounded-full"
           :class="
@@ -49,7 +56,10 @@
         "
       ></div>
 
-      <div class="flex items-center space-x-2 cursor-pointer">
+      <div 
+          class="flex items-center space-x-2 cursor-pointer"
+          :class="step =='third' ? '' : 'md:flex hidden'"
+      >
         <div
           class="border-2 border-red-500 w-4 h-4 bg-white rounded-full"
           :class="
@@ -62,6 +72,9 @@
           <h1 class="text-xs">Specifications</h1>
         </div>
       </div>
+
+      
+
     </div>
 
     <!-- header -->
@@ -107,6 +120,7 @@
 
       let {formSubmit} = DealerSellMyCarController()
 
+
       let header = {
         first: {
           title: "Car Information",
@@ -129,18 +143,23 @@
       let setFirstStepState = (data) => (firstStep.value = data);
       let setSecondStepState = (data) => (secondStep.value = data);
       let setThirdStepState = (data) => (thirdStep.value = data);
+      
+      let emit = defineEmits([
+        'handlePopUp'
+      ])
 
       let handleFormSubmit =  async () => {
-        console.log('form submittied');
         let data = { ...firstStep.value, ...secondStep.value, ...thirdStep.value };
-        console.log(data);
         try{
           let res = await  formSubmit(data)
-          console.log(res);
+          if (res.status) {
+            emit('handlePopUp',true)
+          }
         }catch(error){
           console.log(error);
         }
       };
+
       let step = ref("first");
 
       let handleStepChange = (stepValue) => {

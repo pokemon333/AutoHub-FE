@@ -86,10 +86,19 @@
                 v-model="firstStep.trim_name"
                 class="col-span-2"
                 title="Trim Name"
+                placeholder="Trim Name ( optional )"
             />
             <div class="col-span-2 relative">
-                <div id="error" class="bg-red-100 border hidden text-secondary-500 border-secondary-200 p-2 w-full  mb-2 rounded-md"></div>
-                <div ref="dropRef" class="dropzone custom-dropzone h-32"></div>
+                <div v-if="errors?.images" class="bg-red-100 border  text-secondary-500 border-secondary-200 p-2 w-full  mb-2 rounded-md">
+                    <h1 v-if="errors?.images">{{ getValidationMessage(errors?.images) }}</h1>
+                </div>
+                <div id="error" class="bg-red-100 border hidden text-secondary-500 border-secondary-200 p-2 w-full  mb-2 rounded-md">
+                </div>
+                <div 
+                    ref="dropRef" 
+                    class="dropzone custom-dropzone h-32 "
+                    :class="errors?.images ? 'border-secondary-500' : ''"
+                  ></div>
                 <div
                 class="dropzone preview-container grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-4  w-[100%]   justify-around  py-4"
                 ></div>
@@ -130,10 +139,6 @@
         firstStepResource : {
             type : Object,
             default : {}
-        },
-        testing :{
-          type : String,
-          default : ''
         }
     })
 
@@ -159,7 +164,7 @@
     let errors = ref(null)
     let loading =ref(false)
     
-    let imageMapper = ref([])
+    let imageMapper = ref({})
 
 
     let emit = defineEmits([
@@ -176,10 +181,8 @@
         try{
           errors.value = null
           let res = await firstStepValidation(firstStep.value)
-          if(res.stutus= 200){
-            emit('handleStepChange','second')
-            emit('setFirstStepState', firstStep.value)
-          }
+          emit('handleStepChange','second')
+          emit('setFirstStepState', firstStep.value)
         }catch(error){
           errors.value = error.response.data.errors ;
         }
@@ -237,9 +240,9 @@
 
         dropZone.on("success", (file, response) => {
           let fileName = response.name;
+          firstStep.value.images.push(fileName)
           imageMapper.value[response.original_name] = fileName;
           //ToDo : handle image mapper
-          // firstStep..value.images.push(fileName)
         });
 
         dropZone.on("error", (file, response) => {
@@ -271,10 +274,11 @@
 
         if (dropRef.value.querySelector(".dz-default")) {
           dropRef.value.querySelector(".dz-default").innerHTML = `
-                <div style="display: flex; justify-content: center;">
-                  <i class="bi bi-cloud-arrow-up-fill" style="font-size: 5rem;"></i>
-                </div>
-                <p style="text-align: center; margin: 0;"><strong>Drag and drop files to upload</strong></p>
+                <p 
+                    style="text-align: center; margin: 0;"
+                >
+                    <strong >Drag and drop images to upload</strong>
+                </p>
           `;
         }
       }

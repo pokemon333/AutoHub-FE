@@ -130,7 +130,7 @@ const filterText = ref("");
 defineProps(["isAdvanceSearchMenuOpen"]);
 
 let detail = (id) => {
-  return router.push({ name: "car-detail", params: { id: id } });
+  return router.push({ name: "car-detail", params: { id: id , type : 'dealer' } });
 };
 
 const getDealerCar = () => {

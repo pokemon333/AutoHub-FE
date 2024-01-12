@@ -96,7 +96,7 @@
                                     <li>{{ car?.car_info?.license_status?.name || '-' }}</li>
                                     <li>{{ car?.car_info?.plate_division?.name  || '-'  }}</li>
                                     <li>{{ car?.car_info?.plate_color || '-'  }}</li>
-                                    <li>{{car?.car_info?.plate_number.slice(0,3)  + '*'.repeat(car?.car_info?.plate_number.length - 3) }}</li>
+                                    <li>{{ checkUser() ? car?.car_info?.plate_number.slice(0,3)  + '*'.repeat(car?.car_info?.plate_number.length - 3) : car?.car_info?.plate_number || '' }}</li>
                                 </ul>
                         </div>
                     </div>
@@ -191,7 +191,11 @@ let selectImage = (index)=>{
 }
 
 let backToList =  () => {    
-    router.push({name : 'cars'})
+    if (route.params.type == 'user') {
+        router.push({name : 'cars'})
+    }else{
+        router.push({name : 'car-for-sale'})
+    }
 }
 
 let formatDate = (date) =>{
@@ -215,6 +219,9 @@ let  dateDifference = (date) =>  {
 let checkEdited = (create,update) =>{
    return create == update ? false : true;
 }
+
+
+let checkUser = () => route.params.type == 'user'
 
 function initiatePhoneCall(phoneNumber) {
     let callNow = document.getElementById('call-now')

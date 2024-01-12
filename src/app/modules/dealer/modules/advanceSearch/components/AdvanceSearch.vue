@@ -1,5 +1,5 @@
 <template>
-    <div  v-if="isAdvanceSearchMenuOpen" class="lg:w-6/12   lg:relative bg-slate-300   w-full h-[88vh] overflow-y-auto  form-scroll fixed ">
+    <div  v-if="isAdvanceSearchMenuOpen" class="lg:w-6/12   lg:relative bg-slate-300   w-full h-[88vh] overflow-y-auto  form-scroll fixed  z-20">
         <!-- header and toggle button -->
         <div class="lg:ms-10 md:ms-20 md:me-2 md:my-7 my-5 mx-2 flex items-center  justify-between">
             <h1 class="text-3xl text-secondary-700">Explore Specific</h1>
@@ -246,6 +246,7 @@
 
     const brandChecked = () =>{
         modelArray.value = [],
+        filterData.value.models = [];
         modelArray.value = originalData.value.models.filter((model)=>{
                                 if (filterData.value.brands.includes(model.car_brand_id)){
                                     return model

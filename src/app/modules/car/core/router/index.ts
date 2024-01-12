@@ -8,7 +8,7 @@ const carRoutes: Array<RouteRecordRaw> = [
         component : () => import('../pages/CarList.vue') 
     },
     {
-        path : "/cars/:id",
+        path : "/cars/:id/:type?",
         name : "car-detail",
         component : () => import('../pages/CarDetail.vue') 
     }
