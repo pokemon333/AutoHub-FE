@@ -116,7 +116,7 @@
 <script setup>
 
       import { ref, onMounted } from "vue";
-      import DealerSellMyCarController from 'dealer@/core/api/dealerSellMyCarController.ts'
+      import DealerSellMyCarController from 'dealer@/modules/car/api/dealerSellMyCarController.ts'
 
       let {formSubmit} = DealerSellMyCarController()
 

@@ -210,7 +210,7 @@
     import {useUserStore} from 'core@/store/UserStore'
     import helpers from 'core@/helper/helper'
     import apiService from 'core@/services/apiService'
-    import {useCarStore } from 'dealer@/core/store/CarStore'
+    import {useCarStore } from 'dealer@/modules/car/store/CarStore'
  
 
     const advanceSearchController = useAdvanceServiceController()

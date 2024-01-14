@@ -7,6 +7,7 @@ interface dealerSellMyCarController {
     secondStepValidation(data:Object): Promise<AxiosResponse>,
     thirdStepValidation(data:Object): Promise<AxiosResponse>
     formSubmit(data:Object): Promise<AxiosResponse>
+    getEditResource(id:string|number) : Promise<AxiosResponse>
 }
 
 export default function DealerSellMyCarController() : dealerSellMyCarController{
@@ -26,6 +27,9 @@ export default function DealerSellMyCarController() : dealerSellMyCarController{
         return ApiService.post('car-third-validation',data)
     }
 
+    const getEditResource = (id:string | number) => {
+        return ApiService.get(`dealer/cars/edit/${id}/resource`)
+    }
     const formSubmit = (data:Object) =>{
         return ApiService.post('dealer/cars/create',data)
     }
@@ -35,7 +39,8 @@ export default function DealerSellMyCarController() : dealerSellMyCarController{
         firstStepValidation,
         secondStepValidation,
         thirdStepValidation,
-        formSubmit
+        formSubmit,
+        getEditResource
     }
 
 }

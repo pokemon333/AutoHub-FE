@@ -11,7 +11,7 @@
 
 <script setup>
 
-import DealerCarListSection from 'dealer@/core/components/DealerCarListSection.vue'
+import DealerCarListSection from 'dealer@/modules/car/components/DealerCarListSection.vue'
 import AdvanceSearch from 'dealerAdvanceSearch@/components/AdvanceSearch.vue'
 import { ref } from 'vue'
 

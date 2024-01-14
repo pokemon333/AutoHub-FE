@@ -1,5 +1,4 @@
 <template>
-
     <!-- Pop Up -->
     <div  
         class="fixed  flex justify-center items-center w-full h-[90vh] bg-gray-800/50 z-10 "
@@ -79,24 +78,27 @@
 
 <script setup>
 
-      import { back, success,logoImageUrl} from "dealer@/core/services/getSellMyCarSvg";
-      import Stepper from "dealer@/core/components/Stepper.vue";
-      import FirstStep from "dealer@/core/components/car/FirstStep.vue";
-      import SecondStep from "dealer@/core/components/car/SecondStep.vue";
-      import ThirdStep from "dealer@/core/components/car/ThirdStep.vue";
-      import DealerSellMyCarController from "dealer@/core/api/dealerSellMyCarController.ts";
+      import { back, success,logoImageUrl} from "dealer@/modules/car/services/getSellMyCarSvg";
+      import Stepper from "dealer@/modules/car/components/Stepper.vue";
+      import FirstStep from "dealer@/modules/car/components/FirstStep.vue";
+      import SecondStep from "dealer@/modules/car/components/SecondStep.vue";
+      import ThirdStep from "dealer@/modules/car/components/ThirdStep.vue";
+      import DealerSellMyCarController from "dealer@/modules/car/api/dealerSellMyCarController.ts";
       import { ref, onMounted } from "vue";
-      import { useRouter } from "vue-router";
+      import { useRoute, useRouter } from "vue-router";
       import { useUserStore } from "@/app/core/store/UserStore";
 
+      let carEditData = ref({})
       const userStore = useUserStore();
       let router   = useRouter()
+      let route = useRoute()
       let resources = ref();
-      let { getResource } = DealerSellMyCarController();
-
+      let { getResource,getEditResource } = DealerSellMyCarController();
       let getPreRequirementData = async () => {
         let res = await getResource();
+        let editData = await getEditResource(route.params.id)
         resources.value = res.data.data;
+        carEditData.value = editData.data.data;   
       };
 
       let popup = ref(false)
@@ -117,3 +119,4 @@
         getPreRequirementData();
       });
 </script>
+

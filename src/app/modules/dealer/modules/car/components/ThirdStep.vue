@@ -126,7 +126,7 @@
   import Select from "core@/components/Select.vue";
   import Input from "core@/components/Input.vue"
   import {ref } from 'vue'
-  import DealerSellMyCarController from 'dealer@/core/api/dealerSellMyCarController.ts'
+  import DealerSellMyCarController from 'dealer@/modules/car/api/dealerSellMyCarController.ts'
 
   let {thirdStepValidation} = DealerSellMyCarController()
 
@@ -166,18 +166,24 @@
   let errors = ref(null)
   
   let handleNext = async () =>{
-      loading.value = true
-      errors.value = null
-      try{
-        let res =  await thirdStepValidation(thirdStep.value)
-        if(res.status == 200){
-          emit('setThirdStepState',thirdStep.value)
-          emit('handleFormSubmit')
-        }
-      }catch(error){
-        errors.value = error.response.data.errors ;
-        console.log(errors.value);
+    loading.value = true
+    errors.value = null
+    let isSuccess  = false
+    try{
+      let res =  await thirdStepValidation(thirdStep.value)
+      if(res.status == 200){
+        isSuccess = true
+        emit('setThirdStepState',thirdStep.value)
+        emit('handleFormSubmit')
+        loading.value = false 
       }
+    }catch(error){
+      errors.value = error.response.data.errors ;
+      console.log(errors.value);
+    }
+    if(!isSuccess){
+      loading.value = false
+    }
   }
 
 </script>

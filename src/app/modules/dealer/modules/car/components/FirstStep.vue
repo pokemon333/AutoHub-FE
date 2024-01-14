@@ -126,11 +126,11 @@
     import loadingImg from 'asset@/img/loading.png'
     import { useUserStore } from "@/app/core/store/UserStore";
     import { Dropzone } from "dropzone";
-    import { ref, onMounted } from "vue";
+    import { ref, onMounted, watch, reactive } from "vue";
     import Select from "core@/components/Select.vue";
     import Input from "core@/components/Input.vue"
     import tokenService from "@/app/core/services/tokenService.ts";
-    import DealerSellMyCarController from 'dealer@/core/api/dealerSellMyCarController.ts'
+    import DealerSellMyCarController from 'dealer@/modules/car/api/dealerSellMyCarController.ts'
 
     const userStore = useUserStore();
 
@@ -139,6 +139,10 @@
         firstStepResource : {
             type : Object,
             default : {}
+        },
+        firstStepEdit : {
+            type : Object,
+            default : null
         }
     })
 
@@ -166,7 +170,6 @@
     
     let imageMapper = ref({})
 
-
     let emit = defineEmits([
       'handleStepChange',
       'setFirstStepState'
@@ -177,16 +180,24 @@
     }
 
     let handleNext = async () =>{
-        loading.value = true
-        try{
-          errors.value = null
-          let res = await firstStepValidation(firstStep.value)
-          emit('handleStepChange','second')
-          emit('setFirstStepState', firstStep.value)
-        }catch(error){
-          errors.value = error.response.data.errors ;
-        }
-        loading.value = false
+      loading.value = true
+      try{
+        errors.value = null
+        let res = await firstStepValidation(firstStep.value)
+      }catch(error){
+        errors.value = error.response.data.errors ;
+      }
+      if(firstStep.value.images.length == 0 ){
+        errors.value.images = ["Images is required!"]
+      }
+      if(
+        errors.value == null &&
+          firstStep.value.images.length != 0 
+      ){
+        emit('handleStepChange','second')
+        emit('setFirstStepState', firstStep.value)
+      }
+      loading.value = false
     }
 
     let handleBrandChange = () =>{
@@ -209,7 +220,16 @@
             </div>
           `;
 
+    watch(() => props.firstStepEdit, (newVal) => {
+      let modelId = newVal.car_model_id;
+      firstStep.car_model_id = modelId;
+      firstStep.value.product_year_id = newVal?.product_year_id
+      firstStep.value.price           = newVal?.price 
+      firstStep.value.trim_name       = newVal?.trim_name ?? ''
+    });
+
     onMounted(() => {
+
       if (dropRef.value !== null) {
         let dropZone = new Dropzone(dropRef.value, {
           url: import.meta.env.VITE_CAR_MEDIA ,
@@ -294,3 +314,4 @@
       color: rgb(114, 114, 114);
     }
 </style>
+

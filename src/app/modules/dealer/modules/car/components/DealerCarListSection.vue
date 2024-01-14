@@ -104,12 +104,12 @@ import Back from "asset@/icon/back.svg";
 import Plus from "asset@/icon/plus.svg";
 import { ref, computed, watch } from "vue";
 import advanceFilter from "asset@/icon/advance-filter.svg";
-import CarCard from "dealer@/core/components/CarCard.vue";
+import CarCard from "dealer@/modules/car/components/CarCard.vue";
 import { onMounted } from "vue";
 import { useUserStore } from "@/app/core/store/UserStore";
 import apiService from "@/app/core/services/apiService";
 import { useRouter } from "vue-router";
-import { useCarStore } from "dealer@/core/store/CarStore";
+import { useCarStore } from "dealer@/modules/car/store/CarStore";
 
 const router = useRouter();
 

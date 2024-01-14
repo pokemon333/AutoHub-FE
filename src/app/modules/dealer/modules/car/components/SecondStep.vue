@@ -137,7 +137,7 @@
   import Select from "core@/components/Select.vue";
   import Input from "core@/components/Input.vue"
   import {ref} from 'vue'
-  import DealerSellMyCarController from 'dealer@/core/api/dealerSellMyCarController.ts'
+  import DealerSellMyCarController from 'dealer@/modules/car/api/dealerSellMyCarController.ts'
 
   let {secondStepValidation} = DealerSellMyCarController()
 

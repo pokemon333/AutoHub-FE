@@ -81,8 +81,8 @@
             <button  @click="$emit('carDetail',car?.id)"  @contextmenu.prevent="handleContextMenu" class="bg-transparent hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
                 Details
             </button>
-            <button class="bg-primary-300 hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  space-x-4  px-4 rounded py-1">
-                <div >
+            <button  class="bg-primary-300 hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  space-x-4  px-4 rounded py-1">
+                <div>
                     <edit  class="w-4 h-4"/>
                 </div>
                 <h1> Edit Information</h1>
@@ -110,6 +110,7 @@
         car: {},
     })
     import logoImageUrl from 'asset@/img/logo.png'
+import { useRouter } from 'vue-router';
 
     let isModelOpen = ref(false);
 
@@ -125,6 +126,12 @@
     let engine_power  = props?.car?.car_specification?.engine_power?? ''
     let car_steering  =  props?.car?.car_specification?.steering?? ''
     let brand = props?.car.car_model?.car_brand.name?? ''
+
+    let router = useRouter()
+
+    let goToEditCar = (id) =>{
+      router.push({name : "dealer-car-edit",params : {id:id}})
+    }
 
     function handleContextMenu(event) {
       event.preventDefault();
