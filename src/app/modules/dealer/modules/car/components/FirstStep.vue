@@ -103,6 +103,15 @@
                 class="dropzone preview-container grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-4  w-[100%]   justify-around  py-4"
                 ></div>
             </div>
+            <div class="col-span-2 ">
+                <div class="flex space-x-3"> 
+                  <input  
+                    type="checkbox"
+                    v-model="firstStep.is_soldout"
+                  > 
+                  <h1>Is Sold Out</h1>
+                </div>
+            </div>
         </div>
         <div class="flex justify-end">
           <div
