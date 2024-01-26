@@ -9,8 +9,8 @@
         {{ title }}
       </label>
       <select
-        v-model="selectedOption"
-        @change="onChange"
+        :value="props.modelValue"
+         @change="emit('update:modelValue', $event.target.value)"
         class="w-full h-12 rounded-md px-3  bg-white border border-gray-400"
         :class="selectClass"
       >
@@ -40,10 +40,6 @@
   
   const emit = defineEmits(['update:modelValue']);
   
-  const selectedOption = ref(props.modelValue);
   
-  function onChange() {
-    emit('update:modelValue', selectedOption.value);
-  }
   </script>
   

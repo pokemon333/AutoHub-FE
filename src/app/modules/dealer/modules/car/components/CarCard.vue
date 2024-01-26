@@ -85,7 +85,7 @@
                 <div>
                     <edit  class="w-4 h-4"/>
                 </div>
-                <h1> Edit Information</h1>
+                <h1 @click="goToEditCar(car?.id)"> Edit Information</h1>
             </button>
         </div>
     </div>

@@ -136,17 +136,22 @@
   import loadingImg from 'asset@/img/loading.png'
   import Select from "core@/components/Select.vue";
   import Input from "core@/components/Input.vue"
-  import {ref} from 'vue'
+  import {ref,watch} from 'vue'
   import DealerSellMyCarController from 'dealer@/modules/car/api/dealerSellMyCarController.ts'
 
   let {secondStepValidation} = DealerSellMyCarController()
 
-  let porps = defineProps({
+  let props = defineProps({
       secondStepResource : {
+        type : Object,
+        default : {}
+      },
+      secondStepEdit :{
         type : Object,
         default : {}
       }
   })
+
 
   let loading = ref(false)
 
@@ -189,4 +194,10 @@
   let handleBack = () =>{
       emit('handleStepChange','first')
   }
+
+  watch(() => props.secondStepEdit, (newVal) => {
+      secondStep.value = newVal;
+  });
+  
+
 </script>

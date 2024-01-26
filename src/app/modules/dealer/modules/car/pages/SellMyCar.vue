@@ -1,4 +1,5 @@
 <template>
+
     <!-- Pop Up -->
     <div  
         class="fixed  flex justify-center items-center w-full h-[90vh] bg-gray-800/50 z-10 "
@@ -12,7 +13,7 @@
             <h1 class="text-xs mt-3">Thank You For Dealing  Car Creation</h1>
           </div>
           <button @click="goToLists" class="py-2  px-4 rounded-md bg-red-500 text-white">
-              Car Lists
+            Car Lists
           </button>
       </div>
     </div>
@@ -92,7 +93,6 @@
       let router   = useRouter()
       let resources = ref();
       let { getResource } = DealerSellMyCarController();
-
       let getPreRequirementData = async () => {
         let res = await getResource();
         resources.value = res.data.data;
@@ -111,7 +111,7 @@
       let goToLists = () =>{
         router.push({name : 'car-for-sale'})
       }
-
+      
       onMounted(() => {
         getPreRequirementData();
       });

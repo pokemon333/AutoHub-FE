@@ -171,7 +171,7 @@
     
     let dropRef = ref(null);
 
-    let {firstStepValidation} = DealerSellMyCarController()
+    let {firstStepValidation,removeImage} = DealerSellMyCarController()
 
     let models = ref([])
     let errors = ref(null)
@@ -216,6 +216,7 @@
         models.value  = filteredModels
     }
 
+
     const customPreview = `
             <div class="relative dz-preview  text-xs dz-processing dz-image-preview dz-complete w-20 h-32  rounded-md">
               <div class="dz-imag5e">
@@ -229,13 +230,7 @@
             </div>
           `;
 
-    watch(() => props.firstStepEdit, (newVal) => {
-      let modelId = newVal.car_model_id;
-      firstStep.car_model_id = modelId;
-      firstStep.value.product_year_id = newVal?.product_year_id
-      firstStep.value.price           = newVal?.price 
-      firstStep.value.trim_name       = newVal?.trim_name ?? ''
-    });
+   
 
     onMounted(() => {
 
@@ -259,7 +254,24 @@
           },
         });
 
-        dropZone.on("removedfile", (file) => {
+        watch(() => props.firstStepEdit, (newVal) => {
+          firstStep.value.car_brand_id = newVal?.car_brand_id
+          handleBrandChange();
+          firstStep.value.car_model_id = newVal?.car_model_id;
+          firstStep.value.product_year_id = newVal?.product_year_id
+          firstStep.value.price           = newVal?.price 
+          firstStep.value.trim_name       = newVal?.trim_name ?? ''
+          firstStep.value.is_soldout      = newVal?.is_soldout ? true : false
+          firstStep.value.images          = newVal?.images.map((image)=> image.file_name)
+          newVal?.images.map((image)=>{
+            dropZone.emit('addedfile', image);
+            dropZone.emit('thumbnail', image , image.preview ?? image.preview_url)
+          })
+        });
+
+
+        dropZone.on("removedfile", async (file) => {
+            await removeImage({image: file})
             let fileName = file.name;
             firstStep.value.images = firstStep.value.images.filter((image)=>{
               return image !=  imageMapper.value[fileName]
@@ -271,7 +283,6 @@
           let fileName = response.name;
           firstStep.value.images.push(fileName)
           imageMapper.value[response.original_name] = fileName;
-          //ToDo : handle image mapper
         });
 
         dropZone.on("error", (file, response) => {
@@ -289,6 +300,7 @@
 
           // Show error div
           errorDiv.classList.remove("hidden");
+
 
           errorDiv.innerHTML = message;
 
@@ -310,6 +322,7 @@
                 </p>
           `;
         }
+
       }
     });
 </script>

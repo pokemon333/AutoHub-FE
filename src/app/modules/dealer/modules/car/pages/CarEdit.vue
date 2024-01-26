@@ -47,6 +47,7 @@
             <FirstStep
               @handleStepChange="handleStepChange"
               @setFirstStepState="setFirstStepState"
+              :firstStepEdit="carEditData?.firstStep"
               :firstStepResource="resources?.firstStep"
             />
           </template>
@@ -54,6 +55,7 @@
             <SecondStep
               @handleStepChange="handleStepChange"
               @setSecondStepState="setSecondStepState"
+              :secondStepEdit="carEditData?.secondStep"
               :secondStepResource="resources?.secondStep"
             />
           </template>
@@ -68,11 +70,13 @@
               @handleFormSubmit="handleFormSubmit"
               @handleStepChange="handleStepChange"
               @setThirdStepState="setThirdStepState"
+              :thirdStepEdit="carEditData?.thirdStep"
               :thirdStepResource="resources?.thirdStep"
             />
           </template>
         </Stepper>
       </div>
+
     </div>
 </template>
 
@@ -88,8 +92,8 @@
       import { useRoute, useRouter } from "vue-router";
       import { useUserStore } from "@/app/core/store/UserStore";
 
-      let carEditData = ref({})
       const userStore = useUserStore();
+      let carEditData = ref({})
       let router   = useRouter()
       let route = useRoute()
       let resources = ref();
@@ -98,7 +102,7 @@
         let res = await getResource();
         let editData = await getEditResource(route.params.id)
         resources.value = res.data.data;
-        carEditData.value = editData.data.data;   
+        carEditData.value = editData.data.data;
       };
 
       let popup = ref(false)

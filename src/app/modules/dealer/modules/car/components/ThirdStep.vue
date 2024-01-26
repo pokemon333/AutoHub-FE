@@ -125,15 +125,21 @@
   import loadingImg from 'asset@/img/loading.png'
   import Select from "core@/components/Select.vue";
   import Input from "core@/components/Input.vue"
-  import {ref } from 'vue'
+  import {ref ,watch} from 'vue'
   import DealerSellMyCarController from 'dealer@/modules/car/api/dealerSellMyCarController.ts'
 
   let {thirdStepValidation} = DealerSellMyCarController()
 
-  let porps = defineProps({
+  let props = defineProps({
       thirdStepResource : {
         type : Object,
         default : {}
+      },
+      thirdStepEdit : {
+        type : Object,
+        default : {
+
+        }
       }
   })
 
@@ -185,5 +191,9 @@
       loading.value = false
     }
   }
+
+  watch(() => props.thirdStepEdit, (newVal) => {
+      thirdStep.value = newVal;
+  });
 
 </script>
