@@ -4,8 +4,17 @@
             <div v-if="car?.car_info" class=" w-[110px] h-[30px]  flex justify-center items-center px-2 py-1 rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-2 right-2 border-secondary-300">
                {{ car?.car_info?.plate_division }} / {{car?.car_info?.plate_number.slice(0,3)  + '*'.repeat(car?.car_info?.plate_number.length - 3) }}
             </div>
-            <img 
-                @click="$emit('carDetail',car?.id)" class="object-contain bg-black cursor-pointer w-full aspect-video rounded-lg "  style="height: 200px;" :src="image ?? ''" alt="car-img">
+            <div 
+                style="height: 200px;"  
+                class="overflow-hidden flex justify-center items-center p-0" >
+                <img 
+                @load="handleImageMetadata"
+                @click="$emit('carDetail',car?.id)" 
+                :class="isLandScape ? 'w-full h-auto' : 'w-auto h-full'"
+                class=" cursor-pointer "
+                :src="image ?? ''" 
+            >
+            </div>
             <div class="absolute z-20 w-[98px] h-[28px]   bg-gray-900/80 rounded-md top-2 left-2">
                 <img :src="logoImageUrl" class="w-full h-full">
             </div>
@@ -115,6 +124,7 @@
     import { useRouter } from 'vue-router';
 
     let isModelOpen = ref(false);
+    let isLandScape = ref(true);
 
     let image  = props?.car?.images[0]?.url ?? ''
     let model  = props.car?.car_model?.name?? ''
@@ -135,11 +145,17 @@
       router.push({name : "dealer-car-edit",params : {id:id}})
     }
 
-    // let handleImageMetadata = (event) => {
-    //     console.log('something')
-    //     const img = event.target
-    //     console.log(img.naturalWidth, img.naturalHeight)
-    // }
+     let handleImageMetadata = (event) => {
+         const img = event.target
+         if(img.naturalWidth > img.naturalHeight){
+            isLandScape.value = true
+         }else{
+           isLandScape.value = false
+         }
+         console.log(isLandScape.value)
+         console.log(img.naturalWidth)
+         console.log(img.naturalHeight)
+     }
 
     function handleContextMenu(event) {
       event.preventDefault();

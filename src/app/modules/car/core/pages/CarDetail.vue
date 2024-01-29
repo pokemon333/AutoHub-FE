@@ -43,8 +43,14 @@
                     <div class="lg:w-full w-screen "  v-if="car">
                         <Carousel> 
                             <template v-slot:main>
-                                <div class="absolute w-full h-full bg-red-500">
-                                    <img alt="Big Image"  :src="currentImage" class="w-full h-full aspect-video  object-cover"/>
+                                <div class="absolute w-full h-full overflow-hidden flex justify-center items-center">
+                                    <img 
+                                        @load="handleImageMetadata"
+                                        alt="Big Image"  
+                                        :src="currentImage" 
+                                        :class="isLandScape ? 'w-full h-auto' : 'w-auto h-full'"
+                                        class=""
+                                    />
                                     <div class="absolute md:w-28 w-20 rounded-md top-2 left-2 z-10 bg-gray-900/80">
                                         <img :src="logoImageUrl"  class="w-full h-full">
                                     </div>
@@ -55,7 +61,11 @@
                                     :id="'image-'+index"
                                      class="pr-2 cursor-pointer"
                                     @click="">
-                                    <img :src="image" alt="Thumbnail" @click="selectImage(index)" :class="currentIndex == index ? 'opacity-100 scale-125' : 'opacity-50'" style="min-width: 120px; min-height: 80px; max-width: 120; max-height: 80px;" class=" object-cover" />
+                                    <img 
+                                        :src="image" 
+                                        alt="Thumbnail" 
+                                        @click="selectImage(index)" 
+                                        :class="currentIndex == index ? 'opacity-100 scale-125' : 'opacity-50'" style="min-width: 120px; min-height: 80px; max-width: 120; max-height: 80px;" class=" object-cover" />
                                 </div>
                             </template>
                         </Carousel>
@@ -154,6 +164,7 @@ let car = ref({})
 let images = ref([])
 let currentIndex = ref(0)
 let loading = ref(false)
+let isLandScape = ref(true);
 
 let getData = async () => {
     loading.value = true
@@ -166,6 +177,19 @@ let getData = async () => {
     currentImage.value =  images.value[currentIndex.value]
     loading.value = false
 }
+
+let handleImageMetadata = (event) => {
+         const img = event.target
+         if(img.naturalWidth > img.naturalHeight){
+            isLandScape.value = true
+         }else{
+           isLandScape.value = false
+         }
+         console.log(isLandScape.value)
+         console.log(img.naturalWidth)
+         console.log(img.naturalHeight)
+}
+
 
 
 let currentImage = ref('')
