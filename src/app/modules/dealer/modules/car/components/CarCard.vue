@@ -4,7 +4,8 @@
             <div v-if="car?.car_info" class=" w-[110px] h-[30px]  flex justify-center items-center px-2 py-1 rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-2 right-2 border-secondary-300">
                {{ car?.car_info?.plate_division }} / {{car?.car_info?.plate_number.slice(0,3)  + '*'.repeat(car?.car_info?.plate_number.length - 3) }}
             </div>
-            <img @click="$emit('carDetail',car?.id)" class="object-cover cursor-pointer w-full aspect-video rounded-lg "  style="height: 200px;" :src="image ?? ''" alt="car-img">
+            <img 
+                @click="$emit('carDetail',car?.id)" class="object-contain bg-black cursor-pointer w-full aspect-video rounded-lg "  style="height: 200px;" :src="image ?? ''" alt="car-img">
             <div class="absolute z-20 w-[98px] h-[28px]   bg-gray-900/80 rounded-md top-2 left-2">
                 <img :src="logoImageUrl" class="w-full h-full">
             </div>
@@ -81,11 +82,11 @@
             <button  @click="$emit('carDetail',car?.id)"  @contextmenu.prevent="handleContextMenu" class="bg-transparent hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
                 Details
             </button>
-            <button  class="bg-primary-300 hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  space-x-4  px-4 rounded py-1">
+            <button @click="goToEditCar(car?.id)"  class="bg-primary-300 hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  space-x-4  px-4 rounded py-1">
                 <div>
                     <edit  class="w-4 h-4"/>
                 </div>
-                <h1 @click="goToEditCar(car?.id)"> Edit Information</h1>
+                <h1 > Edit Information</h1>
             </button>
         </div>
     </div>
@@ -109,8 +110,9 @@
     const props = defineProps({
         car: {},
     })
+
     import logoImageUrl from 'asset@/img/logo.png'
-import { useRouter } from 'vue-router';
+    import { useRouter } from 'vue-router';
 
     let isModelOpen = ref(false);
 
@@ -132,6 +134,12 @@ import { useRouter } from 'vue-router';
     let goToEditCar = (id) =>{
       router.push({name : "dealer-car-edit",params : {id:id}})
     }
+
+    // let handleImageMetadata = (event) => {
+    //     console.log('something')
+    //     const img = event.target
+    //     console.log(img.naturalWidth, img.naturalHeight)
+    // }
 
     function handleContextMenu(event) {
       event.preventDefault();

@@ -7,8 +7,9 @@ interface dealerSellMyCarController {
     secondStepValidation(data:Object): Promise<AxiosResponse>,
     thirdStepValidation(data:Object): Promise<AxiosResponse>,
     formSubmit(data:Object): Promise<AxiosResponse>,
+    formEditSubmit(id:string|number,data:Object):Promise<AxiosResponse>,
     getEditResource(id:string|number) : Promise<AxiosResponse>,
-    removeImage(data:Object): Promise<AxiosResponse>
+    removeImage(id:string|number): Promise<AxiosResponse>
 }
 
 export default function DealerSellMyCarController() : dealerSellMyCarController{
@@ -31,11 +32,17 @@ export default function DealerSellMyCarController() : dealerSellMyCarController{
     const getEditResource = (id:string | number) => {
         return ApiService.get(`dealer/cars/edit/${id}/resource`)
     }
+
     const formSubmit = (data:Object) =>{
         return ApiService.post('dealer/cars/create',data)
     }
-    const removeImage = (data:Object) =>{
-        return ApiService.post('dealer/cars/edit/removeImage',data)
+
+    const formEditSubmit = (id:number | string,data:Object) =>{
+        return ApiService.patch('dealer/cars/edit/'+id,data)
+    }
+
+    const removeImage = (id:number|string) =>{
+        return ApiService.post('dealer/cars/edit/removeImage/'+id)
     }
 
     
@@ -46,7 +53,8 @@ export default function DealerSellMyCarController() : dealerSellMyCarController{
         thirdStepValidation,
         formSubmit,
         getEditResource,
-        removeImage
+        removeImage,
+        formEditSubmit
     }
 
 }

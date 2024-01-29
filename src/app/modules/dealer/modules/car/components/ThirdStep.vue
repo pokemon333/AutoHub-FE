@@ -110,11 +110,18 @@
             <img :src="loadingImg" width="24" height="24" class="animate-spin"> 
           </div>
           <button 
-              v-if="!loading"
+              v-if="!loading && !isEdit"
               @click="handleNext"
               class="bg-secondary-500 cursor-pointer  px-2 py-1  rounded-sm text-white"
           >
             Create Car Listing 
+          </button>
+          <button 
+              v-if="!loading && isEdit"
+              @click="handleNext"
+              class="bg-secondary-500 cursor-pointer  px-2 py-1  rounded-sm text-white"
+          >
+            Edit Car Info 
           </button>
       </div>
     </div>
@@ -140,6 +147,10 @@
         default : {
 
         }
+      },
+      isEdit : {
+        type : Boolean,
+        default  : false
       }
   })
 

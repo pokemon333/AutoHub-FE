@@ -118,8 +118,7 @@
       import { ref, onMounted } from "vue";
       import DealerSellMyCarController from 'dealer@/modules/car/api/dealerSellMyCarController.ts'
 
-      let {formSubmit} = DealerSellMyCarController()
-
+      let {formSubmit,formEditSubmit} = DealerSellMyCarController()
 
       let header = {
         first: {
@@ -136,6 +135,17 @@
         },
       };
 
+      let props = defineProps({
+        isEdit : {
+          type : Boolean,
+          default : false
+        },
+        ids : {
+          type : Object,
+          default : {}
+        }
+      })
+
       let firstStep = ref({});
       let secondStep = ref({});
       let thirdStep = ref({});
@@ -147,17 +157,30 @@
       let emit = defineEmits([
         'handlePopUp'
       ])
+      
 
       let handleFormSubmit =  async () => {
-        let data = { ...firstStep.value, ...secondStep.value, ...thirdStep.value };
-        try{
-          let res = await  formSubmit(data)
-          if (res.status) {
-            emit('handlePopUp',true)
+        let data = { ...firstStep.value, ...secondStep.value, ...thirdStep.value};
+        if(props.isEdit){
+          try{
+            let res = await  formEditSubmit(props.ids.car_id,{...data,ids: props.ids })
+            if (res.status) {
+              emit('handlePopUp',true)
+            }
+          }catch(error){
+            console.log(error);
           }
-        }catch(error){
-          console.log(error);
+        }else{
+          try{
+            let res = await  formSubmit(data)
+            if (res.status) {
+              emit('handlePopUp',true)
+            }
+          }catch(error){
+            console.log(error);
+          }
         }
+       
       };
 
       let step = ref("first");

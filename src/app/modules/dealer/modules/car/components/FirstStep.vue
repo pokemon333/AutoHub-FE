@@ -135,16 +135,21 @@
     import loadingImg from 'asset@/img/loading.png'
     import { useUserStore } from "@/app/core/store/UserStore";
     import { Dropzone } from "dropzone";
-    import { ref, onMounted, watch, reactive } from "vue";
+    import { ref, onMounted, watch } from "vue";
     import Select from "core@/components/Select.vue";
     import Input from "core@/components/Input.vue"
     import tokenService from "@/app/core/services/tokenService.ts";
     import DealerSellMyCarController from 'dealer@/modules/car/api/dealerSellMyCarController.ts'
 
+
     const userStore = useUserStore();
 
 
     let props = defineProps({
+        isEdit : {
+            type : Boolean,
+            default:false
+        },
         firstStepResource : {
             type : Object,
             default : {}
@@ -156,7 +161,11 @@
     })
 
     
+
+    
     let { getToken } = tokenService;
+
+    let dropZone;
     
     let firstStep = ref({
       car_brand_id : '',
@@ -167,6 +176,7 @@
       is_soldout: false,
       trim_name: "",
       images: [],
+      removedImages:[]
     });
     
     let dropRef = ref(null);
@@ -174,7 +184,7 @@
     let {firstStepValidation,removeImage} = DealerSellMyCarController()
 
     let models = ref([])
-    let errors = ref(null)
+    let errors = ref({})
     let loading =ref(false)
     
     let imageMapper = ref({})
@@ -184,29 +194,54 @@
       'setFirstStepState'
     ])
 
+    let isEmpty = (object)=>{
+      return   Object.keys(object).length == 0 ? true : false
+    }
+
     let getValidationMessage = (data) =>{
       return data[0];
     }
 
-    let handleNext = async () =>{
-      loading.value = true
-      try{
-        errors.value = null
-        let res = await firstStepValidation(firstStep.value)
-      }catch(error){
-        errors.value = error.response.data.errors ;
+
+    const validate = async () => {
+
+      loading.value = true;
+
+      try {
+        errors.value = {};
+        await firstStepValidation(firstStep.value);
+      } catch (error) {
+        errors.value = error.response.data.errors;
       }
-      if(firstStep.value.images.length == 0 ){
-        errors.value.images = ["Images is required!"]
+
+      if (dropZone.files.length == 0) {
+        errors.value.images = ["Images is required!"];
       }
-      if(
-        errors.value == null &&
-          firstStep.value.images.length != 0 
-      ){
-        emit('handleStepChange','second')
-        emit('setFirstStepState', firstStep.value)
-      }
+
       loading.value = false
+
+      return isEmpty(errors.value);
+    }
+
+
+    let handleNext = async () =>{
+
+      if (!(await validate())) {
+        return;
+      }
+
+      if (props.isEdit) {
+        emit('handleStepChange', 'second');
+        emit('setFirstStepState', firstStep.value);
+        return;
+      }
+
+      if (firstStep.value.images.length > 0) {
+        emit('handleStepChange', 'second');
+        emit('setFirstStepState', firstStep.value);
+      }
+
+      
     }
 
     let handleBrandChange = () =>{
@@ -215,6 +250,8 @@
         }) 
         models.value  = filteredModels
     }
+
+    
 
 
     const customPreview = `
@@ -235,7 +272,7 @@
     onMounted(() => {
 
       if (dropRef.value !== null) {
-        let dropZone = new Dropzone(dropRef.value, {
+          dropZone = new Dropzone(dropRef.value, {
           url: import.meta.env.VITE_CAR_MEDIA ,
           method: "POST",
           acceptedFiles: ".jpg,.png,.jpeg",
@@ -262,21 +299,29 @@
           firstStep.value.price           = newVal?.price 
           firstStep.value.trim_name       = newVal?.trim_name ?? ''
           firstStep.value.is_soldout      = newVal?.is_soldout ? true : false
-          firstStep.value.images          = newVal?.images.map((image)=> image.file_name)
           newVal?.images.map((image)=>{
             dropZone.emit('addedfile', image);
             dropZone.emit('thumbnail', image , image.preview ?? image.preview_url)
+            dropZone.files.push(image)
           })
+          
         });
 
 
-        dropZone.on("removedfile", async (file) => {
-            await removeImage({image: file})
-            let fileName = file.name;
-            firstStep.value.images = firstStep.value.images.filter((image)=>{
-              return image !=  imageMapper.value[fileName]
-            })
-            delete imageMapper.value[fileName];
+        dropZone.on("removedfile",  (file) => {
+
+          
+          if(file.id){
+            firstStep.value.removedImages.push(file.id)
+          }
+
+          let fileName = file.name;
+          firstStep.value.images = firstStep.value.images.filter((image)=>{
+            return image !=  imageMapper.value[fileName]
+          })
+          delete imageMapper.value[fileName];
+         
+      
         });
 
         dropZone.on("success", (file, response) => {

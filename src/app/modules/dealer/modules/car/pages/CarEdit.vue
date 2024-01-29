@@ -9,7 +9,7 @@
           <div class="flex  flex-col justify-center items-center">
             <img :src="success" class="w-20 h-20" loop onload="this.removeAttribute('loop')"/>
             <h1 class="text-4xl text-green-500 drop-shadow-md drop-shadow-secondary-500 ">Success!</h1>
-            <h1 class="text-xs mt-3">Thank You For Dealing  Car Creation</h1>
+            <h1 class="text-xs mt-3">Successfully Updated Your Information!</h1>
           </div>
           <button @click="goToLists" class="py-2  px-4 rounded-md bg-red-500 text-white">
               Car Lists
@@ -26,10 +26,10 @@
         <div class="md:w-1/2">
           <div class="flex items-center space-x-4">
             <back class="w-8 h-8 cursor-pointer" fill="black"  @click="goToLists"/>
-            <h1 class="text-3xl">Sell My Car</h1>
+            <h1 class="text-3xl">Edit My Car</h1>
           </div>
           <h1 class="mt-4 ps-12 font-bold text-[13px]">
-            Create your car listing by filling out the following form
+            Edit your car listing by filling out the following form
           </h1>
         </div>
         <div
@@ -42,13 +42,19 @@
 
       <!-- Form section -->
       <div class="">
-        <Stepper class="mt-6 border-b-2 pb-4" @handlePopUp="handlePopUp">
+        <Stepper 
+            class="mt-6 border-b-2 pb-4" 
+            @handlePopUp="handlePopUp" 
+            :isEdit="carEditData?.isEdit"
+            :ids="carEditData?.id"
+        >
           <template v-slot:first="{ handleStepChange, setFirstStepState }">
             <FirstStep
               @handleStepChange="handleStepChange"
               @setFirstStepState="setFirstStepState"
               :firstStepEdit="carEditData?.firstStep"
               :firstStepResource="resources?.firstStep"
+              :isEdit="carEditData?.isEdit"
             />
           </template>
           <template v-slot:second="{ handleStepChange, setSecondStepState }">
@@ -57,6 +63,7 @@
               @setSecondStepState="setSecondStepState"
               :secondStepEdit="carEditData?.secondStep"
               :secondStepResource="resources?.secondStep"
+              :isEdit="carEditData?.isEdit"
             />
           </template>
           <template
@@ -72,6 +79,7 @@
               @setThirdStepState="setThirdStepState"
               :thirdStepEdit="carEditData?.thirdStep"
               :thirdStepResource="resources?.thirdStep"
+              :isEdit="carEditData?.isEdit"
             />
           </template>
         </Stepper>
@@ -104,6 +112,8 @@
         resources.value = res.data.data;
         carEditData.value = editData.data.data;
       };
+
+    
 
       let popup = ref(false)
 
