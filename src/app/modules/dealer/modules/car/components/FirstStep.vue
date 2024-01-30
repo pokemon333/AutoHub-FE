@@ -252,10 +252,16 @@
       if (!(await validate())) {
         return;
       }
-      
-      if (firstStep.value.images.length > 0) {
+
+      if (props.isEdit) {
         emit('setFirstStepState', firstStep.value);
+      }else{
+        if (firstStep.value.images.length > 0) {
+          emit('setFirstStepState', firstStep.value);
+        }
       }
+      
+     
      
       emit('handleFormSubmit');
       

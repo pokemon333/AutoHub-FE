@@ -162,7 +162,7 @@
       
 
       let handleFormSubmit =  async () => {
-        console.log('form is submitted')
+        
         let data = { ...firstStep.value, ...secondStep.value, ...thirdStep.value};
         if(props.isEdit){
           try{

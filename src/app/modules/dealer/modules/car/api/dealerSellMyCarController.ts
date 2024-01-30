@@ -25,7 +25,9 @@ export default function DealerSellMyCarController() : dealerSellMyCarController{
         return ApiService.post('car-second-validation',data)
     }
 
-    const thirdStepValidation = (data:Object) => {
+    const thirdStepValidation = (data:Object) => { 
+        console.log(data);
+        
         return ApiService.post('car-third-validation',data)
     }
 

@@ -154,9 +154,6 @@ let handleImageMetadata = (event) => {
          }else{
            isLandScape.value = false
          }
-         console.log(isLandScape.value)
-         console.log(img.naturalWidth)
-         console.log(img.naturalHeight)
 }
 
 

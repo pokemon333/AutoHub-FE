@@ -176,9 +176,6 @@
     } else {
         isLandScape.value = false;
     }
-    console.log(isLandScape.value);
-    console.log(img.naturalWidth);
-    console.log(img.naturalHeight);
     };
 
     function handleContextMenu(event) {

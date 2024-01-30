@@ -135,6 +135,7 @@ let detail = (id) => {
 
 const getDealerCar = () => {
   apiService.get(`dealer/cars/${userStore.user.dealer_id}`).then((res) => {
+    console.log(res)
     carStore.setCars(res.data.data);
     cars.value = carStore.getCars;
   });

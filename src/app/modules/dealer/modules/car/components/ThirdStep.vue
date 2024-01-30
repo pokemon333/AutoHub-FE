@@ -186,6 +186,7 @@
     loading.value = true
     errors.value = null
     let isSuccess  = false
+    console.log(thirdStep.value);
     try{
       let res =  await thirdStepValidation(thirdStep.value)
       if(res.status == 200){
@@ -204,7 +205,9 @@
   }
 
   watch(() => props.thirdStepEdit, (newVal) => {
-      thirdStep.value = newVal;
+      if(Object.keys(newVal) != 0 ){
+        thirdStep.value = newVal;
+      }
   });
 
 </script>
