@@ -6,7 +6,7 @@
             </div>
             <div 
                 style="height: 200px;"  
-                class="overflow-hidden flex justify-center items-center p-0" >
+                class=" flex justify-center overflow-hidden bg-primary-300 rounded-md items-center p-0" >
                 <img 
                 @load="handleImageMetadata"
                 @click="$emit('carDetail',car?.id)" 

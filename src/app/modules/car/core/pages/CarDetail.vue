@@ -43,7 +43,7 @@
                     <div class="lg:w-full w-screen "  v-if="car">
                         <Carousel> 
                             <template v-slot:main>
-                                <div class="absolute w-full h-full overflow-hidden flex justify-center items-center">
+                                <div class="absolute bg-primary-300 w-full h-full overflow-hidden flex justify-center items-center">
                                     <img 
                                         @load="handleImageMetadata"
                                         alt="Big Image"  
@@ -148,13 +148,14 @@
 
 <script setup>
 
-import { onMounted , ref, watch ,nextTick } from 'vue';
+import { onMounted , ref, watch ,nextTick,computed} from 'vue';
 import CarController from 'car@/core/api/carController';
 import { useRoute ,useRouter  } from 'vue-router';
 import { back } from 'car@/core/services/getCarCardSvg'
 import Carousel from 'car@/core/components/Carousel.vue'
 import PageLoading from 'core@/components/PageLoading.vue'
 import logoImageUrl from 'asset@/img/logo.png'
+import { useSeoMeta } from '@unhead/vue'
 
 let carController = CarController()
 let { getCarDetial } = carController
@@ -185,9 +186,6 @@ let handleImageMetadata = (event) => {
          }else{
            isLandScape.value = false
          }
-         console.log(isLandScape.value)
-         console.log(img.naturalWidth)
-         console.log(img.naturalHeight)
 }
 
 
@@ -247,11 +245,14 @@ let checkEdited = (create,update) =>{
 
 let checkUser = () => route.params.type == 'user'
 
+
 function initiatePhoneCall(phoneNumber) {
     let callNow = document.getElementById('call-now')
     callNow.href = 'tel:' + phoneNumber
     callNow.click()
 }
+
+
 
 watch(()=> currentIndex.value,()=>{
   nextTick().then(()=>{
@@ -266,6 +267,11 @@ onMounted(()=>{
     scrollCurrentElementToCenter()
     getData();
     autoChangeImageSlide();
+    useSeoMeta({ 
+        ogTitle : computed(() => car.value?.car_model?.car_brand?.name + ' '  + car.value?.car_model?.name+' '  + car.value?.product_year?.name +' ' +( car.value?.trim_name ? '('+car.value?.trim_name+')' : '' )),
+        ogImage: computed(()=>images.value[0]),
+        ogDescription:  computed(()=>car.value?.car_info?.descriptions),
+    })
 })
 
 </script>

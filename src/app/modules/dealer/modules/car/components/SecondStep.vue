@@ -114,9 +114,17 @@
     >
       Back
     </button>
-    <div>
+    <div class="space-x-2 flex ">
+          <button 
+              v-if="!loading"
+              @click=""
+              class="bg-secondary-500 cursor-pointer  px-2 py-1  w-20 rounded-sm text-white"
+          >
+            Submit 
+          </button>
           <div
             v-if="loading"
+            @click="handleSubmit"
             class="bg-secondary-500 cursor-pointer  flex justify-center items-center px-2 py-1  w-20 rounded-sm text-white"
           >
             <img :src="loadingImg" width="24" height="24" class="animate-spin"> 
@@ -124,7 +132,7 @@
           <button 
               v-if="!loading"
               @click="handleNext"
-              class="bg-secondary-500 cursor-pointer  px-2 py-1  w-20 rounded-sm text-white"
+              class="bg-primary-300 cursor-pointer  px-2 py-1  w-20 rounded-sm text-white"
           >
             Next 
           </button>
@@ -157,7 +165,8 @@
 
   let emit = defineEmits([
     'handleStepChange',
-    'setSecondStepState'
+    'setSecondStepState',
+    'handleFormSubmit'
   ])
   
   let getValidationMessage = (data) =>{
@@ -177,6 +186,8 @@
   })
 
   let handleNext = async () =>{
+      //ToDo : Validation rule need to check when user fill somethig if not we don't need to check the rule for validation
+      //and logic for the third form man you need to handle these don't forget make sure logic are correct 
       loading.value = true
       errors.value = null
       try{
@@ -184,6 +195,21 @@
         if (res.status) {
          emit('handleStepChange','third')
          emit('setSecondStepState', secondStep.value)
+        }
+      }catch(error){
+        errors.value = error.response.data.errors ;
+      }
+      loading.value = false 
+  }
+
+  let handleSubmit = async  () =>{
+    loading.value = true
+      errors.value = null
+      try{
+        let res =  await secondStepValidation(secondStep.value)
+        if (res.status) {
+         emit('setSecondStepState', secondStep.value)
+         emit('handleFormSubmit')
         }
       }catch(error){
         errors.value = error.response.data.errors ;

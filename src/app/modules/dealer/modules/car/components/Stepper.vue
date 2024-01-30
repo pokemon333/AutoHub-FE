@@ -88,6 +88,7 @@
       <div v-show="step == 'first'">
         <slot
           name="first"
+          :handleFormSubmit="handleFormSubmit"
           :setFirstStepState="setFirstStepState"
           :handleStepChange="handleStepChange"
         ></slot>
@@ -95,6 +96,7 @@
       <div v-show="step == 'second'">
         <slot
           name="second"
+          :handleFormSubmit="handleFormSubmit"
           :setSecondStepState="setSecondStepState"
           :handleStepChange="handleStepChange"
         ></slot>
@@ -160,6 +162,7 @@
       
 
       let handleFormSubmit =  async () => {
+        console.log('form is submitted')
         let data = { ...firstStep.value, ...secondStep.value, ...thirdStep.value};
         if(props.isEdit){
           try{
@@ -188,4 +191,5 @@
       let handleStepChange = (stepValue) => {
         step.value = stepValue;
       };
+
 </script>

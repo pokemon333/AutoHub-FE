@@ -113,7 +113,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-end">
+        <div class="flex justify-end space-x-2">
           <div
             v-if="loading"
             class="bg-secondary-500 cursor-pointer  flex justify-center items-center px-2 py-1  w-20 rounded-sm text-white"
@@ -122,8 +122,15 @@
           </div>
           <button 
               v-if="!loading"
-              @click="handleNext"
+              @click="handleSubmit"
               class="bg-secondary-500 cursor-pointer  px-2 py-1  w-20 rounded-sm text-white"
+          >
+            Submit 
+          </button>
+          <button 
+              v-if="!loading"
+              @click="handleNext"
+              class="bg-primary-300 cursor-pointer  px-2 py-1  w-20 rounded-sm text-white"
           >
             Next 
           </button>
@@ -141,9 +148,7 @@
     import tokenService from "@/app/core/services/tokenService.ts";
     import DealerSellMyCarController from 'dealer@/modules/car/api/dealerSellMyCarController.ts'
 
-
     const userStore = useUserStore();
-
 
     let props = defineProps({
         isEdit : {
@@ -159,9 +164,6 @@
             default : null
         }
     })
-
-    
-
     
     let { getToken } = tokenService;
 
@@ -191,7 +193,8 @@
 
     let emit = defineEmits([
       'handleStepChange',
-      'setFirstStepState'
+      'setFirstStepState',
+      'handleFormSubmit'
     ])
 
     let isEmpty = (object)=>{
@@ -241,7 +244,22 @@
         emit('setFirstStepState', firstStep.value);
       }
 
+      return true;
+
+    }
+
+    let handleSubmit = async () => {
+      if (!(await validate())) {
+        return;
+      }
       
+      if (firstStep.value.images.length > 0) {
+        emit('setFirstStepState', firstStep.value);
+      }
+     
+      emit('handleFormSubmit');
+      
+    
     }
 
     let handleBrandChange = () =>{
@@ -272,6 +290,7 @@
     onMounted(() => {
 
       if (dropRef.value !== null) {
+
           dropZone = new Dropzone(dropRef.value, {
           url: import.meta.env.VITE_CAR_MEDIA ,
           method: "POST",
@@ -289,6 +308,7 @@
             width: 4096,
             height: 4096,
           },
+
         });
 
         watch(() => props.firstStepEdit, (newVal) => {
