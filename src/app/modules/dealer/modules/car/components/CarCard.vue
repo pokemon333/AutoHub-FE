@@ -124,9 +124,17 @@
       </button>
     </div>
   </div>
+  <!-- Handle More Thing here -->
+  <!-- <SocialNetwork
+    network="messenger"
+    url="www.minshinsaw.com"
+  /> -->
+  
 </template>
 
 <script setup>
+
+    import SocialNetwork from 'core@/components/social/SocialNetwork.vue';
 
     import {
         condition,
@@ -141,7 +149,7 @@
     import { ref } from "vue";
 
     const props = defineProps({
-    car: {},
+      car: {},
     });
 
     import logoImageUrl from "asset@/img/logo.png";
@@ -155,12 +163,12 @@
     let year = props.car?.product_year?.name ?? "";
     let trim_name = props?.car.trim_name ?? "";
     let price = props?.car.price ?? "";
-    let car_condition = props?.car?.car_specification?.condition ?? "";
-    let car_transmission = props?.car?.car_specification?.transmission ?? "";
-    let fuel_type = props?.car?.car_specification?.fuel_type.name ?? "";
-    let milage = props?.car?.car_specification?.mileage.name ?? "";
-    let engine_power = props?.car?.car_specification?.engine_power ?? "";
-    let car_steering = props?.car?.car_specification?.steering ?? "";
+    let car_condition = props?.car?.car_specification?.condition ?? "-";
+    let car_transmission = props?.car?.car_specification?.transmission ?? "-";
+    let fuel_type = props?.car?.car_specification?.fuel_type.name ?? "-";
+    let milage = props?.car?.car_specification?.mileage.name ?? "-";
+    let engine_power = props?.car?.car_specification?.engine_power ?? "-";
+    let car_steering = props?.car?.car_specification?.steering ?? "-";
     let brand = props?.car.car_model?.car_brand.name ?? "";
 
     let router = useRouter();

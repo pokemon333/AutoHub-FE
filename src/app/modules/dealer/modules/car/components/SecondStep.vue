@@ -106,15 +106,15 @@
         >
         </textarea>
       </div>
-      <div class="flex justify-end space-x-2 mb-4">
-        <input 
-          type="checkbox"
-          v-model="formSkip"
-        >
-        <span>
-          Skip this form
-        </span>
-      </div>
+  </div>
+  <div v-if="canSkipInEdit" class="flex justify-end space-x-2 mb-4">
+    <input 
+      type="checkbox"
+      v-model="formSkip"
+    >
+    <span>
+      Skip this form
+    </span>
   </div>
   <div class="flex justify-between ">
     <button 
@@ -171,6 +171,7 @@
 
   let loading = ref(false)
   let formSkip = ref(false)
+  let canSkipInEdit = ref(true)
 
   let emit = defineEmits([
     'handleStepChange',
@@ -225,7 +226,7 @@
       }catch(error){
         errors.value = error.response.data.errors ;
       }
-      loading.value = false 
+    loading.value = false 
   }
 
   let handleBack = () =>{
@@ -233,7 +234,10 @@
   }
 
   watch(() => props.secondStepEdit, (newVal) => {
+    if(Object.keys(newVal) != 0 ){
       secondStep.value = newVal;
+      canSkipInEdit.value = false
+    }
   });
   
 

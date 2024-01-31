@@ -1,4 +1,5 @@
 <template>
+    {{  }}
     <div class="bg-white w-full h-[400px] rounded-lg border-2 border-primary-50/30  font-poppins">
         <div class="w-full relative">
             <div v-if="car?.car_info" class=" w-[110px] h-[30px]  flex justify-center items-center px-2 py-1 rounded-lg text-white text-xs border-2 absolute bg-primary-500 bg-opacity-90 top-2 right-2 border-secondary-300">
@@ -134,6 +135,8 @@ let engine_power = props?.car?.car_specification?.engine_power ?? '-';
 let car_steering = props?.car?.car_specification?.steering ?? '-';
 let dealer_name = props?.car?.dealer?.user?.name ?? '';
 let phone_number = props?.car?.dealer?.phone_number ?? '';
+
+
 
 let isLandScape = ref(true);
 
