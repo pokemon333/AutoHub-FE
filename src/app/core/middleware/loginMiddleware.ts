@@ -1,9 +1,7 @@
 import {useUserStore}   from "core@/store/UserStore.ts";
 import tokenService from 'core@/services/tokenService.ts'
-import { useRouter } from 'vue-router';
 
 const handle = (to,from,next)=>{
-    const router = useRouter();
     const userStore = useUserStore();
     const isUserSet = Object.keys(userStore.user).length > 0
     /*
@@ -12,7 +10,7 @@ const handle = (to,from,next)=>{
     *  if both are not set then next to login
     */   
     if (isUserSet && tokenService.getToken())  {
-        router.push(from.fullPath);
+        next(from.fullPath);
     }
 }
 

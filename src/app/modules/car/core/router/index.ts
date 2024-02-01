@@ -8,8 +8,11 @@ const carRoutes: Array<RouteRecordRaw> = [
         component : () => import('../pages/CarList.vue') 
     },
     {
-        path : "/cars/:id/:type?",
+        path : "/cars/:id/:type",
         name : "car-detail",
+        meta : {
+            guards : [ "DealerAccept"]
+        },
         component : () => import('../pages/CarDetail.vue') 
     }
 ]

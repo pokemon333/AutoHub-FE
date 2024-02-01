@@ -66,17 +66,13 @@
 
 import logo from 'asset@/img/logo-login.png'
 import bgImage from 'asset@/img/login-bg-img.png'
-import useAuthController from 'auth@/api/authController'
+import useAuthController from 'auth@/api/authController.ts'
 import { ref } from 'vue'
-import apiService from 'core@/services/apiService';
 import tokenService from 'core@/services/tokenService'
 import { useUserStore  } from '@/app/core/store/UserStore';
 import { useRouter } from 'vue-router';
 
-let router = useRouter();
-let { setToken , removeToken  } = tokenService
-let userStore = useUserStore()
-let { login , getUser }  = useAuthController()
+
 
 let errors = ref({})
 
@@ -85,18 +81,23 @@ let data =  ref({
     password : ''
 })
 
+let router = useRouter();
+let userStore = useUserStore()
+let { setToken   } = tokenService
+let { login , getUser }  = useAuthController()
+
 let submit = async () => {
     try {
         let res = await login(data.value)
-        console.log(res.data.data);
         if(res.data.success){
-            let { token   } = await res?.data.data
-            console.log(token);
-            await setToken(token)
-            await getUser()
-            await router.go(-1)
+            let { token , user  } = await res?.data.data
+            setToken(token)
+            userStore.setUser(user)
+            userStore.changeLoginStatus(true)
+            router.push({name:"landing"})
         }
     } catch (error) {
+        // console.log(error)
         if (error.response.data.errors) {
             errors.value = error.response.data.errors
             console.log(errors.value);

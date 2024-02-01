@@ -4,8 +4,6 @@ import tokenService from 'core@/services/tokenService.ts'
 import { useUserStore  } from '@/app/core/store/UserStore.ts';
 import { useRouter } from 'vue-router';
 
-let { setToken , removeToken  } = tokenService
-let userStore = useUserStore()
 
 interface UserData {
     name : string
@@ -15,22 +13,18 @@ interface UserData {
 interface authController{
     login(userData : UserData ) : Promise<AxiosResponse> 
     logout(): void
-    getUser() : void
+    getUser() : Promise<AxiosResponse> 
 }
 
 
 export default function useAuthController() : authController {
     
         let router = useRouter();
+        let userStore = useUserStore()
+        let { setToken , removeToken  } = tokenService
 
         function getUser(){
-            apiService.get('user')
-            .then((res : AxiosResponse)=> {
-                let user = res?.data.data
-                userStore.setUser(user)
-                userStore.changeLoginStatus(true)
-            })
-            .catch((error : AxiosResponse)=>console.log('error',error))
+            return apiService.get('user')
         }
 
         function login (userData : UserData ) {

@@ -9,10 +9,10 @@
       >
         {{ car?.car_info?.plate_division }} /
         {{
-          car?.car_info?.plate_number.slice(0, 3) +
-          "*".repeat(car?.car_info?.plate_number.length - 3)
+          car?.car_info?.plate_number
         }}
       </div>
+      
       <div
         style="height: 200px"
         class="overflow-hidden rounded-md flex justify-center items-center p-0 bg-primary-300"
@@ -56,7 +56,12 @@
           {{ trim_name ? "(" + trim_name + ")" : "" }}
         </div>
       </div>
-
+      <div 
+        @click="handleShare"
+        class="w-6 h-6 p-1 cursor-pointer   bg-red-500 rounded-full"
+      >
+          <upload class="w-full h-full"/>
+      </div>
       <h1 class="font-roboto-price text-card-price">{{ price }} Lakhs</h1>
     </div>
     <div
@@ -126,7 +131,7 @@
   </div>
   <!-- Handle More Thing here -->
   <!-- <SocialNetwork
-    network="messenger"
+    network="facebook"
     url="www.minshinsaw.com"
   /> -->
   
@@ -144,6 +149,7 @@
         gear,
         lighting,
         edit,
+        upload
     } from "dealer@/core/services/getCarCardSvg";
 
     import { ref } from "vue";
@@ -174,17 +180,21 @@
     let router = useRouter();
 
     let goToEditCar = (id) => {
-    router.push({ name: "dealer-car-edit", params: { id: id } });
+      router.push({ name: "dealer-car-edit", params: { id: id } });
     };
 
     let handleImageMetadata = (event) => {
-    const img = event.target;
-    if (img.naturalWidth > img.naturalHeight) {
-        isLandScape.value = true;
-    } else {
-        isLandScape.value = false;
-    }
+      const img = event.target;
+      if (img.naturalWidth > img.naturalHeight) {
+          isLandScape.value = true;
+      } else {
+          isLandScape.value = false;
+      }
     };
+
+    let  handleShare = () => {
+
+    }
 
     function handleContextMenu(event) {
     event.preventDefault();

@@ -1,11 +1,11 @@
 import LoginMiddleware from 'core@/middleware/loginMiddleware.ts'
-// import DealerMiddleware from 'core@/middleware/dealerMiddleware'
 import AuthMiddleware from 'core@/middleware/authMiddleware.ts'
+import DealerAcceptMiddleware from 'core@/middleware/dealerAcceptMiddleware.ts'
 
 const middlewares = {
     "Login"  : LoginMiddleware,
-    // "Dealer" : DealerMiddleware,
-    "Auth"   : AuthMiddleware
+    "Auth"   : AuthMiddleware,
+    'DealerAccept' : DealerAcceptMiddleware
 }
 
 export default  middlewares;

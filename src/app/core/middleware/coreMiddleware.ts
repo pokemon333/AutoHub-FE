@@ -1,14 +1,30 @@
 import resolver from 'core@/services/middlewareResolveService.ts'
-import { useSeoMeta } from '@unhead/vue'
-import LinkPreview from 'asset@/img/link-preview.jpg'
+import {useUserStore}   from "core@/store/UserStore.ts";
+import useAuthController from 'auth@/api/authController.ts'
+import tokenService from 'core@/services/tokenService.ts'
+import { useRouter } from 'vue-router';
 
 const initMiddleWare = (router) => {
-    router.beforeEach((to, from , next ) => {
-        useSeoMeta({ 
-            ogTitle :"AutoHub Myanamr" ,
-            ogImage: LinkPreview,
-            ogDescription: 'One Stop Car Sales' ,
-        })
+
+    router.beforeEach(async (to, from , next ) => {
+        const userStore = useUserStore();
+        let { getUser }  = useAuthController()
+        const router = useRouter();
+
+        if(tokenService.getToken()){
+            try{
+                let res = await getUser();
+                let {user} = res?.data
+                userStore.setUser(user)
+                userStore.changeLoginStatus(true)
+            }catch(e){
+                tokenService.removeToken();
+                router.push({name:"login"});
+            }
+        }
+
+        
+
         resolver(to,from,next)
     })
 }

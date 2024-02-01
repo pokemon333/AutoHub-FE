@@ -38,6 +38,5 @@ export const  useUserStore = defineStore('user',{
        getLoginStatus(state){
             return state.isLogin;
        }
-   },
-   persist: true,
+   }
 })
