@@ -7,7 +7,7 @@
             
             <div 
                 style="height: 200px;"  
-                class=" flex justify-center overflow-hidden bg-primary-300 rounded-md items-center p-0" >
+                class=" flex justify-center overflow-hidden bg-primary-900 rounded-md items-center p-0" >
                 <img 
                 @load="handleImageMetadata"
                 @click="$emit('carDetail',car?.id)" 
@@ -22,8 +22,8 @@
         </div>
         <div class="py-4 px-4  flex justify-between bg-white border-b-2 border-b-primary-100/30">
             <div class="relative inline-block group w-1/2">
-                <div class="flex items-center" @click="()=>isModelOpen = !isModelOpen">
-                    <h1 class="text-text-400 overflow-hidden w-full  text-card-title truncate  cursor-pointer">
+                <div class="flex items-center w-8/12" @click="()=>isModelOpen = !isModelOpen">
+                    <h1 class="text-text-400 overflow-hidden me-2  text-card-title truncate  cursor-pointer">
                         {{ brand }} {{ model }} {{ year }} {{ trim_name ? '('+trim_name+')' : '' }}
                     </h1>
                     <h1 class="rotate-90 text-gray-500 text-md">

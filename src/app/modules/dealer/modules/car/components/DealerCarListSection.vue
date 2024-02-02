@@ -121,13 +121,15 @@ const originalData = computed(() => carStore.getCars);
 
 const cars = ref([]);
 
-watch(carStore, () => {
-  cars.value = carStore.cars;
-});
 
 const filterText = ref("");
 
+
 defineProps(["isAdvanceSearchMenuOpen"]);
+
+defineEmits([
+  "toggleShareDialog"
+])
 
 let detail = (id) => {
   return router.push({ name: "car-detail", params: { id: id , type : 'dealer' } });
@@ -135,7 +137,7 @@ let detail = (id) => {
 
 const getDealerCar = () => {
   apiService.get(`dealer/cars/${userStore.user.dealer_id}`).then((res) => {
-    console.log(res)
+    // console.log(res)
     carStore.setCars(res.data.data);
     cars.value = carStore.getCars;
   });
@@ -171,6 +173,11 @@ function goToDealerProfile() {
 function goToSellMyCar() {
   router.push({ name: "sell-my-car"});
 }
+
+watch(carStore, () => {
+  cars.value = carStore.cars;
+});
+
 
 onMounted(() => {
   getDealerCar();

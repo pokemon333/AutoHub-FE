@@ -1,11 +1,13 @@
 <template>
-  <button class="w-6 h-6" @click="handleShare">
+  <button class="w-[80px] flex flex-col justify-center items-center" @click="handleShare">
     <!-- For icon -->
-    <img :src="icon" class="w-full h-full" />
+    <img :src="icon" class="w-10 h-10" />
+    <h1 class=" text-sm">{{ text }}</h1>
   </button>
 </template>
 
 <script setup>
+
 import { ref, watch, onMounted } from "vue";
 import facebookIcon from "asset@/icon/facebook.png";
 import gmailIcon from "asset@/icon/gmail.png";
@@ -21,7 +23,7 @@ let icon = ref("");
 
 let urlCollection = {
   gmail: {
-    url: "mailto:?subject=@t&body=@u%0D%0A@d",
+    url: "mailto:?body=@u",
     icon: gmailIcon,
   },
   facebook: {
@@ -33,15 +35,15 @@ let urlCollection = {
     icon: linkedinIcon
   },
   telegram: {
-    url: "https://t.me/share/url?url=@u&text=@t%0D%0A@d",
+    url: "https://t.me/share/url?url=@u",
     icon: telegramIcon
   },
   twitter: {
-    url: "https://twitter.com/intent/tweet?text=@t&url=@u&hashtags=@h@tu",
+    url: "https://twitter.com/intent/tweet?url=@u",
     icon:twitterIcon
   },
   viber: {
-    url: "viber://forward?text=@t%0D%0A@u%0D%0A@d",
+    url: "viber://forward?text=@u",
     icon:  viberIcon
   },
 };
@@ -51,19 +53,16 @@ let props = defineProps({
     type: String,
     default: "",
   },
-  title: {
-    type: String,
-    default: "",
-  },
-  description: {
-    type: String,
-    default: "",
+  text : {
+    type : String,
+    default : ""
   },
   url: {
     type: String,
     default: "",
   },
 });
+
 
 function handleShare() {
   window.open(url.value, "_blank");

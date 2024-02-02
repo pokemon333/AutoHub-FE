@@ -2,14 +2,14 @@ import resolver from 'core@/services/middlewareResolveService.ts'
 import {useUserStore}   from "core@/store/UserStore.ts";
 import useAuthController from 'auth@/api/authController.ts'
 import tokenService from 'core@/services/tokenService.ts'
-import { useRouter } from 'vue-router';
+// import { useRouter } from 'vue-router';
 
 const initMiddleWare = (router) => {
 
     router.beforeEach(async (to, from , next ) => {
         const userStore = useUserStore();
         let { getUser }  = useAuthController()
-        const router = useRouter();
+        // const router = useRouter();
 
         if(tokenService.getToken()){
             try{
@@ -19,7 +19,7 @@ const initMiddleWare = (router) => {
                 userStore.changeLoginStatus(true)
             }catch(e){
                 tokenService.removeToken();
-                router.push({name:"login"});
+                next({name:"login"});
             }
         }
 

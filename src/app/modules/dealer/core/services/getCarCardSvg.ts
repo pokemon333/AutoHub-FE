@@ -7,7 +7,7 @@ import lighting from 'asset@/icon/lighting.svg'
 import advanceFilter from 'asset@/icon/advance-filter.svg'
 import back from 'asset@/icon/back.svg'
 import edit from 'asset@/icon/edit.svg'
-import upload from 'asset@/icon/upload.svg'
+import share from 'asset@/icon/share.svg'
 
 export {
     condition,
@@ -19,5 +19,5 @@ export {
     advanceFilter,
     back,
     edit,
-    upload
+    share
 }

@@ -43,7 +43,7 @@
                     <div class="lg:w-full w-screen "  v-if="car">
                         <Carousel> 
                             <template v-slot:main>
-                                <div class="absolute bg-primary-300 w-full h-full overflow-hidden flex justify-center items-center">
+                                <div class="absolute bg-primary-900 w-full h-full overflow-hidden flex justify-center items-center">
                                     <img 
                                         @load="handleImageMetadata"
                                         alt="Big Image"  
@@ -51,7 +51,7 @@
                                         :class="isLandScape ? 'w-full h-auto' : 'w-auto h-full'"
                                         class=""
                                     />
-                                    <div class="absolute md:w-28 w-20 rounded-md top-2 left-2 z-10 bg-gray-900/80">
+                                    <div class="absolute md:w-28 w-20 rounded-md top-2 left-2 z-10 bg-primary-900">
                                         <img :src="logoImageUrl"  class="w-full h-full">
                                     </div>
                                 </div>

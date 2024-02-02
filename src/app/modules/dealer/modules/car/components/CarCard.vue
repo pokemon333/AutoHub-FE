@@ -15,7 +15,7 @@
       
       <div
         style="height: 200px"
-        class="overflow-hidden rounded-md flex justify-center items-center p-0 bg-primary-300"
+        class="overflow-hidden rounded-md flex justify-center items-center p-0 bg-primary-900"
       >
         <img
           @load="handleImageMetadata"
@@ -32,21 +32,23 @@
       </div>
     </div>
     <div
-      class="py-4 px-4 flex justify-between items-center bg-white border-b-2 border-b-primary-100/30"
+      class="py-4 px-4 flex justify-between  items-center bg-white border-b-2 border-b-primary-100/30"
     >
-      <div class="relative inline-block group w-1/2">
+      <div class="relative flex space-x-2 group w-1/2">
         <div
-          class="flex items-center"
+          class="flex justify-start  items-center  w-8/12"
           @click="() => (isModelOpen = !isModelOpen)"
         >
           <h1
-            class="text-text-400 overflow-hidden w-full text-card-title truncate cursor-pointer"
+            class="text-text-400  overflow-hidden me-2 text-card-title truncate cursor-pointer"
           >
             {{ brand }} {{ model }} {{ year }}
             {{ trim_name ? "(" + trim_name + ")" : "" }}
           </h1>
-          <h1 class="rotate-90 text-gray-500 text-md">></h1>
+          <h1 class="rotate-90  text-gray-500 text-md">></h1>
         </div>
+        
+       
 
         <div
           :class="isModelOpen ? 'opacity-100 ' : 'opacity-0'"
@@ -56,12 +58,8 @@
           {{ trim_name ? "(" + trim_name + ")" : "" }}
         </div>
       </div>
-      <div 
-        @click="handleShare"
-        class="w-6 h-6 p-1 cursor-pointer   bg-red-500 rounded-full"
-      >
-          <upload class="w-full h-full"/>
-      </div>
+
+      
       <h1 class="font-roboto-price text-card-price">{{ price }} Lakhs</h1>
     </div>
     <div
@@ -112,11 +110,16 @@
       class="flex justify-between text-card-title rounded-b-md bg-primary-50/20 py-3 px-4"
     >
       <button
-        @click="$emit('carDetail', car?.id)"
+        @click="handleShare"
         @contextmenu.prevent="handleContextMenu"
-        class="bg-transparent hover:bg-secondary-500 w-[27%] hover:text-white py-1 px-4 border border-secondary-500 hover:border-transparent rounded"
+        class="bg-transparent text-secondary-500 flex justify-center items-center space-x-2 hover:bg-secondary-500 w-[27%] hover:text-white py-1 px-4 border border-secondary-500 hover:border-transparent rounded"
       >
-        Details
+        <share
+          class="w-4 h-4 fill-secondary-500 hover:fill-white"
+        />
+        <h1>
+          Share
+        </h1>
       </button>
       <button
         @click="goToEditCar(car?.id)"
@@ -129,17 +132,16 @@
       </button>
     </div>
   </div>
+
+
+  
   <!-- Handle More Thing here -->
-  <!-- <SocialNetwork
-    network="facebook"
-    url="www.minshinsaw.com"
-  /> -->
+  
   
 </template>
 
 <script setup>
 
-    import SocialNetwork from 'core@/components/social/SocialNetwork.vue';
 
     import {
         condition,
@@ -149,17 +151,17 @@
         gear,
         lighting,
         edit,
-        upload
+        share
     } from "dealer@/core/services/getCarCardSvg";
 
-    import { ref } from "vue";
+    import { ref , inject } from "vue";
 
     const props = defineProps({
       car: {},
     });
 
     import logoImageUrl from "asset@/img/logo.png";
-    import { useRouter } from "vue-router";
+    import { useRouter ,useRoute } from "vue-router";
 
     let isModelOpen = ref(false);
     let isLandScape = ref(true);
@@ -178,6 +180,10 @@
     let brand = props?.car.car_model?.car_brand.name ?? "";
 
     let router = useRouter();
+    let route  = useRoute()
+
+    let toggleShareDialog = inject('toggleShareDialog');
+    let url               = inject('url')
 
     let goToEditCar = (id) => {
       router.push({ name: "dealer-car-edit", params: { id: id } });
@@ -192,9 +198,17 @@
       }
     };
 
-    let  handleShare = () => {
-
+    let getRoute = (id) => {
+      return window.location.host +  router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href;
     }
+
+    let  handleShare = (id) => {
+      console.log(router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href)
+      toggleShareDialog()
+      url.value = getRoute(id)
+    }
+
+    
 
     function handleContextMenu(event) {
     event.preventDefault();
