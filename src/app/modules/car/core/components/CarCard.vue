@@ -84,9 +84,18 @@
             </div>
         </div>
         <div class="flex justify-between text-card-title rounded-b-md  bg-primary-50/20 py-3 px-4">
-            <div   @contextmenu="handleContextMenu"  @click="$emit('carDetail',car?.id)" id="detail-btn" class="bg-transparent select-none text-center hover:bg-secondary-500 w-[27%]  hover:text-white py-1    px-4 border border-secondary-500 hover:border-transparent rounded">
-                Details
-            </div>
+            <button
+                @click="handleShare"
+                @contextmenu.prevent="handleContextMenu"
+                class="bg-transparent text-secondary-500 flex justify-center items-center space-x-2 hover:bg-secondary-500 w-[27%] hover:text-white py-1 px-4 border border-secondary-500 hover:border-transparent rounded"
+            >
+                <share
+                    class="w-5 h-5 fill-secondary-500 hover:fill-white"
+                />
+                <h1>
+                Share
+                </h1>
+            </button>
             <button  @click="initiatePhoneCall"  class="bg-primary-300  hover:bg-primary-500 w-[68%] text-white  flex items-center justify-center  px-4 rounded py-1">
                 <phone class="w-4 h-4 mr-4 fill-white"/>
                 {{ dealer_name }}
@@ -100,7 +109,7 @@
 
 <script setup  >
 
-import {ref} from 'vue'
+import {ref,inject} from 'vue'
 import { 
     condition,
     fuelType,
@@ -108,10 +117,11 @@ import {
     transmission,
     gear,
     lighting,
-    phone
+    phone,
+    share
 } from 'car@/core/services/getCarCardSvg';
 import logoImageUrl from 'asset@/img/logo.png'
-
+import {useRouter} from 'vue-router'
 const props = defineProps({
   car: {
     type : Object,
@@ -137,7 +147,7 @@ let phone_number = props?.car?.dealer?.phone_number ?? '';
 let brand = props?.car.car_model?.car_brand.name ?? "";
 
 
-
+let router = useRouter()
 let isLandScape = ref(true);
 
 function handleContextMenu(event) {
@@ -160,5 +170,16 @@ let handleImageMetadata = (event) => {
 }
 
 
+let toggleShareDialog = inject('toggleShareDialog');
+let url               = inject('url')
+let getRoute = (id) => {
+    return window.location.host +  router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href;
+}
+
+let  handleShare = () => {
+    console.log(router.resolve({ name: "car-detail" , params  : { id : props.car.id , type : 'user' }}).href)
+    toggleShareDialog()
+    url.value = getRoute(props.car.id)
+}
 
 </script>

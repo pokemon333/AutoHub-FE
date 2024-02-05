@@ -5,9 +5,13 @@ const handle = (to,from,next)=>{
     const userStore = useUserStore();
     const isUserSet = Object.keys(userStore.user).length > 0
     if(to.params.type == 'dealer'){
-        if(!isUserSet && !tokenService.getToken()){
-            next(from.fullPath);
+        if(!isUserSet){
+            return from.fullPath;
+        }else{
+            return 'passed'
         }
+    }else{
+        return 'passed'
     }
 }
 

@@ -5,6 +5,7 @@
         <div class="flex justify-between">
         <h1 class="text-lg">Share</h1>
         <div 
+            class="cursor-pointer"
             @click="handleClose"
         >
             <img 

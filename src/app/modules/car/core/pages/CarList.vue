@@ -1,4 +1,13 @@
 <template>
+    <div 
+        v-if="shareDialog"
+        class="fixed flex justify-center items-center  w-full h-full bg-primary-300/40 z-30"
+    >
+      <SocialShare
+        @close="toggleShareDialog"
+        :url="url"
+      />
+    </div>
     <div class="w-full bg-primary-50/10 h-[88%] " :class="advanceFileter ? 'flex' : ''">
         <!-- advance filter form -->
         <div class=" lg:pr-1  lg:h-full  lg:pl-2 pl-2 pr-2 pt-8 min:h-fit h-fit sticky top-[12%]  bg-slate-300  max-lg:z-40 max-lg:min-h-screen max-lg:fixed"
@@ -65,7 +74,8 @@
 
 <script setup >
 
-import { ref, onMounted, computed } from 'vue'
+import SocialShare from "core@/components/social/SocialShare.vue";
+import { ref, onMounted, computed ,provide} from 'vue'
 import { advanceFilter } from 'car@/core/services/getCarCardSvg';
 import CarCard from 'car@/core/components/CarCard.vue';
 import { useCarStore } from 'car@/core/stores/CarStore';
@@ -85,6 +95,16 @@ let loading = ref(true)
 let fetchAllData = ref(false)
 let carController = CarController();
 let { getCars } = carController
+
+//Social Share Dialog Logic Handle
+let shareDialog = ref(false)
+let url   =  ref('')
+let toggleShareDialog = () => {
+  shareDialog.value = !shareDialog.value
+}
+provide('toggleShareDialog',toggleShareDialog);
+provide('url',url)
+//--------------------------------------------
 
 onMounted(() => {
     if (carStore.cars.length != 0) {

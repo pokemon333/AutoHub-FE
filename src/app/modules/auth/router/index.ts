@@ -5,7 +5,7 @@ const authRoutes: Array<RouteRecordRaw> = [
         path : "/login",
         name : "login",
         meta : {
-            guards : ['Login',]
+            guards : ['Login']
         },
         component : () => import('../pages/Login.vue') 
     },

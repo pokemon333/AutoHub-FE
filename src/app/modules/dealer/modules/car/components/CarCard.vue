@@ -115,7 +115,7 @@
         class="bg-transparent text-secondary-500 flex justify-center items-center space-x-2 hover:bg-secondary-500 w-[27%] hover:text-white py-1 px-4 border border-secondary-500 hover:border-transparent rounded"
       >
         <share
-          class="w-4 h-4 fill-secondary-500 hover:fill-white"
+          class="w-5 h-5 fill-secondary-500 hover:fill-white"
         />
         <h1>
           Share
@@ -133,10 +133,7 @@
     </div>
   </div>
 
-
-  
   <!-- Handle More Thing here -->
-  
   
 </template>
 
@@ -202,15 +199,15 @@
       return window.location.host +  router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href;
     }
 
-    let  handleShare = (id) => {
-      console.log(router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href)
+    let  handleShare = () => {
+      console.log(router.resolve({ name: "car-detail" , params  : { id : props.car.id , type : 'user' }}).href)
       toggleShareDialog()
-      url.value = getRoute(id)
+      url.value = getRoute(props.car.id)
     }
 
     
 
     function handleContextMenu(event) {
-    event.preventDefault();
+      event.preventDefault();
     }
 </script>

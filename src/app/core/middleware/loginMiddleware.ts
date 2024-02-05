@@ -9,8 +9,10 @@ const handle = (to,from,next)=>{
     *  if user is already set in pinia(state managment) then redirect back to previous page
     *  if both are not set then next to login
     */   
-    if (isUserSet && tokenService.getToken())  {
-        next(from.fullPath);
+    if (isUserSet)  {
+        return from.fullPath;
+    }else{
+        return 'passed'
     }
 }
 

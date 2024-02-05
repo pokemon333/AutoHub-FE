@@ -22,9 +22,6 @@ const initMiddleWare = (router) => {
                 next({name:"login"});
             }
         }
-
-        
-
         resolver(to,from,next)
     })
 }

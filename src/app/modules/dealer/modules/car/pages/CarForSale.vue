@@ -37,7 +37,6 @@ let url   =  ref('')
 let toggleShareDialog = () => {
   shareDialog.value = !shareDialog.value
 }
-
 provide('toggleShareDialog',toggleShareDialog);
 provide('url',url)
 

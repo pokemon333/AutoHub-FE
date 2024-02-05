@@ -1,4 +1,15 @@
 <template>
+    
+    <div 
+        v-if="shareDialog"
+        class="fixed flex justify-center items-center  w-full h-full bg-primary-300/40 z-30"
+    >
+        <SocialShare
+            @close="toggleShareDialog"
+            :url="url"
+        />
+    </div>
+ 
     <PageLoading v-if="loading"/>
     <div class=" pb-2  flex"  v-if="!loading">
         <div class=" lg:w-[7%]  h-full pt-14 max-lg:hidden flex  justify-center">
@@ -18,7 +29,26 @@
 
                             <div class="flex  lg:w-full justify-between">
                                 <div class="flex flex-col space-y-1 pb-2">
-                                    <h1 class="text-[30px]">{{ car.car_model?.car_brand?.name || '-' }} {{ car?.car_model?.name  || '-'}}</h1>
+                                    <div class="flex  items-center space-x-6">
+                                        <h1 class="text-[30px]">{{ car.car_model?.car_brand?.name || '-' }} {{ car?.car_model?.name  || '-'}}</h1>
+                                        <div
+                                            @click="handleShare"
+                                            class="flex space-x-2 cursor-pointer"
+                                        >
+                                            <div
+                                                class="w-6 h-6 flex justify-center items-center bg-secondary-500 rounded-full"
+                                            >
+                                                <share 
+                                                    class="w-10 h-10 stroke-white fill-secondary-500"
+                                                />
+                                            </div>
+                                            <h1
+                                                class="text-secondary-500"
+                                            >
+                                                share
+                                            </h1>
+                                        </div>
+                                    </div>
                                     <div class="flex text-success-800 text-[25px] space-x-1">
                                         <h1 class="font-bold">{{ parseInt( car?.price)  || '-'}}</h1>
                                         <h1>Lakhs</h1>
@@ -148,10 +178,11 @@
 
 <script setup>
 
+import SocialShare from "core@/components/social/SocialShare.vue";
 import { onMounted , ref, watch ,nextTick,computed} from 'vue';
 import CarController from 'car@/core/api/carController';
 import { useRoute ,useRouter  } from 'vue-router';
-import { back } from 'car@/core/services/getCarCardSvg'
+import { back,share } from 'car@/core/services/getCarCardSvg'
 import Carousel from 'car@/core/components/Carousel.vue'
 import PageLoading from 'core@/components/PageLoading.vue'
 import logoImageUrl from 'asset@/img/logo.png'
@@ -251,6 +282,24 @@ function initiatePhoneCall(phoneNumber) {
     callNow.href = 'tel:' + phoneNumber
     callNow.click()
 }
+
+//Social Share logic handle 
+let shareDialog = ref(false)
+let url   =  ref('')
+let toggleShareDialog = () => {
+  shareDialog.value = !shareDialog.value
+}
+
+let getRoute = (id) => {
+    return window.location.host +  router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href;
+}
+
+let  handleShare = () => {
+    // console.log(router.resolve({ name: "car-detail" , params  : { id : props.car.id , type : 'user' }}).href)
+    toggleShareDialog()
+    url.value = getRoute(car.value.id)
+}
+//------------------------------------
 
 
 

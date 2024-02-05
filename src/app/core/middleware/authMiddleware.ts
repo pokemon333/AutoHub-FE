@@ -11,8 +11,10 @@ const handle = async (to,from,next)=>{
     *  If auth token is not in local storage and user is not set in pinia(state managment) then redirect to login
     */   
    
-    if (!isUserSet && !tokenService.getToken())  {
-        next({name:"login"});
+    if (!isUserSet)  {
+        return {name:"login"};
+    }else{
+        return "passed";
     }
   
 }
