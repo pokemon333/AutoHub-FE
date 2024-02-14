@@ -50,12 +50,12 @@
 
             <div class="flex items-center ">
 
-                <button @click="modeChange"  v-if="mode == 'normal'"  class="text-white  px-4 py-2 mr-4  flex justify-center space-x-2 bg-secondary-500  rounded-md" >
+                <!-- <button @click="modeChange"  v-if="mode == 'normal'"  class="text-white  px-4 py-2 mr-4  flex justify-center space-x-2 bg-secondary-500  rounded-md" >
                     <img :src="FuelStation" class="w-5 h-5" />
                     <h1>
                         NearBy                   
                     </h1>
-                </button>
+                </button> -->
 
                 <div 
                     v-if="mode == 'nearby'"

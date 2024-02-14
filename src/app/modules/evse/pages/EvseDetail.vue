@@ -65,7 +65,7 @@ let map  = ref('');
 
 let getData = async ()=>{
     let res = await getDetail(id)
-    console.log(res.data.data.map);
+    // console.log(res.data.data.map);
     evse.value = await res.data.data 
     map.value  = await res.data.data.map.replace(/width="[^"]*"/, `width="100%"`).replace(/height="[^"]*"/, `height="100%"`)   
 }

@@ -84,7 +84,7 @@ let data =  ref({
 let router = useRouter();
 let userStore = useUserStore()
 let { setToken   } = tokenService
-let { login , getUser }  = useAuthController()
+let { login , getUser  }  = useAuthController()
 
 let submit = async () => {
     try {
@@ -92,6 +92,7 @@ let submit = async () => {
         if(res.data.success){
             let { token , user  } = await res?.data.data
             setToken(token)
+            userStore.setToken(token);
             userStore.setUser(user)
             userStore.changeLoginStatus(true)
             router.push({name:"landing"})

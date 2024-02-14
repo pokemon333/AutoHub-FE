@@ -4,7 +4,7 @@ import './assets/main.css'
 import App from './App.vue'
 import router from '@/app/core/router/index.ts'
 import { createPersistedState } from 'pinia-plugin-persistedstate'
-import { createHead } from '@unhead/vue'
+import {createHead} from '@vueuse/head'
 
 const head = createHead()
 const pinia  = createPinia()
@@ -12,7 +12,7 @@ pinia.use(createPersistedState())
 
 
 createApp(App)
+.use(head)
 .use(router)
 .use(pinia)
-.use(head)
 .mount('#app')

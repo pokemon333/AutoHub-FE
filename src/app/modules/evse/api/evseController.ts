@@ -22,7 +22,7 @@ export default function EvseController() : EvseController{
     }
 
     function getDetail(id:string|string[]): Promise<AxiosResponse>{
-        console.log(id);
+        // console.log(id);
         return ApiService.get('evses/'+id)
     }
 

@@ -4,7 +4,6 @@ interface tokenService {
   removeToken: () => void;
 }
 
-
 let tokenService: tokenService =  {
     getToken : (): string   => {
         let token  =  localStorage.getItem('token');

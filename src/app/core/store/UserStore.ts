@@ -17,7 +17,8 @@ interface User {
 export const  useUserStore = defineStore('user',{
     state:() => ({
         user : {},
-        isLogin : false
+        isLogin : false,
+        token : null
     }),
    actions :{
        reset(){
@@ -26,6 +27,9 @@ export const  useUserStore = defineStore('user',{
        },
        setUser(user : User){
            this.user = user
+       },
+       setToken(token:string){
+            this.token = token
        },
        changeLoginStatus(status : boolean){
            this.isLogin = status
@@ -37,6 +41,10 @@ export const  useUserStore = defineStore('user',{
        },
        getLoginStatus(state){
             return state.isLogin;
+       },
+       getToken(state){
+            return state.token
        }
-   }
+   },
+   persist : true
 })

@@ -39,7 +39,7 @@
                                                 class="w-6 h-6 flex justify-center items-center bg-secondary-500 rounded-full"
                                             >
                                                 <share 
-                                                    class="w-10 h-10 stroke-white fill-secondary-500"
+                                                    class="w-4 h-4 fill-white"
                                                 />
                                             </div>
                                             <h1
@@ -186,7 +186,7 @@ import { back,share } from 'car@/core/services/getCarCardSvg'
 import Carousel from 'car@/core/components/Carousel.vue'
 import PageLoading from 'core@/components/PageLoading.vue'
 import logoImageUrl from 'asset@/img/logo.png'
-import { useSeoMeta } from '@unhead/vue'
+import { useHead } from "@vueuse/head"
 
 let carController = CarController()
 let { getCarDetial } = carController
@@ -291,7 +291,7 @@ let toggleShareDialog = () => {
 }
 
 let getRoute = (id) => {
-    return window.location.host +  router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href;
+    return 'https://'+window.location.host +  router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href;
 }
 
 let  handleShare = () => {
@@ -316,11 +316,48 @@ onMounted(()=>{
     scrollCurrentElementToCenter()
     getData();
     autoChangeImageSlide();
-    useSeoMeta({ 
-        ogTitle : computed(() => car.value?.car_model?.car_brand?.name + ' '  + car.value?.car_model?.name+' '  + car.value?.product_year?.name +' ' +( car.value?.trim_name ? '('+car.value?.trim_name+')' : '' )),
-        ogImage: computed(()=>images.value[0]),
-        ogDescription:  computed(()=>car.value?.car_info?.descriptions),
+    useHead({
+    title : computed(() => car.value?.car_model?.car_brand?.name + ' '  + car.value?.car_model?.name+' '  + car.value?.product_year?.name +' ' +( car.value?.trim_name ? '('+car.value?.trim_name+')' : '' )),
+    meta : [
+        {
+        name : "description",
+        content  :  computed(()=>car.value?.car_info?.descriptions)
+        },
+        {
+        property : "og:type",
+        content : "website"
+        },
+        {
+        property : "og:image",
+        content : computed(()=>images.value[0])
+        },
+        {
+        property : "og:url",
+        content : computed(()=> getRoute(car.value.id))
+        },
+        {
+        property : "twitter:title",
+        content : computed(() => car.value?.car_model?.car_brand?.name + ' '  + car.value?.car_model?.name+' '  + car.value?.product_year?.name +' ' +( car.value?.trim_name ? '('+car.value?.trim_name+')' : '' )),
+        },
+        {
+        property : "twitter:description",
+        content :  computed(()=>car.value?.car_info?.descriptions)
+        },
+        {
+        property : "twitter:image",
+        content :   computed(()=>images.value[0])
+        },
+        {
+        property : "twitter:card",
+        content :   "summary_large_image"
+        },
+        {
+        property  : "twitter:url",
+        content  : computed(()=> getRoute(car.value.id))
+        }
+    ]
     })
+
 })
 
 </script>

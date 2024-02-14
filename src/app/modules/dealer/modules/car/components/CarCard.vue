@@ -200,7 +200,7 @@
     }
 
     let  handleShare = () => {
-      console.log(router.resolve({ name: "car-detail" , params  : { id : props.car.id , type : 'user' }}).href)
+      // console.log(router.resolve({ name: "car-detail" , params  : { id : props.car.id , type : 'user' }}).href)
       toggleShareDialog()
       url.value = getRoute(props.car.id)
     }

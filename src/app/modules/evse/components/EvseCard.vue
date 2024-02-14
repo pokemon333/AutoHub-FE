@@ -46,7 +46,7 @@ let handleMap = () =>{
     }
 }
 let generateGoogleMapDirectionUrl = () =>{
-    console.log(props.currentLocation);
+    // console.log(props.currentLocation);
     let url =  `https://www.google.com/maps/dir/${props.currentLocation.latitude},${props.currentLocation.longitude}/${props.evse.latitude},${props.evse.longitude}`;
     goToGoogleMap(url)
 }

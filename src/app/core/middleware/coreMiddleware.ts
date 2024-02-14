@@ -9,8 +9,6 @@ const initMiddleWare = (router) => {
     router.beforeEach(async (to, from , next ) => {
         const userStore = useUserStore();
         let { getUser }  = useAuthController()
-        // const router = useRouter();
-
         if(tokenService.getToken()){
             try{
                 let res = await getUser();

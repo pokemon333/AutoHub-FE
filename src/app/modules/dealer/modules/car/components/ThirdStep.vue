@@ -186,7 +186,7 @@
     loading.value = true
     errors.value = null
     let isSuccess  = false
-    console.log(thirdStep.value);
+    // console.log(thirdStep.value);
     try{
       let res =  await thirdStepValidation(thirdStep.value)
       if(res.status == 200){

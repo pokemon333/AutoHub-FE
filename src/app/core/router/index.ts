@@ -6,6 +6,7 @@ import evseRoutes from 'evse@/router/index.ts'
 import initMiddleware from "core@/middleware/coreMiddleware.ts"
 import authRoutes from '@/app/modules/auth/router/index.ts';
 import dealerRoutes from 'dealer@/core/router/index.ts';
+
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
