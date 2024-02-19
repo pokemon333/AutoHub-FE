@@ -83,14 +83,14 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-between text-card-title rounded-b-md  bg-primary-50/20 py-3 px-4">
+        <div class="flex justify-between text-card-title  rounded-b-md  bg-primary-50/20 py-3 px-4">
             <button
                 @click="handleShare"
                 @contextmenu.prevent="handleContextMenu"
-                class="bg-transparent text-secondary-500 flex justify-center items-center space-x-2 hover:bg-secondary-500 w-[27%] hover:text-white py-1 px-4 border border-secondary-500 hover:border-transparent rounded"
+                class="bg-transparent text-secondary-500 fill-secondary-500 hover:fill-white flex justify-center items-center space-x-2 hover:bg-secondary-500 w-[27%] hover:text-white py-1 px-4 border border-secondary-500 hover:border-transparent rounded"
             >
                 <share
-                    class="w-5 h-5 fill-secondary-500 hover:fill-white"
+                    class="w-5 h-5  "
                 />
                 <h1>
                 Share
@@ -173,7 +173,7 @@ let handleImageMetadata = (event) => {
 let toggleShareDialog = inject('toggleShareDialog');
 let url               = inject('url')
 let getRoute = (id) => {
-    return window.location.host +  router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href;
+    return 'https://' +  window.location.host +  router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href;
 }
 
 let  handleShare = () => {

@@ -291,7 +291,7 @@ let toggleShareDialog = () => {
 }
 
 let getRoute = (id) => {
-    return 'https://'+window.location.host +  router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href;
+    return 'https://'+ window.location.host +  router.resolve({ name: "car-detail" , params  : { id : id , type : 'user' }}).href;
 }
 
 let  handleShare = () => {
@@ -316,47 +316,47 @@ onMounted(()=>{
     scrollCurrentElementToCenter()
     getData();
     autoChangeImageSlide();
-    useHead({
-    title : computed(() => car.value?.car_model?.car_brand?.name + ' '  + car.value?.car_model?.name+' '  + car.value?.product_year?.name +' ' +( car.value?.trim_name ? '('+car.value?.trim_name+')' : '' )),
-    meta : [
-        {
-        name : "description",
-        content  :  computed(()=>car.value?.car_info?.descriptions)
-        },
-        {
-        property : "og:type",
-        content : "website"
-        },
-        {
-        property : "og:image",
-        content : computed(()=>images.value[0])
-        },
-        {
-        property : "og:url",
-        content : computed(()=> getRoute(car.value.id))
-        },
-        {
-        property : "twitter:title",
-        content : computed(() => car.value?.car_model?.car_brand?.name + ' '  + car.value?.car_model?.name+' '  + car.value?.product_year?.name +' ' +( car.value?.trim_name ? '('+car.value?.trim_name+')' : '' )),
-        },
-        {
-        property : "twitter:description",
-        content :  computed(()=>car.value?.car_info?.descriptions)
-        },
-        {
-        property : "twitter:image",
-        content :   computed(()=>images.value[0])
-        },
-        {
-        property : "twitter:card",
-        content :   "summary_large_image"
-        },
-        {
-        property  : "twitter:url",
-        content  : computed(()=> getRoute(car.value.id))
-        }
-    ]
-    })
+    // useHead({
+    // title : computed(() => car.value?.car_model?.car_brand?.name + ' '  + car.value?.car_model?.name+' '  + car.value?.product_year?.name +' ' +( car.value?.trim_name ? '('+car.value?.trim_name+')' : '' )),
+    // meta : [
+    //     {
+    //     name : "description",
+    //     content  :  computed(()=>car.value?.car_info?.descriptions)
+    //     },
+    //     {
+    //     property : "og:type",
+    //     content : "website"
+    //     },
+    //     {
+    //     property : "og:image",
+    //     content : computed(()=>images.value[0])
+    //     },
+    //     {
+    //     property : "og:url",
+    //     content : computed(()=> getRoute(car.value.id))
+    //     },
+    //     {
+    //     property : "twitter:title",
+    //     content : computed(() => car.value?.car_model?.car_brand?.name + ' '  + car.value?.car_model?.name+' '  + car.value?.product_year?.name +' ' +( car.value?.trim_name ? '('+car.value?.trim_name+')' : '' )),
+    //     },
+    //     {
+    //     property : "twitter:description",
+    //     content :  computed(()=>car.value?.car_info?.descriptions)
+    //     },
+    //     {
+    //     property : "twitter:image",
+    //     content :   computed(()=>images.value[0])
+    //     },
+    //     {
+    //     property : "twitter:card",
+    //     content :   "summary_large_image"
+    //     },
+    //     {
+    //     property  : "twitter:url",
+    //     content  : computed(()=> getRoute(car.value.id))
+    //     }
+    // ]
+    // })
 
 })
 
